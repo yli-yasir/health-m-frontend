@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Sidebar from "./components/Sidebar";
+import Content from "./components/Content"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {Box} from '@material-ui/core'
+import AddPatient from './pages/AddPatient'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box display='flex'>
+      <CssBaseline />
+      <Router>
+        <Sidebar></Sidebar>
+        <Content>
+        <Switch>
+          <Route path="/add">
+            <AddPatient />
+          </Route>
+          <Route path="/view">
+            <p>hi</p>
+          </Route>
+        </Switch>
+        </Content>
+      </Router>
+    </Box>
   );
 }
 
