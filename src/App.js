@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Content from "./components/Content"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Box} from '@material-ui/core'
-import AddPatient from './pages/AddPatient'
+import AddPatient from './pages/addPatient/Main'
 
 
 function App() {
