@@ -8,7 +8,7 @@ export default function HMRadioGroup(props){
       aria-label="gender"
       name={props.name}
       value={props.value}
-      onChange={props.handleChange}
+      onChange={props.onChange}
       row={true}
     >
     {props.radios.map((radio)=> <FormControlLabel value={radio.value} control={<Radio />} label={radio.label} />)}

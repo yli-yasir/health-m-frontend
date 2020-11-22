@@ -1,6 +1,6 @@
 import React from "react";
-import { Formik } from "formik";
-import { Button, Paper, Box} from "@material-ui/core";
+import { Formik, validateYupSchema } from "formik";
+import { Button, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import HMTextField from "../../components/HMTextField";
 import FormSection from "../../components/FormSection";
@@ -8,7 +8,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import HMSelect from "../../components/HMSelect";
 import PatientNameSection from "./partials/PatientNameSection";
-import { validate, handleSubmit } from "./funcs";
+import PatientBodySection from "./partials/PatientBodySection";
+import {initialValues,validationSchema,handleSubmit} from "./formProps";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -16,12 +17,11 @@ export default function addPatient() {
   return (
     <Paper elevation={3}>
       <Box p={2}>
-        <Formik 
-        initialValues={{ 
-        patientFirstName: '',
-        patientLastName: '' }}
-        validate={validate} 
-        onSubmit={handleSubmit}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
           {FormikForm}
         </Formik>
       </Box>
@@ -37,16 +37,46 @@ function FormikForm({
   handleBlur,
   handleSubmit,
   isSubmitting,
+  setFieldValue
 }) {
-  //const classes = useStyles();
+  const getErrorMsg = (name) =>  touched[name] && errors[name];
+
   return (
-      <form onSubmit={handleSubmit}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      
+    <form onSubmit={handleSubmit}>
 
-      <PatientNameSection firstNameValue={values.patientFirstName} lastNameValue={values.patientLastName} 
-      onChange={handleChange}/>
+      <PatientNameSection
+        firstNameValue={values.patientFirstName}
+        lastNameValue={values.patientLastName}
+        firstNameErrorMsg={getErrorMsg('patientFirstName')}
+        lastNameErrorMsg={getErrorMsg('patientLastName')}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
 
-      <Button disabled={isSubmitting} type='submit' color="primary" variant='contained'>Submit</Button>
-      </form>
+      <PatientBodySection
+        genderValue={values.patientGender}
+        bodyWeightValue={values.patientBodyWeight}
+        birthDateValue={values.patientBirthDate}
+        onBirthDateChange={date => setFieldValue("patientBirthDate",date)}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      
+
+      <Button
+        disabled={isSubmitting}
+        type="submit"
+        color="primary"
+        variant="contained"
+      >
+        Submit
+      </Button>
+    </form>
+    </ MuiPickersUtilsProvider>
+
   );
 }
 
@@ -88,3 +118,4 @@ function MotorDevMonthSelect(props) {
   }));
   return <HMSelect label={props.label} items={dataset}></HMSelect>;
 }
+
