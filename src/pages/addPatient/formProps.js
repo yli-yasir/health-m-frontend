@@ -6,7 +6,10 @@ export const initialValues={
   patientLastName: '',
   patientGender:'male',
   patientBodyWeight:'',
-  patientBirthDate:new Date()
+  patientBirthDate:new Date(),
+  patientAddress:'',
+  patientPhoneNumber:'',
+
 
 };
 

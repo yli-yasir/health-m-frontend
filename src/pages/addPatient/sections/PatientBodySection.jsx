@@ -5,17 +5,24 @@ import HMDatePicker from "../../../components/HMDatePicker";
 
 import {InputAdornment} from "@material-ui/core";
 
-export default function PatientBodySection(props) {
+export default function PatientBodySection({
+  values,
+  touched,
+  errors,
+  onBlur: handleBlur,
+  onChange: handleChange,
+  onBirthDateChange: handleBirthDateChange
+}) {
   return (
     <FormSection title="Patient Body Info.">
 
     <HMRadioGroup
       label="Gender"
       name="gender"
-      value={props.genderValue}
+      value={values.patientGender}
       name="patientGender"
-      onChange={props.onChange}
-      onBlur={props.onBlur}
+      onChange={handleChange}
+      onBlur={handleBlur}
       radios={[
         { value: "male", label: "Male" },
         { value: "female", label: "Female" },
@@ -25,9 +32,9 @@ export default function PatientBodySection(props) {
     <HMTextField
       name="patientBodyWeight"
       label="Body Weight"
-      value={props.bodyWeightValue}
-      onChange={props.onChange}
-      onBlur={props.onBlur}
+      value={values.patientBodyWeight}
+      onChange={handleChange}
+      onBlur={handleBlur}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">Kg</InputAdornment>
@@ -35,7 +42,7 @@ export default function PatientBodySection(props) {
       }}
     />
 
-    <HMDatePicker value={props.birthDateValue} onChange={props.onBirthDateChange} onBlur={props.onBlur} label="Birth date" />
+    <HMDatePicker value={values.patientBirthDate} onChange={handleBirthDateChange} onBlur={handleBlur} label="Birth date" />
 
 
   </FormSection>

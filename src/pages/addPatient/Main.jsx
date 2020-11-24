@@ -7,9 +7,10 @@ import FormSection from "../../components/FormSection";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import HMSelect from "../../components/HMSelect";
-import PatientNameSection from "./partials/PatientNameSection";
-import PatientBodySection from "./partials/PatientBodySection";
-import {initialValues,validationSchema,handleSubmit} from "./formProps";
+import PatientNameSection from "./sections/PatientNameSection";
+import PatientBodySection from "./sections/PatientBodySection";
+import { initialValues, validationSchema, handleSubmit } from "./formProps";
+import PatientContactInfoSection from "./sections/PatientContactInfoSection";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -37,46 +38,40 @@ function FormikForm({
   handleBlur,
   handleSubmit,
   isSubmitting,
-  setFieldValue
+  setFieldValue,
 }) {
-  const getErrorMsg = (name) =>  touched[name] && errors[name];
-
+  const getErrorMsg = (name) => touched[name] && errors[name];
+  const sectionProps = {
+    values,
+    errors,
+    touched,
+    onChange: handleChange,
+    onBlur: handleBlur,
+  };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      
-    <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
 
-      <PatientNameSection
-        firstNameValue={values.patientFirstName}
-        lastNameValue={values.patientLastName}
-        firstNameErrorMsg={getErrorMsg('patientFirstName')}
-        lastNameErrorMsg={getErrorMsg('patientLastName')}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+        <PatientNameSection {...sectionProps} />
 
-      <PatientBodySection
-        genderValue={values.patientGender}
-        bodyWeightValue={values.patientBodyWeight}
-        birthDateValue={values.patientBirthDate}
-        onBirthDateChange={date => setFieldValue("patientBirthDate",date)}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+        {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
+        <PatientBodySection
+          onBirthDateChange={(date) => setFieldValue("patientBirthDate", date)}
+          {...sectionProps}
+        />
 
-      
+        <PatientContactInfoSection {...sectionProps} />
 
-      <Button
-        disabled={isSubmitting}
-        type="submit"
-        color="primary"
-        variant="contained"
-      >
-        Submit
-      </Button>
-    </form>
-    </ MuiPickersUtilsProvider>
-
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          color="primary"
+          variant="contained"
+        >
+          Submit
+        </Button>
+      </form>
+    </MuiPickersUtilsProvider>
   );
 }
 
@@ -118,4 +113,3 @@ function MotorDevMonthSelect(props) {
   }));
   return <HMSelect label={props.label} items={dataset}></HMSelect>;
 }
-
