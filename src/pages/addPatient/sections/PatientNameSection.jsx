@@ -1,17 +1,13 @@
 import HMTextField from "../../../components/HMTextField";
 import FormSection from "../../../components/FormSection";
-import {getTouchedErrorMsg} from '../../../utils';
 
 export default function PatientNameSection({
   values,
-  touched,
   errors,
   onBlur: handleBlur,
   onChange: handleChange,
 }) {
 
-  const firstNameErrorMsg = getTouchedErrorMsg(touched,errors,'patientFirstName');
-  const lastNameErrorMsg = getTouchedErrorMsg(touched,errors,'patientLastName');
 
   return (
     <FormSection title="Patient Name">
@@ -21,8 +17,8 @@ export default function PatientNameSection({
         value={values.patientFirstName}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={Boolean(firstNameErrorMsg)}
-        helperText={firstNameErrorMsg}
+        error={Boolean(errors.patientFirstName)}
+        helperText={errors.patientFirstName}
       />
 
       <HMTextField
@@ -31,8 +27,8 @@ export default function PatientNameSection({
         value={values.patientLastName}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={Boolean(lastNameErrorMsg)}
-        helperText={lastNameErrorMsg}
+        error={Boolean(errors.patientLastName)}
+        helperText={errors.patientLastName}
       />
     </FormSection>
   );

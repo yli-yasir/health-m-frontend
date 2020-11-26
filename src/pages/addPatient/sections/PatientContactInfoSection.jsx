@@ -15,6 +15,8 @@ export default function PatientContactInfoSection({
         name="patientAddress"
         label="Patient Address"
         value={values.address}
+        error={Boolean(errors.patientAddress)}
+        helperText={errors.patientAddress}
         onChange={handleChange}
         onBlur={handleBlur}
       />
@@ -22,7 +24,10 @@ export default function PatientContactInfoSection({
       <HMTextField
         name="patientPhoneNumber"
         label="Patient Phone Number"
+        type="number"
         value={values.patientPhoneNumber}
+        error={Boolean(errors.patientPhoneNumber)}
+        helperText={errors.patientPhoneNumber}
         onChange={handleChange}
         onBlur= {handleBlur}
       />

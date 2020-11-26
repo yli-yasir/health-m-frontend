@@ -1,3 +1,15 @@
 
-export const getTouchedErrorMsg = (touched,errors,name) => touched[name] && errors[name];
+export function makeTouchedErrors(touched,errors){
+
+    const touchedErrors = {};
+
+    for (const [key,value] of Object.entries(errors)){
+        if (touched[key] && errors[key]){
+          touchedErrors[key] = value;
+        }
+      }
+      return touchedErrors;
+}
+
+export const hasOnlyNumbers= (string) => /^\d+$/.test(string);
 

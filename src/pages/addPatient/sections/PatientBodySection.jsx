@@ -7,11 +7,10 @@ import {InputAdornment} from "@material-ui/core";
 
 export default function PatientBodySection({
   values,
-  touched,
   errors,
   onBlur: handleBlur,
   onChange: handleChange,
-  onBirthDateChange: handleBirthDateChange
+  onBirthDateChange: handleBirthDateChange,
 }) {
   return (
     <FormSection title="Patient Body Info.">
@@ -33,6 +32,9 @@ export default function PatientBodySection({
       name="patientBodyWeight"
       label="Body Weight"
       value={values.patientBodyWeight}
+      error={Boolean(errors.patientBodyWeight)}
+      helperText={errors.patientBodyWeight}
+      type="number"
       onChange={handleChange}
       onBlur={handleBlur}
       InputProps={{
@@ -42,7 +44,8 @@ export default function PatientBodySection({
       }}
     />
 
-    <HMDatePicker value={values.patientBirthDate} onChange={handleBirthDateChange} onBlur={handleBlur} label="Birth date" />
+    <HMDatePicker value={values.patientBirthDate} onChange={handleBirthDateChange} onBlur={handleBlur} label="Birth Date"
+    maxDate={new Date()} maxDateMessage={errors.patientBirthDate}/>
 
 
   </FormSection>

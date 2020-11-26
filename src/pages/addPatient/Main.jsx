@@ -11,6 +11,7 @@ import PatientNameSection from "./sections/PatientNameSection";
 import PatientBodySection from "./sections/PatientBodySection";
 import { initialValues, validationSchema, handleSubmit } from "./formProps";
 import PatientContactInfoSection from "./sections/PatientContactInfoSection";
+import { hasOnlyNumbers, makeTouchedErrors } from "../../utils";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -40,18 +41,16 @@ function FormikForm({
   isSubmitting,
   setFieldValue,
 }) {
-  const getErrorMsg = (name) => touched[name] && errors[name];
   const sectionProps = {
     values,
-    errors,
-    touched,
+    errors: makeTouchedErrors(touched, errors),
     onChange: handleChange,
     onBlur: handleBlur,
   };
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form onSubmit={handleSubmit}>
-
         <PatientNameSection {...sectionProps} />
 
         {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
