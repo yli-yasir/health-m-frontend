@@ -11,5 +11,4 @@ export function makeTouchedErrors(touched,errors){
       return touchedErrors;
 }
 
-export const hasOnlyNumbers= (string) => /^\d+$/.test(string);
 

@@ -1,23 +1,33 @@
-import React, {useEffect, useRef} from 'react';
-import {fabric} from 'fabric/dist/fabric'
-
-export default function PedigreeChart(props){
-
-    let canvas;
-
-    useEffect(() => {
-        canvas = new fabric.Canvas('fabric-canvas');
-
-  var rect = new fabric.Rect({
-          width: 200, height: 100, left: 0, top: 50, angle: 30,
-          fill: 'rgba(255,0,0,0.5)'
-        });
-
-      canvas.add(rect);
-      console.log('added')
-      });
+import React, { useState, useEffect, useRef } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {Box} from "@material-ui/core";
+import fabric, { createFamilyNode } from "../utils/fabricUtils";
+import {createDeleteControl,createFamilyControl} from "../utils/fabricUtils";
 
 
-    return (<canvas  id="fabric-canvas" width="300" height="300"></canvas>
-    )
+export default function PedigreeChart(props) {
+
+
+  useEffect(() => {
+    const fabricCanvas = new fabric.Canvas("fabric-canvas");
+    initFabric(fabricCanvas);
+    
+  }, []);
+
+  return (
+    <Box width="100%" paddingTop={2} display="flex" justifyContent="center">
+      <canvas
+        id="fabric-canvas"
+      ></canvas>
+    </Box>
+  );
+}
+
+
+function initFabric(canvas){
+  canvas.setBackgroundColor("#A599E9");
+  canvas.setDimensions({ width: 1024, height: 576 });
+  createDeleteControl();
+  createFamilyControl();
+  createFamilyNode(canvas,'');
 }

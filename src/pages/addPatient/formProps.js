@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { hasOnlyNumbers } from "../../utils";
 
 // These keys must be the same as the names of inputs in the form to work with Formik
 export const initialValues = {

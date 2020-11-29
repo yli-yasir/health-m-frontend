@@ -9,14 +9,16 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import HMSelect from "../../components/HMSelect";
 import PatientNameSection from "./sections/PatientNameSection";
 import PatientBodySection from "./sections/PatientBodySection";
+import PedigreeChartSection from './sections/PedigreeChartSection'
 import { initialValues, validationSchema, handleSubmit } from "./formProps";
 import PatientContactInfoSection from "./sections/PatientContactInfoSection";
-import { hasOnlyNumbers, makeTouchedErrors } from "../../utils";
+import {makeTouchedErrors } from "../../utils/formikUtils";
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function addPatient() {
   return (
+    <Box width="50%">
     <Paper elevation={3}>
       <Box p={2}>
         <Formik
@@ -28,6 +30,7 @@ export default function addPatient() {
         </Formik>
       </Box>
     </Paper>
+    </Box>
   );
 }
 
@@ -41,6 +44,7 @@ function FormikForm({
   isSubmitting,
   setFieldValue,
 }) {
+
   const sectionProps = {
     values,
     errors: makeTouchedErrors(touched, errors),
@@ -49,8 +53,10 @@ function FormikForm({
   };
 
   return (
+
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form onSubmit={handleSubmit}>
+
         <PatientNameSection {...sectionProps} />
 
         {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
@@ -60,6 +66,8 @@ function FormikForm({
         />
 
         <PatientContactInfoSection {...sectionProps} />
+
+        <PedigreeChartSection />
 
         <Button
           disabled={isSubmitting}
