@@ -35,7 +35,7 @@ export function createFamilyControl(onClick){
     offsetX:24,
     cursorStyle: "pointer",
     render: renderControl(familyImg),
-    mouseUpHandler: deleteFamilyNode,
+    mouseUpHandler: onClick,
     cornerSize: 40,
   });
 }

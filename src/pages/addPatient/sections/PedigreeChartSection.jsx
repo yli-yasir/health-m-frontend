@@ -26,7 +26,7 @@ export default function PedigreeChartSection() {
   return (
     <FormSection title="Pedigree Chart">
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open Pedigree Chart
+        Open Pedigree Chart Editor
       </Button>
       <Dialog
         fullScreen
