@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-import fabric, { createFamilyNode } from "../utils/fabricUtils";
-import { createDeleteControl, createFamilyControl } from "../utils/fabricUtils";
+import fabric, { addFamilyNode,removeFamilyNode } from "../utils/fabricUtils";
+import { createRemoveFamilyNodeControl, createAddFamilyNodeControl } from "../utils/fabricUtils";
 import FamilyNodeDialog from "../components/FamilyNodeDialog";
 
 export default function PedigreeChart(props) {
@@ -11,11 +11,11 @@ export default function PedigreeChart(props) {
 
   useEffect(() => {
     const canvas = new fabric.Canvas("fabric-canvas");
-    canvas.setBackgroundColor("#7986cb");
+    canvas.setBackgroundColor("#e0e0e0");
     canvas.setDimensions({ width: 1024, height: 576 });
-    createDeleteControl();
-    createFamilyControl(() => setFamilyDialogOpen(true));
-    createFamilyNode(canvas, "");
+    createRemoveFamilyNodeControl(removeFamilyNode);
+    createAddFamilyNodeControl(() => setFamilyDialogOpen(true));
+    addFamilyNode(canvas, "Eve","female");
   }, []);
 
 
