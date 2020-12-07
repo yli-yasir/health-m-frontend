@@ -24,7 +24,7 @@ export default function HMSelect(props) {
         label={props.label}
       >
         {props.items.map((item) => (
-          <MenuItem value={item.value}>{item.label}</MenuItem>
+          <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
         ))}
       </Select>
     </FormControl>

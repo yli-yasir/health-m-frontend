@@ -9,8 +9,11 @@ export default function PedigreeChart(props) {
 
   const [isFamilyDialogOpen, setFamilyDialogOpen] = useState(false);
 
+  let canvasRef = useRef();
+
   useEffect(() => {
     const canvas = new fabric.Canvas("fabric-canvas");
+    canvasRef.current = canvas;
     canvas.setBackgroundColor("#e0e0e0");
     canvas.setDimensions({ width: 1024, height: 576 });
     createRemoveFamilyNodeControl(removeFamilyNode);
@@ -18,6 +21,11 @@ export default function PedigreeChart(props) {
     addFamilyNode(canvas, "Eve","female");
   }, []);
 
+  function createFamilyNodeViaDialog(canvas){
+    return function(name,gender){
+      addFamilyNode(canvas,name,gender)
+    }
+  }
 
   return (
     <Box width="100%" paddingTop={2} display="flex" justifyContent="center">
@@ -26,6 +34,7 @@ export default function PedigreeChart(props) {
       <FamilyNodeDialog
         isOpen={isFamilyDialogOpen}
         onClose={() => setFamilyDialogOpen(false)}
+        onConfirm={createFamilyNodeViaDialog(canvasRef.current)}
       ></FamilyNodeDialog>
     </Box>
   );
