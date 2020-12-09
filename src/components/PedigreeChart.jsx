@@ -9,7 +9,8 @@ import {
   createRemoveFamilyNodeControl,
   createAddFamilyNodeControl,
   connectFamilyNodes,
-  trackFamilyNodeConnectionLines
+  trackFamilyNodeConnectionLines,
+  hasOriginConnectionLines
 } from "../utils/fabricUtils";
 import FamilyNodeDialog from "../components/FamilyNodeDialog";
 
@@ -25,7 +26,7 @@ export default function PedigreeChart(props) {
     canvasRef.current = canvas;
     canvas.setBackgroundColor("#e0e0e0");
     canvas.setDimensions({ width: 1024, height: 576 });
-    createRemoveFamilyNodeControl(removeFamilyNode);
+    createRemoveFamilyNodeControl(handleRemoveFamilyNodeControlClick);
     createAddFamilyNodeControl(handleFamilyNodeControlClick);
     canvas.add(createFamilyNode("Eve", "female"));
     canvas.on('object:moving',(e)=>{
@@ -37,6 +38,17 @@ export default function PedigreeChart(props) {
   function handleFamilyNodeControlClick(eventData, target) {
     setFamilyDialogOpen(true);
     dialogOriginRef.current = target;
+  }
+
+  function handleRemoveFamilyNodeControlClick(eventData,target){
+    if (hasOriginConnectionLines(target)){
+      console.log('cant remove this');
+      console.log(target.originConnectionLines)
+      return;
+    }
+    else{
+      removeFamilyNode(eventData,target);
+    }
   }
 
   function createFamilyNodeViaDialog(name, gender) {

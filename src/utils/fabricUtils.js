@@ -54,7 +54,11 @@ function renderControl(icon) {
 
 export function removeFamilyNode(eventData, target) {
   const canvas = target.canvas;
+  if (target.terminalConnectionLine){
+   canvas.remove(target.terminalConnectionLine) 
+  }
   canvas.remove(target);
+
   canvas.requestRenderAll();
 }
 
@@ -86,14 +90,17 @@ export function createFamilyNode(name, gender) {
     });
   }
 
-  var group = new fabric.Group([shape, label], {
+  var familyNode = new fabric.Group([shape, label], {
     ...commonConfig,
     left: 150,
     top: 100,
     cornerSize: 25,
   });
 
-  return group;
+  familyNode.originConnectionLines = [];
+  familyNode.terminalConnectionLine = null;
+
+  return familyNode;
 }
 
 export function connectFamilyNodes(fromFamilyNode, toFamilyNode) {
@@ -106,13 +113,9 @@ export function connectFamilyNodes(fromFamilyNode, toFamilyNode) {
 
   // The connection lines that originate from this node
   // a Family node can have more than one origin connection line
-  if (typeof fromFamilyNode.originConnectionLines === "undefined") {
-    fromFamilyNode.originConnectionLines = [line];
-  } else {
-    fromFamilyNode.originConnectionLines.push(line);
-  }
 
-  console.log(fromFamilyNode);
+    fromFamilyNode.originConnectionLines.push(line);
+
 
   // The connection line which terminates at this node
   //The toFamilyNode is drawn at the end (x2,y2) coords of this line.
@@ -128,13 +131,13 @@ export function trackFamilyNodeConnectionLines(movingFamilyNode) {
   const originLines = movingFamilyNode.originConnectionLines;
   const terminalLine = movingFamilyNode.terminalConnectionLine;
 
-  if (typeof originLines !== "undefined") {
+  if (hasOriginConnectionLines(movingFamilyNode)) {
     originLines.forEach((line) =>
       line.set({ x1: movingFamilyNode.left, y1: movingFamilyNode.top })
     );
   }
 
-  if (typeof terminalLine !== "undefined") {
+  if (hasTerminalConnectionLine(movingFamilyNode)) {
     terminalLine.set({x2: movingFamilyNode.left,y2:movingFamilyNode.top})
   }
 
@@ -149,4 +152,13 @@ function createConnectionLine(coords) {
     evented: false,
   });
 }
+
+
+export function hasOriginConnectionLines(familyNode) {
+  return familyNode.originConnectionLines.length > 0;
+};
+
+export function hasTerminalConnectionLine(familyNode){
+  return Boolean(familyNode.terminalConnectionLine)
+ }
 export default fabric;
