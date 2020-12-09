@@ -6,7 +6,7 @@ const deleteImg = makeImageElement(deleteSvg);
 
 const familyImg = makeImageElement(FamilySvg);
 
-function makeImageElement(src) {
+export function makeImageElement(src) {
   const imgElement = document.createElement("img");
   imgElement.src = src;
   return imgElement;
