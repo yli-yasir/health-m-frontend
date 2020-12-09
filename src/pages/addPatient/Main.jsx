@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Formik, validateYupSchema } from "formik";
 import { Button, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,7 +16,8 @@ import {makeTouchedErrors } from "../../utils/formikUtils";
 
 const useStyles = makeStyles((theme) => ({}));
 
-export default function addPatient() {
+export default function AddPatient() {
+
   return (
     <Box width="50%">
     <Paper elevation={3}>

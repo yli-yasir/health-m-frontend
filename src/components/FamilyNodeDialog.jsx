@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HMRadioGroup from "./HMRadioGroup";
 import HMTextField from "./HMTextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,11 +16,15 @@ export default function FamilyNodeDialog(props) {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("male");
 
+  useEffect(()=>{
+    return function(){
+      console.log('unmount family node dialog')
+    }
+  },[])
   return (
     <Dialog
       open={props.isOpen}
       onClose={props.onClose}
-      aria-labelledby="form-dialog-title"
       onEnter={()=> {
         setName('');
         setGender("male")

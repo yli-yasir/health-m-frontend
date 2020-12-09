@@ -58,8 +58,7 @@ export function removeFamilyNode(eventData, target) {
   canvas.requestRenderAll();
 }
 
-export function addFamilyNode(fabricCanvas,name, gender) {
-
+export function createFamilyNode(name, gender) {
   const commonConfig = { originX: "center", originY: "center" };
   const padding = 16;
   let shape;
@@ -67,33 +66,87 @@ export function addFamilyNode(fabricCanvas,name, gender) {
   let label = new fabric.Text(name, {
     ...commonConfig,
     fontSize: 50,
-    fontFamily: 'Roboto, sans-serif'
+    fontFamily: "Roboto, sans-serif",
   });
 
   if (gender === "male") {
     shape = new fabric.Rect({
       ...commonConfig,
-      fill: '#7986cb',
-      height:label.height + padding,
-      width:label.width+ padding,
-      rx:12,
-      ry:12,
-    })
+      fill: "#7986cb",
+      height: label.height + padding,
+      width: label.width + padding,
+      rx: 12,
+      ry: 12,
+    });
   } else {
-    shape= new fabric.Circle({
+    shape = new fabric.Circle({
       ...commonConfig,
-      fill:'#f06292',
-      radius: label.width/2 + 8 
-    })
+      fill: "#f06292",
+      radius: label.width / 2 + 8,
+    });
   }
 
-  var group = new fabric.Group([ shape, label ], {
+  var group = new fabric.Group([shape, label], {
+    ...commonConfig,
     left: 150,
     top: 100,
-    cornerSize:25
+    cornerSize: 25,
   });
 
-  fabricCanvas.add(group);
+  return group;
 }
 
+export function connectFamilyNodes(fromFamilyNode, toFamilyNode) {
+  const line = createConnectionLine([
+    fromFamilyNode.left,
+    fromFamilyNode.top,
+    toFamilyNode.left,
+    toFamilyNode.top,
+  ]);
+
+  // The connection lines that originate from this node
+  // a Family node can have more than one origin connection line
+  if (typeof fromFamilyNode.originConnectionLines === "undefined") {
+    fromFamilyNode.originConnectionLines = [line];
+  } else {
+    fromFamilyNode.originConnectionLines.push(line);
+  }
+
+  console.log(fromFamilyNode);
+
+  // The connection line which terminates at this node
+  //The toFamilyNode is drawn at the end (x2,y2) coords of this line.
+  toFamilyNode.terminalConnectionLine = line;
+
+  return line;
+}
+
+// When a family node moves:
+// All connection lines that originate form it  (originLines) should change x1, y1
+// The line that terminates at it (terminalLine) should change x2, y2
+export function trackFamilyNodeConnectionLines(movingFamilyNode) {
+  const originLines = movingFamilyNode.originConnectionLines;
+  const terminalLine = movingFamilyNode.terminalConnectionLine;
+
+  if (typeof originLines !== "undefined") {
+    originLines.forEach((line) =>
+      line.set({ x1: movingFamilyNode.left, y1: movingFamilyNode.top })
+    );
+  }
+
+  if (typeof terminalLine !== "undefined") {
+    terminalLine.set({x2: movingFamilyNode.left,y2:movingFamilyNode.top})
+  }
+
+}
+
+function createConnectionLine(coords) {
+  return new fabric.Line(coords, {
+    fill: "red",
+    stroke: "red",
+    strokeWidth: 5,
+    selectable: false,
+    evented: false,
+  });
+}
 export default fabric;
