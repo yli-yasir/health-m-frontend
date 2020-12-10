@@ -146,7 +146,6 @@ export function trackFamilyNodeConnectionLines(movingFamilyNode) {
 function createConnectionLine(coords) {
   return new fabric.Line(coords, {
     fill: "red",
-    stroke: "red",
     strokeWidth: 5,
     selectable: false,
     evented: false,

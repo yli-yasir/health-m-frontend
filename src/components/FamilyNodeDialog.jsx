@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogContentText,
   DialogActions,
   TextField,
   Button,
@@ -16,11 +17,7 @@ export default function FamilyNodeDialog(props) {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("male");
 
-  useEffect(()=>{
-    return function(){
-      console.log('unmount family node dialog')
-    }
-  },[])
+
   return (
     <Dialog
       open={props.isOpen}
@@ -30,9 +27,12 @@ export default function FamilyNodeDialog(props) {
         setGender("male")
       }}
     >
-      <DialogTitle id="form-dialog-title">Create Family Node</DialogTitle>
+      <DialogTitle id="form-dialog-title">Add Family Member</DialogTitle>
 
       <DialogContent>
+      <DialogContentText>
+            Please fill the following information to add a new family member.
+      </DialogContentText>
         <HMRadioGroup
           label="Gender"
           name="gender"

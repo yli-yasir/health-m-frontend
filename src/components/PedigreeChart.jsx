@@ -1,23 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
-import fabric, {
-  createFamilyNode,
-  removeFamilyNode,
-} from "../utils/fabricUtils";
-import {
-  createRemoveFamilyNodeControl,
-  createAddFamilyNodeControl,
-  connectFamilyNodes,
-  trackFamilyNodeConnectionLines,
-  hasOriginConnectionLines
-} from "../utils/fabricUtils";
+import { Box, Snackbar } from "@material-ui/core";
 import FamilyNodeDialog from "../components/FamilyNodeDialog";
-import PedigreeChartCanvas from "../pedigreeChartjs/PedigreeChartCanvas";
+import PedigreeChartCanvas from "../pedigreeChartjs/pedigreeChartCanvas";
 
-export default function PedigreeChart(props) {
+export default function PedigreeChart() {
+
   const [isFamilyDialogOpen, setFamilyDialogOpen] = useState(false);
-
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  
   let canvasRef = useRef();
   //Holds a reference to the family node that opened the dialog
   let dialogOriginRef = useRef();
@@ -25,41 +17,45 @@ export default function PedigreeChart(props) {
   useEffect(() => {
     const canvas = new PedigreeChartCanvas("fabric-canvas");
     canvasRef.current = canvas;
-    canvas.init(handleRemoveControlClick,handleAddControlClick);
-    canvas.add(createFamilyNode("Eve", "female"));
-    canvas.on('object:moving',(e)=>{
-      trackFamilyNodeConnectionLines(e.target);
-      canvas.renderAll();
-    });
+    canvas.init(handleRemoveControlClick, handleAddControlClick);
   }, []);
 
-  function handleRemoveControlClick(eventData,target){
-    if (hasOriginConnectionLines(target)){
-      console.log('cant remove this');
-      console.log(target.originConnectionLines)
+  function handleRemoveControlClick(eventData, target) {
+    try {
+      canvasRef.current.removeFamilyMemberNode(target);
+    } catch (e) {
+      openSnackbar(e.message);
+      console.log(e);
+    }
+  }
+
+  function handleAddControlClick(eventData, target) {
+    dialogOriginRef.current = target;
+    setFamilyDialogOpen(true);
+  }
+
+  function openSnackbar(msg) {
+    setSnackbarMessage(msg);
+    setSnackbarOpen(true);
+  }
+
+  function closeSnackbar(event, reason) {
+    if (reason === "clickaway") {
       return;
     }
-    else{
-      removeFamilyNode(eventData,target);
-    }
-  }
-  
-  function handleAddControlClick(eventData, target) {
-    setFamilyDialogOpen(true);
-    dialogOriginRef.current = target;
+    setSnackbarOpen(false);
   }
 
-
-
-  function createFamilyNodeViaDialog(name, gender) {
+  function createFamilyMemberNodeViaDialog(name, gender) {
     const canvas = canvasRef.current;
     const originNode = dialogOriginRef.current;
-    const newNode = createFamilyNode(name, gender);
-    const connectionLine = connectFamilyNodes(originNode,newNode);
-    canvas.add(connectionLine);
-    canvas.sendToBack(connectionLine);
-    canvas.add(newNode);
-
+    try{
+    canvas.addFamilyMemberNode(name, gender, originNode);
+    }
+    catch(e){
+      openSnackbar(e.message);
+      console.log(e);
+    }
   }
 
   return (
@@ -69,8 +65,20 @@ export default function PedigreeChart(props) {
       <FamilyNodeDialog
         isOpen={isFamilyDialogOpen}
         onClose={() => setFamilyDialogOpen(false)}
-        onConfirm={createFamilyNodeViaDialog}
+        onConfirm={createFamilyMemberNodeViaDialog}
       ></FamilyNodeDialog>
+
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={isSnackbarOpen}
+        autoHideDuration={6000}
+        onClose={closeSnackbar}
+        message={snackbarMessage}
+      />
     </Box>
   );
 }
+
