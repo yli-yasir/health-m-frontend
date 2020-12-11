@@ -12,12 +12,14 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
   static BACKGROUND_COLOR = "#e0e0e0";
   static CONNECTION_LINE_COLOR = "#282C34";
 
-  init(onRemoveControlClick, onAddControlClick) {
+  constructor(canvasId,onRemoveControlClick, onAddControlClick) {
+    super(canvasId);
     this.setBackgroundColor(PedigreeChartCanvas.BACKGROUND_COLOR);
     this.setDimensions(PedigreeChartCanvas.DIMENSIONS);
     this._createCustomControls(onRemoveControlClick, onAddControlClick);
     this.addFamilyMemberNode("Eve", "female");
     this.on("object:moving", this._trackFamilyMemberNodes);
+    this.on("object:scaling",this._trackFamilyMemberNodes);
   }
 
   _createCustomControls(onRemoveControlClick, onAddControlClick) {
@@ -67,8 +69,8 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
 
     if (typeof relatedFamilyMemberNode !== "undefined") {
       const connectionLine = this._connectFamilyMemberNodes(
-        familyMemberNode,
-        relatedFamilyMemberNode
+        relatedFamilyMemberNode,
+        familyMemberNode  
       );
       this.add(connectionLine);
       this.sendToBack(connectionLine);
@@ -88,23 +90,14 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
     }
     //-----
 
-    //Remove lines that terminate at this target
+    //Remove the line that terminate at this target
     if (this._hasTerminalConnectionLine(target)) {
-      const terminalConnectionLine = target.terminalConnectionLine;
-
-      this.remove(terminalConnectionLine);
-
-      // We must also inform the node that line originated from of it its removal.
-      const originNode = this._findFamilyMemberNodeById(
-        terminalConnectionLine.fromNodeId
-      );
-      
-      // This is done by removing it from that nodes originConnectionLines list.
-      originNode.originConnectionLines = originNode.originConnectionLines.filter(
-        (connectionLine) => connectionLine.toNodeId !== target.id
-      );
+      this._removeTerminalConnectionLine(target);
     }
 
+    if (this._hasOriginConnectionLines(target)){
+      this._removeOriginConnectionLines(target);
+    }
 
     this.remove(target);
 
@@ -168,31 +161,29 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
   }
 
   _isIntermediateNode(familyNode) {
-    return (
-      this._hasTerminalConnectionLine(familyNode) &&
-      this._hasOriginConnectionLines(familyNode)
-    );
+    return this._connectionLineCount(familyNode) > 1; 
   }
 
   _isLoneNode(familyNode) {
-    return (
-      !this._hasTerminalConnectionLine(familyNode) &&
-      !this._hasOriginConnectionLines(familyNode)
-    );
+    return this._connectionLineCount(familyNode)  === 0 ;
   }
 
   _trackFamilyMemberNodes(moveEvent) {
+
     const movingFamilyNode = moveEvent.target;
-    const originLines = movingFamilyNode.originConnectionLines;
-    const terminalLine = movingFamilyNode.terminalConnectionLine;
+
+    
+    
 
     if (this._hasOriginConnectionLines(movingFamilyNode)) {
+      const originLines = movingFamilyNode.originConnectionLines;
       originLines.forEach((line) =>
         line.set({ x1: movingFamilyNode.left, y1: movingFamilyNode.top })
       );
     }
 
     if (this._hasTerminalConnectionLine(movingFamilyNode)) {
+      const terminalLine = movingFamilyNode.terminalConnectionLine;
       terminalLine.set({ x2: movingFamilyNode.left, y2: movingFamilyNode.top });
     }
 
@@ -208,9 +199,8 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
 
     // The connection lines that originate from this node
     // a Family node can have more than one origin connection line
-
     fromNode.originConnectionLines.push(line);
-
+    
     // The connection line which terminates at this node
     //The toFamilyNode is drawn at the end (x2,y2) coords of this line.
     toNode.terminalConnectionLine = line;
@@ -236,5 +226,42 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
       fromNodeId,
       toNodeId,
     });
+  }
+
+  _connectionLineCount(familyNode){
+    const terminalConnectionLinesCount = this._hasTerminalConnectionLine(familyNode) ? 1 : 0;
+    const originConnectionLinesCount = familyNode.originConnectionLines.length;
+    return terminalConnectionLinesCount + originConnectionLinesCount;
+  }
+
+  _removeTerminalConnectionLine(familyNode){
+    const terminalConnectionLine = familyNode.terminalConnectionLine;
+
+
+    // We must also inform the node that the line originated from of it its removal.
+    const originNode = this._findFamilyMemberNodeById(
+      terminalConnectionLine.fromNodeId
+    );
+    
+    // This is done by removing it from that nodes originConnectionLines list.
+    originNode.originConnectionLines = originNode.originConnectionLines.filter(
+      (connectionLine) => connectionLine.toNodeId !== familyNode.id
+    );
+
+    this.remove(terminalConnectionLine);
+
+  }
+
+  _removeOriginConnectionLines(familyNode){
+    const originLines= familyNode.originConnectionLines;
+    originLines.forEach((originLine)=>{
+
+      // Inform node the line terminates at of its removal
+      const toNode = this._findFamilyMemberNodeById(originLine.toNodeId);
+      // This is done by setting the terminalLine of that node to null
+      toNode.terminalConnectionLine = null;
+
+      this.remove(originLine);
+    })  
   }
 }
