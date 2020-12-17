@@ -6,12 +6,13 @@ import { Dialog, Button, Slide } from "@material-ui/core";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { Typography, Paper, Box } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-export default function PedigreeChartSection() {
+export default function PedigreeChartSection(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -21,6 +22,7 @@ export default function PedigreeChartSection() {
 
   const handleClose = () => {
     setOpen(false);
+
   };
 
   return (
@@ -35,7 +37,7 @@ export default function PedigreeChartSection() {
         TransitionComponent={Slide}
       >
         <PedigreeChartAppBar onClose={handleClose} classes={classes} />
-        <PedigreeChart />
+        <PedigreeChart chartData={props.chartData} saveChart={props.saveChart}/>
       </Dialog>
     </FormSection>
   );

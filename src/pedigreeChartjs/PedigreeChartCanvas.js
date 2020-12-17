@@ -17,7 +17,6 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
     this.setBackgroundColor(PedigreeChartCanvas.BACKGROUND_COLOR);
     this.setDimensions(PedigreeChartCanvas.DIMENSIONS);
     this._createCustomControls(onRemoveControlClick, onAddControlClick);
-    this.addFamilyMemberNode("Eve", "female");
     this.on("object:moving", this._trackFamilyMemberNodes);
     this.on("object:scaling",this._trackFamilyMemberNodes);
   }
@@ -153,7 +152,7 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
   }
 
   _hasOriginConnectionLines(familyNode) {
-    return familyNode.originConnectionLines.length > 0;
+    return familyNode.originConnectionLines && familyNode.originConnectionLines.length > 0;
   }
 
   _hasTerminalConnectionLine(familyNode) {
@@ -173,13 +172,12 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
     const movingFamilyNode = moveEvent.target;
 
     
-    
 
     if (this._hasOriginConnectionLines(movingFamilyNode)) {
       const originLines = movingFamilyNode.originConnectionLines;
-      originLines.forEach((line) =>
+      originLines.forEach((line) =>{
         line.set({ x1: movingFamilyNode.left, y1: movingFamilyNode.top })
-      );
+      });
     }
 
     if (this._hasTerminalConnectionLine(movingFamilyNode)) {
@@ -199,6 +197,7 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
 
     // The connection lines that originate from this node
     // a Family node can have more than one origin connection line
+    fromNode.originConnectionLines = fromNode.originConnectionLines  || [];
     fromNode.originConnectionLines.push(line);
     
     // The connection line which terminates at this node
@@ -264,4 +263,29 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
       this.remove(originLine);
     })  
   }
+
+  toJSON(){
+   return super.toJSON(['cornerSize','selectable','evented','id','toNodeId','fromNodeId'])
+  }
+
+  loadFromJSON(json){
+    super.loadFromJSON(json);
+    const lines = this.getObjects('line');
+    lines.forEach((line)=>{
+      const fromNode = this._findFamilyMemberNodeById(line.fromNodeId);
+      fromNode.originConnectionLines = fromNode.originConnectionLines || [];
+      fromNode.originConnectionLines.push(line);
+
+      const toNode = this._findFamilyMemberNodeById(line.toNodeId);
+      toNode.terminalConnectionLine = line;
+
+      // Lines have awkward coords in fabric when deserialized...
+      // For now, work around this by setting the lines coords manually after load.
+      line.set({ x1: fromNode.left, y1: fromNode.top });
+      line.set({ x2: toNode.left, y2: toNode.top });
+       
+    });
+
+  }
+  
 }

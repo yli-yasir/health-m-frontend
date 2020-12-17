@@ -1,25 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Snackbar } from "@material-ui/core";
+import { Box, Snackbar, Fab } from "@material-ui/core";
+import { SaveOutlined } from "@material-ui/icons";
 import FamilyNodeDialog from "../components/FamilyNodeDialog";
 import PedigreeChartCanvas from "../pedigreeChartjs/pedigreeChartCanvas";
 
-export default function PedigreeChart() {
+
+export default function PedigreeChart(props) {
+
   const [isFamilyDialogOpen, setFamilyDialogOpen] = useState(false);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+
 
   let canvasRef = useRef();
   //Holds a reference to the family node that opened the dialog
   let dialogOriginRef = useRef();
 
   useEffect(() => {
+
     const canvas = new PedigreeChartCanvas(
       "fabric-canvas",
       handleRemoveControlClick,
       handleAddControlClick
     );
     canvasRef.current = canvas;
+
+    if (props.chartData){
+      canvas.loadFromJSON(props.chartData);
+    }
+    else{
+      canvas.addFamilyMemberNode("Eve", "female");
+    }
+   
+
+
+    return ()=>{
+      props.saveChart(JSON.stringify(canvas));
+      }
   }, []);
 
   function handleRemoveControlClick(eventData, target) {
@@ -61,7 +79,9 @@ export default function PedigreeChart() {
 
   return (
     <Box width="100%" paddingTop={2} display="flex" justifyContent="center">
-      <canvas id="fabric-canvas"></canvas>
+
+      <canvas id="fabric-canvas" />
+      
 
       <FamilyNodeDialog
         isOpen={isFamilyDialogOpen}

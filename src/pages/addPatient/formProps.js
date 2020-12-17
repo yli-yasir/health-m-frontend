@@ -9,6 +9,19 @@ export const initialValues = {
   patientBirthDate: new Date(),
   patientAddress: "",
   patientPhoneNumber: "",
+  pedigreeChart: "",
+  patientAdmissionDate: new Date(),
+  patientAdmittor: "",
+  parentsSeparated: false,
+  parentsSeparatedDescription: "",
+  parentsDivorced: false,
+  parentsDivorcedDescription: "",
+  parentsDeath: false,
+  parentsDeathDescription: "",
+  patientStepFamily: false,
+  patientStepFamilyDescription: "",
+  doctorNotes: "",
+  diagnosisTreatment: [{ diagnosis: "", treatment: "" }],
 };
 
 // Must have the same keys as inital values to work with Formik
@@ -25,14 +38,17 @@ export const validationSchema = yup.object().shape({
     .required("Required"),
   patientGender: yup.string().oneOf(["male", "female"]).required("Required"),
   patientBodyWeight: yup.string().max(3, "Too Long!").required("Required"),
-  patientBirthDate: yup.date().max(new Date(),"Invalid Date").required("Required"),
-  patientAddress: yup.string().max(500,"Too long!").required("Required"),
-  patientPhoneNumber: yup.string().max(15,"Too long!").required("Required")
-
+  patientBirthDate: yup
+    .date()
+    .max(new Date(), "Invalid Date")
+    .required("Required"),
+  patientAddress: yup.string().max(500, "Too long!").required("Required"),
+  patientPhoneNumber: yup.string().max(15, "Too long!").required("Required"),
 });
 
 export function handleSubmit(values, { setSubmitting }) {
   setTimeout(() => {
+    console.log(JSON.stringify(values, null, 2));
     alert(JSON.stringify(values, null, 2));
     setSubmitting(false);
   }, 400);

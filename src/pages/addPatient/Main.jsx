@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Formik, validateYupSchema } from "formik";
 import { Button, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,28 +9,31 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import HMSelect from "../../components/HMSelect";
 import PatientNameSection from "./sections/PatientNameSection";
 import PatientBodySection from "./sections/PatientBodySection";
-import PedigreeChartSection from './sections/PedigreeChartSection'
+import PedigreeChartSection from "./sections/PedigreeChartSection";
 import { initialValues, validationSchema, handleSubmit } from "./formProps";
 import PatientContactInfoSection from "./sections/PatientContactInfoSection";
-import {makeTouchedErrors } from "../../utils/formikUtils";
+import { makeTouchedErrors } from "../../utils/formikUtils";
+import PatientAdmissionSection from "./sections/PatientAdmissionSection";
+import FamilySection from "./sections/FamilySection";
+import DoctorNotesSection from "./sections/DoctorNotesSection";
+import DiagnosisTreatmentSection from "./sections/DiagnosisTreatmentSection";
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function AddPatient() {
-
   return (
     <Box width="50%">
-    <Paper elevation={3}>
-      <Box p={2}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {FormikForm}
-        </Formik>
-      </Box>
-    </Paper>
+      <Paper elevation={3}>
+        <Box p={2}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {FormikForm}
+          </Formik>
+        </Box>
+      </Paper>
     </Box>
   );
 }
@@ -45,19 +48,17 @@ function FormikForm({
   isSubmitting,
   setFieldValue,
 }) {
-
   const sectionProps = {
     values,
     errors: makeTouchedErrors(touched, errors),
     onChange: handleChange,
     onBlur: handleBlur,
+    setFieldValue,
   };
 
   return (
-
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form onSubmit={handleSubmit}>
-
         <PatientNameSection {...sectionProps} />
 
         {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
@@ -68,8 +69,26 @@ function FormikForm({
 
         <PatientContactInfoSection {...sectionProps} />
 
-        <PedigreeChartSection />
+        <PatientAdmissionSection
+          onAdmissionDateChange={(date) =>
+            setFieldValue("patientAdmissionDate", date)
+          }
+          {...sectionProps}
+        />
 
+        <FamilySection {...sectionProps} />
+
+        <PedigreeChartSection
+          chartData={values.pedigreeChart}
+          saveChart={(json) => {
+            setFieldValue("pedigreeChart", json);
+          }}
+        />
+
+        <DiagnosisTreatmentSection {...sectionProps}/>
+        <DoctorNotesSection {...sectionProps} />
+
+        
         <Button
           disabled={isSubmitting}
           type="submit"
@@ -114,10 +133,3 @@ function PersonFormSection(props) {
   );
 }
 
-function MotorDevMonthSelect(props) {
-  const dataset = [...Array(36).keys()].map((num) => ({
-    value: num + 1,
-    label: num + 1 + " Months",
-  }));
-  return <HMSelect label={props.label} items={dataset}></HMSelect>;
-}

@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }));
 
-export default function HMCheckBox(props){
+export default function HMCheckbox(props){
     const {label,...checkBoxProps} = props;
     const classes = useStyles();
     return   ( <FormControlLabel
