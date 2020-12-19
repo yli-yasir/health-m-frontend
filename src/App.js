@@ -4,8 +4,8 @@ import Sidebar from "./components/Sidebar";
 import Content from "./components/Content"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Box} from '@material-ui/core'
-import AddPatient from './pages/addPatient/Main'
-
+import AddPatient from './pages/addPatient/Main';
+import SearchPatients from './pages/searchPatients/Main';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
           <Route path="/add">
             <AddPatient />
           </Route>
-          <Route path="/view">
-            <p>hi</p>
+          <Route path="/search">
+            <SearchPatients />
           </Route>
         </Switch>
         </Content>

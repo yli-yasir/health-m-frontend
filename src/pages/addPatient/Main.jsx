@@ -18,13 +18,19 @@ import FamilySection from "./sections/FamilySection";
 import DoctorNotesSection from "./sections/DoctorNotesSection";
 import DiagnosisTreatmentSection from "./sections/DiagnosisTreatmentSection";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  formContainer: {
+    padding: theme.spacing(2),
+    width:'90%'
+  }
+}));
 
 export default function AddPatient() {
+
+  const classes=  useStyles();
+
   return (
-    <Box width="50%">
-      <Paper elevation={3}>
-        <Box p={2}>
+      <Paper className={classes.formContainer} elevation={3}>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -32,9 +38,7 @@ export default function AddPatient() {
           >
             {FormikForm}
           </Formik>
-        </Box>
       </Paper>
-    </Box>
   );
 }
 
@@ -88,7 +92,6 @@ function FormikForm({
         <DiagnosisTreatmentSection {...sectionProps}/>
         <DoctorNotesSection {...sectionProps} />
 
-        
         <Button
           disabled={isSubmitting}
           type="submit"

@@ -62,7 +62,7 @@ export default function Sidebar() {
       <Divider />
       <List>
         <ListItemLink to="/add" icon={<AddCircleOutline/>} text="Add Patient" />
-        <ListItemLink to="/view" icon={<BookOutlined/>} text="View Patients" />
+        <ListItemLink to="/search" icon={<BookOutlined/>} text="View Patients" />
       </List>
     </Drawer>
   );
