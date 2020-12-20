@@ -1,26 +1,16 @@
 import React, { useState } from "react";
-import { InputBase } from "@material-ui/core";
+import { InputBase, Button, Box } from "@material-ui/core";
+import { MenuItem, Paper } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { buildQueryString } from "../utils/URLUtils";
-import MenuItem from "@material-ui/core/MenuItem";
-import Paper from "@material-ui/core/Paper";
 import Autosuggest from "react-autosuggest";
-import { searchPatients } from "../utils/APIUtils";
-
+import { buildQueryString } from "../utils/URLUtils";
 
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
     width: "100%",
     position: "relative",
-  },
-  link: {
-    width: "100%",
-    textDecoration: "none",
-    color: theme.palette.grey[700],
   },
   suggestionsContainerOpen: {
     position: "absolute",
@@ -50,27 +40,37 @@ const useStyles = makeStyles((theme) => ({
   searchButton: {
     borderRadius: theme.spacing(2),
   },
-  suggestionItem: {
-    width: "100%",
-    display: "block",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
+  suggestion: {
+    "& .suggestionLink": {
+      width: "100%",
+      textDecoration: "none",
+      color: theme.palette.grey[700],
+    },
+    "& .suggestionText": {
+      width: "100%",
+      display: "block",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+    },
   },
 }));
 
-export default function SearchBar(props) {
-
-  const queryString = props.queryString;
-
+export default function SearchBar({
+  text,
+  onTextChange,
+  getSuggestions,
+  getSuggestionValue,
+  queryString,
+}) {
   const [suggestions, setSuggestions] = useState([]);
 
   const classes = useStyles();
 
   const handleSuggestionsFetchRequested = async ({ value }) => {
     try {
-      //const mSuggestions = await searchPatients();
-      setSuggestions(['banana','apple']);
+      const foundSuggestions = await getSuggestions();
+      setSuggestions(foundSuggestions);
     } catch (e) {
       console.log(e);
     }
@@ -88,8 +88,8 @@ export default function SearchBar(props) {
       onSuggestionsClearRequested={handleSuggestionsClearRequested}
       inputProps={{
         classes,
-        value: props.text,
-        onChange: props.onTextChange,
+        value: text,
+        onChange: onTextChange,
         queryString,
       }}
       theme={{
@@ -101,14 +101,15 @@ export default function SearchBar(props) {
       renderSuggestionsContainer={SuggestionsContainer}
       renderInputComponent={SearchField}
       renderSuggestion={(suggestionItem) =>
-        renderSuggestion(suggestionItem, queryString, classes)
+        renderSuggestionWithValue(
+          getSuggestionValue(suggestionItem),
+          queryString)
       }
     />
   );
 }
 
 function SearchField(props) {
-
   const { classes, queryString, ...other } = props;
 
   return (
@@ -141,25 +142,21 @@ function SuggestionsContainer(props) {
 }
 
 //Render a suggestion item
-function renderSuggestion(suggestionItem, queryString, classes) {
+function renderSuggestionWithValue(suggestionValue, queryString) {
   return (
     <Link
-      className={classes.link}
+      className="suggestionLink"
       to={{
         pathname: "/search",
-        search: buildQueryString(queryString, { q: suggestionItem }),
+        search: buildQueryString(queryString, { q: suggestionValue }),
       }}
     >
       <MenuItem component="div">
         <SearchIcon color="primary" />
-        <div className={classes.suggestionItem}>
-          &nbsp;&nbsp;&nbsp;{suggestionItem}
+        <div className="suggestionText">
+          &nbsp;&nbsp;&nbsp;{suggestionValue}
         </div>
       </MenuItem>
     </Link>
   );
-}
-
-function getSuggestionValue(suggestionItem) {
-  return suggestionItem;
 }

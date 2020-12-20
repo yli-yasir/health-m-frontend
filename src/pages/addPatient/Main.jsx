@@ -17,6 +17,7 @@ import PatientAdmissionSection from "./sections/PatientAdmissionSection";
 import FamilySection from "./sections/FamilySection";
 import DoctorNotesSection from "./sections/DoctorNotesSection";
 import DiagnosisTreatmentSection from "./sections/DiagnosisTreatmentSection";
+import AppBarSpace from "../../components/AppBarSpace";
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -30,6 +31,8 @@ export default function AddPatient() {
   const classes=  useStyles();
 
   return (
+    <React.Fragment>
+      <AppBarSpace />
       <Paper className={classes.formContainer} elevation={3}>
           <Formik
             initialValues={initialValues}
@@ -39,6 +42,7 @@ export default function AddPatient() {
             {FormikForm}
           </Formik>
       </Paper>
+      </React.Fragment>
   );
 }
 
