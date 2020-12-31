@@ -8,13 +8,14 @@ export default function getInitialValues() {
 
   return {
     fullName: "",
-    lastName: "",
-    patientGender: "male",
+    gender: "male",
+    email:"",
     bodyWeight: "",
     birthDate: lastYearsDate,
     address: "",
     phoneNumber: "",
     pedigreeChart: "",
+    admittorName:"",
     admissionDate: todaysDate,
     patientAdmittorName: "",
     parentsSeparated: false,

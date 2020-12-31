@@ -7,8 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import boySvg from '../../../assets/boy.svg';
-import girlSvg from '../../../assets/girl.svg';
+import boySvg from '../../../assets/boy1.svg';
+import girlSvg from '../../../assets/girl1.svg';
 import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({

@@ -4,33 +4,27 @@ import PhoneField from "../../../inputs/PhoneField";
 
 export default function PatientContactInfoSection({
   values,
-  touched,
   errors,
   onBlur: handleBlur,
   onChange: handleChange,
 }) {
+  const makeProps = (name, label) => ({
+    name,
+    label,
+    value: values[name],
+    error: Boolean(errors[name]),
+    helperText: errors[name],
+    onChange: handleChange,
+    onBlur: handleBlur,
+  });
+
   return (
     <FormSection title="Contact Info.">
-      <HMTextField
-        name="address"
-        label="Patient Address"
-        value={values.address}
-        error={Boolean(errors.address)}
-        helperText={errors.address}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <HMTextField {...makeProps("address", "Address")} />
 
-      <PhoneField
-        name="phoneNumber"
-        label="Patient Phone Number"
-        value={values.phoneNumber}
-        error={Boolean(errors.phoneNumber)}
-        helperText={errors.phoneNumber}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <HMTextField {...makeProps("email", "Email")} />
 
+      <PhoneField {...makeProps("phoneNumber", "Phone Number")} />
     </FormSection>
   );
 }

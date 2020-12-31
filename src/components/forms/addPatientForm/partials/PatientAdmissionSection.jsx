@@ -18,7 +18,6 @@ export default function PatientAdmissionSection({
         onBlur={handleBlur}
         label="Admission Date"
         maxDate={new Date()}
-        maxDateMessage={errors.admissionDate}
       />
 
       <HMTextField

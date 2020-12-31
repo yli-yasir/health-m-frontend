@@ -22,7 +22,7 @@ export default function FamilySection({
       },
       onTextFieldChange: handleChange,
       onBlur: handleBlur,
-      textFieldError: errors[textFieldName],
+      textFieldError: Boolean(errors[textFieldName]),
       helperText: errors[textFieldName],
     };
   }

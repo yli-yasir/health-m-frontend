@@ -8,7 +8,12 @@ export default function AddPatient() {
   return (
     <AddPatientForm
     initialValues={initialValues}
-    onSubmit={()=>{}}
+    onSubmit={(values, { setSubmitting }) => {
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+        setSubmitting(true);
+      }, 400);
+    }}
     />
   );
 }

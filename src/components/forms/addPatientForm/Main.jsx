@@ -12,23 +12,22 @@ import PatientAdmissionSection from "./partials/PatientAdmissionSection";
 import FamilySection from "./partials/FamilySection";
 import DoctorNotesSection from "./partials/DoctorNotesSection";
 import DiagnosisTreatmentSection from "./partials/DiagnosisTreatmentSection";
-import PaperPage from '../../presentationals/PaperPage'
-import validationSchema from './validationSchema';
+import PaperPage from "../../presentationals/PaperPage";
+import validationSchema from "./validationSchema";
+import {ProgressButton} from "../../inputs/ProgressButton";
 
 export default function AddPatient(props) {
-  const { initialValues, onSubmit } = props;
-
-
+  const { initialValues,onSubmit } = props;
   return (
     <PaperPage>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-          >
-            {form}
-          </Formik>
-      </PaperPage>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {form}
+      </Formik>
+    </PaperPage>
   );
 }
 
@@ -42,7 +41,6 @@ function form({
   isSubmitting,
   setFieldValue,
 }) {
-  
   const sectionProps = {
     values,
     errors: getTouchedErrors(touched, errors),
@@ -65,9 +63,7 @@ function form({
         <PatientContactInfoSection {...sectionProps} />
 
         <PatientAdmissionSection
-          onAdmissionDateChange={(date) =>
-            setFieldValue("admissionDate", date)
-          }
+          onAdmissionDateChange={(date) => setFieldValue("admissionDate", date)}
           {...sectionProps}
         />
 
@@ -80,19 +76,18 @@ function form({
           }}
         />
 
-        <DiagnosisTreatmentSection {...sectionProps}/>
+        <DiagnosisTreatmentSection {...sectionProps} />
         <DoctorNotesSection {...sectionProps} />
 
-        <Button
+        <ProgressButton
           disabled={isSubmitting}
           type="submit"
           color="primary"
           variant="contained"
-        >
+          isLoading={isSubmitting}>
           Submit
-        </Button>
+        </ProgressButton>
       </form>
     </MuiPickersUtilsProvider>
   );
 }
-

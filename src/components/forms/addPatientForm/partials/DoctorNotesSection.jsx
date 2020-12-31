@@ -12,7 +12,7 @@ export default function DoctorNotesSection({
       <HMTextField
         label='Mental State Examination'
         value={values.doctorNotes}
-        error={errors.doctorNotes}
+        error={Boolean(errors.doctorNotes)}
         helperText={errors.doctorNotes}
         onChange={handleChange}
         onBlur={handleBlur}

@@ -18,7 +18,7 @@ export default function PatientBodySection({
     <HMRadioGroup
       label="Gender"
       name="gender"
-      value={values.patientGender}
+      value={values.gender}
       name="patientGender"
       onChange={handleChange}
       onBlur={handleBlur}
