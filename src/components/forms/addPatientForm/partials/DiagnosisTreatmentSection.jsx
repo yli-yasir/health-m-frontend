@@ -1,14 +1,24 @@
 import React from "react";
-import FormSection from "../../../components/FormSection";
-import HMSelect from "../../../components/HMSelect";
-import HMTextField from "../../../components/HMTextField";
+import FormSection from "../../../presentationals/FormSection";
+import HMSelect from "../../../inputs/HMSelect";
+import HMTextField from "../../../inputs/HMTextField";
 import { Button, Paper, Typography } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import MEDICAL_CODES from "../../../../values/medicalCodes";
 
 const useStyles = makeStyles((theme) => ({
-  paper: { padding: theme.spacing(2), marginBottom: theme.spacing(1),
-  backgroundColor: theme.palette.grey[100] },
+  paper: {
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    backgroundColor: theme.palette.grey[100],
+  },
+}));
+
+const dataset = MEDICAL_CODES.map((code) => ({
+  key: code,
+  value: code,
+  label: code,
 }));
 
 export default function DiagnosisTreatmentSection({
@@ -20,18 +30,12 @@ export default function DiagnosisTreatmentSection({
 }) {
   const classes = useStyles();
 
-  const dataset = [
-    { key: "a1", value: "a1", label: "a1" },
-    { key: "b1", value: "b1", label: "b1" },
-    { key: "c1", value: "c1", label: "c1" },
-  ];
-
   return (
     <FormSection title="Diagnosis & Treatment">
       {values.diagnosisTreatment.map((medicalCode, index) => {
         return (
           // It's not recommended to depend on index when generating keys
-          // However, it's going to be used here because performance is not an issue.
+          // However, it's going to be used here because performance is not currently an issue.
           <Paper
             variant="outlined"
             className={classes.paper}
@@ -51,6 +55,9 @@ export default function DiagnosisTreatmentSection({
               value={values.diagnosisTreatment[index].treatment}
               onChange={handleChange}
               onBlur={handleBlur}
+              error={Boolean(getTreatmentError(errors,index))}
+              helperText={getTreatmentError(errors,index)}
+              disabled={!Boolean(values.diagnosisTreatment[index].diagnosis)}
             />
           </Paper>
         );
@@ -71,4 +78,11 @@ export default function DiagnosisTreatmentSection({
       </Button>
     </FormSection>
   );
+}
+
+const getTreatmentError = (errors,index)=> {
+  if (errors.diagnosisTreatment && errors.diagnosisTreatment[index]){
+    return errors.diagnosisTreatment[index].treatment;
+  }
+  return '';
 }

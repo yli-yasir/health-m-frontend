@@ -1,7 +1,7 @@
-import HMTextField from "../../../components/HMTextField";
-import FormSection from "../../../components/FormSection";
-import HMRadioGroup from "../../../components/HMRadioGroup";
-import HMDatePicker from "../../../components/HMDatePicker";
+import HMTextField from "../../../inputs/HMTextField";
+import FormSection from "../../../presentationals/FormSection";
+import HMRadioGroup from "../../../inputs/HMRadioGroup";
+import HMDatePicker from "../../../inputs/HMDatePicker";
 
 import {InputAdornment} from "@material-ui/core";
 
@@ -29,11 +29,11 @@ export default function PatientBodySection({
     />
     
     <HMTextField
-      name="patientBodyWeight"
+      name="bodyWeight"
       label="Body Weight"
-      value={values.patientBodyWeight}
-      error={Boolean(errors.patientBodyWeight)}
-      helperText={errors.patientBodyWeight}
+      value={values.bodyWeight}
+      error={Boolean(errors.bodyWeight)}
+      helperText={errors.bodyWeight}
       type="number"
       onChange={handleChange}
       onBlur={handleBlur}
@@ -44,8 +44,8 @@ export default function PatientBodySection({
       }}
     />
 
-    <HMDatePicker value={values.patientBirthDate} onChange={handleBirthDateChange} onBlur={handleBlur} label="Birth Date"
-    maxDate={new Date()} maxDateMessage={errors.patientBirthDate}/>
+    <HMDatePicker value={values.birthDate} onChange={handleBirthDateChange} onBlur={handleBlur} label="Birth Date"
+    maxDate={new Date(new Date().getFullYear()-1, new Date().getMonth())}/>
 
 
   </FormSection>

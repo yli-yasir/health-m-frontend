@@ -1,5 +1,5 @@
-import FormSection from "../../../components/FormSection";
-import PedigreeChart from "../../../components/PedigreeChart";
+import FormSection from "../../../presentationals/FormSection";
+import PedigreeChart from "../../../pedigreeChart/PedigreeChart";
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Dialog, Button, Slide } from "@material-ui/core";

@@ -1,5 +1,5 @@
-import FormSection from "../../../components/FormSection";
-import CheckboxedTextField from "../../../components/CheckboxedTextField";
+import FormSection from "../../../presentationals/FormSection";
+import CheckboxedTextField from "../../../inputs/CheckboxedTextField";
 
 export default function FamilySection({
   values,
@@ -8,6 +8,7 @@ export default function FamilySection({
   onChange: handleChange,
   setFieldValue,
 }) {
+
   function makeProps(label, checkboxName, textFieldName) {
     return {
       checkboxLabel: label,
@@ -46,17 +47,17 @@ export default function FamilySection({
 
       <CheckboxedTextField
         {...makeProps(
-          "Parents Death",
-          "parentsDeath",
-          "parentsDeathDescription"
+          "Parents Died",
+          "parentsDied",
+          "parentsDiedDescription"
         )}
       />
 
       <CheckboxedTextField
         {...makeProps(
-          "Patient Step Family",
-          "patientStepFamily",
-          "patientStepFamilyDescription"
+          "Step Family",
+          "stepFamily",
+          "stepFamilyDescription"
         )}
       />
 

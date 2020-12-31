@@ -1,6 +1,6 @@
-import HMTextField from "../../../components/HMTextField";
-import FormSection from "../../../components/FormSection";
-import HMDatePicker from "../../../components/HMDatePicker";
+import HMTextField from "../../../inputs/HMTextField";
+import FormSection from "../../../presentationals/FormSection";
+import HMDatePicker from "../../../inputs/HMDatePicker";
 
 export default function PatientAdmissionSection({
   values,
@@ -13,22 +13,22 @@ export default function PatientAdmissionSection({
     <FormSection title="Admission Info.">
 
       <HMDatePicker
-        value={values.patientAdmissionDate}
+        value={values.admissionDate}
         onChange={handleAdmissionDateChange}
         onBlur={handleBlur}
         label="Admission Date"
         maxDate={new Date()}
-        maxDateMessage={errors.patientAdmissionDate}
+        maxDateMessage={errors.admissionDate}
       />
 
       <HMTextField
-        name="patientAdmittor"
+        name="admittorName"
         label="Patient admitted by"
-        value={values.patientAdmittor}
+        value={values.admittorName}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={Boolean(errors.patientAdmittor)}
-        helperText={errors.patientAdmittor}
+        error={Boolean(errors.admittorName)}
+        helperText={errors.admittorName}
       />
     </FormSection>
   );

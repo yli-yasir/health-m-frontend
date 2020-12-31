@@ -1,20 +1,9 @@
+import axios from "axios";
 
-export async function searchPatients(){
-    return [{
-        _id:'001',
-        firstName:'Yasir',
-        lastName: 'Al-Baldawi'
-    }
-    ,
-    {
-        _id:'002',
-        firstName:'Paul',
-        lastName: 'Pheonix'
-    },
-    {
-        _id:'003',
-        firstName:'Jack',
-        lastName: 'Cortex'
-    }
-]
+export async function searchPatients(limit, page) {
+  const skip = limit * (page-1);
+  const response = await axios.get(
+    `https://mockend.com/yli-yasir/health-m/patients?limit=${limit}&offset=${skip}`
+  );
+  return response.data;
 }

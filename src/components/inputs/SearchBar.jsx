@@ -5,7 +5,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
-import { buildQueryString } from "../utils/URLUtils";
+import { buildQueryString } from "../../utils/URLUtils";
 
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
@@ -61,7 +61,7 @@ export default function SearchBar({
   onTextChange,
   getSuggestions,
   getSuggestionValue,
-  queryString,
+  makeSearchLink,
 }) {
   const [suggestions, setSuggestions] = useState([]);
 
@@ -90,7 +90,7 @@ export default function SearchBar({
         classes,
         value: text,
         onChange: onTextChange,
-        queryString,
+        makeSearchLink,
       }}
       theme={{
         container: classes.autoSuggestRoot,
@@ -103,14 +103,14 @@ export default function SearchBar({
       renderSuggestion={(suggestionItem) =>
         renderSuggestionWithValue(
           getSuggestionValue(suggestionItem),
-          queryString)
+          makeSearchLink)
       }
     />
   );
 }
 
 function SearchField(props) {
-  const { classes, queryString, ...other } = props;
+  const { classes, makeSearchLink, ...other } = props;
 
   return (
     <Box className={classes.searchInputContainer}>
@@ -124,10 +124,7 @@ function SearchField(props) {
         {...other}
       />
       <Link
-        to={{
-          pathname: "/search",
-          search: buildQueryString(queryString, { q: props.value }),
-        }}
+        to={makeSearchLink(props.value)}
       >
         <Button className={classes.searchButton}>
           <SearchIcon color="primary" />
@@ -142,14 +139,11 @@ function SuggestionsContainer(props) {
 }
 
 //Render a suggestion item
-function renderSuggestionWithValue(suggestionValue, queryString) {
+function renderSuggestionWithValue(suggestionValue,makeSearchLink) {
   return (
     <Link
       className="suggestionLink"
-      to={{
-        pathname: "/search",
-        search: buildQueryString(queryString, { q: suggestionValue }),
-      }}
+      to={makeSearchLink(suggestionValue)}
     >
       <MenuItem component="div">
         <SearchIcon color="primary" />

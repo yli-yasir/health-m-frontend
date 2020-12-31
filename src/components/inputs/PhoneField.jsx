@@ -2,7 +2,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import MaskedInput from 'react-text-mask';
-import HMTextField from './HMTextField';
+import HMTextField from '../inputs/HMTextField';
 import React from 'react'
 
 

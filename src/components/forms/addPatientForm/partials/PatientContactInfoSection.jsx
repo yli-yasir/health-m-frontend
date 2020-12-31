@@ -1,6 +1,6 @@
-import HMTextField from "../../../components/HMTextField";
-import FormSection from "../../../components/FormSection";
-import PhoneField from "../../../components/PhoneField";
+import HMTextField from "../../../inputs/HMTextField";
+import FormSection from "../../../presentationals/FormSection";
+import PhoneField from "../../../inputs/PhoneField";
 
 export default function PatientContactInfoSection({
   values,
@@ -12,21 +12,21 @@ export default function PatientContactInfoSection({
   return (
     <FormSection title="Contact Info.">
       <HMTextField
-        name="patientAddress"
+        name="address"
         label="Patient Address"
         value={values.address}
-        error={Boolean(errors.patientAddress)}
-        helperText={errors.patientAddress}
+        error={Boolean(errors.address)}
+        helperText={errors.address}
         onChange={handleChange}
         onBlur={handleBlur}
       />
 
       <PhoneField
-        name="patientPhoneNumber"
+        name="phoneNumber"
         label="Patient Phone Number"
-        value={values.patientPhoneNumber}
-        error={Boolean(errors.patientPhoneNumber)}
-        helperText={errors.patientPhoneNumber}
+        value={values.phoneNumber}
+        error={Boolean(errors.phoneNumber)}
+        helperText={errors.phoneNumber}
         onChange={handleChange}
         onBlur={handleBlur}
       />

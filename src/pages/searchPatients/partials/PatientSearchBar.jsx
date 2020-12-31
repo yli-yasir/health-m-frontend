@@ -1,23 +1,26 @@
-import SearchBar from "../../../components/SearchBar";
+import SearchBar from "../../../components/inputs/SearchBar";
 import { searchPatients } from "../../../utils/mockAPIUtils";
 import { useState } from "react";
+import { buildQueryString } from "../../../utils/URLUtils";
+
 export default function PatientSearchBar() {
   const [text, setText] = useState('');
 
   return (
     <SearchBar
       text={text}
-      onTextChange={(e) => setText(e.target.value)}
+      onTextChange={(e,{newValue}) => setText(newValue)}
       getSuggestions={getSuggestions}
-      getSuggestionValue={getSuggestionValue}
+      getSuggestionValue={(patient)=>patient.fullName}
+      makeSearchLink={(searchTerm)=> ({
+        pathname:'/search',
+        search: buildQueryString('',{q:searchTerm})
+      })}
     />
   );
 }
 
 async function getSuggestions() {
-  return await searchPatients();
+  return await searchPatients(5,1);
 }
 
-function getSuggestionValue(patient) {
-  return patient.firstName + ' ' +  patient.lastName;
-}

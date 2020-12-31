@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import HMRadioGroup from "./HMRadioGroup";
-import HMTextField from "./HMTextField";
+import HMRadioGroup from "../inputs/HMRadioGroup";
+import HMTextField from "../inputs/HMTextField";
 import { makeStyles } from "@material-ui/core/styles";
 import {Formik} from 'formik'
 import {

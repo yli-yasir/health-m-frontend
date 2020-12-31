@@ -38,6 +38,7 @@ function ListItemLink(props) {
         component={NavLink}
         to={to}
         activeClassName={classes.activeLink}
+        exact={true}
       >
         {icon ? <ListItemIcon classes= {{root: classes.listItemRoot}}>{icon}</ListItemIcon> : null}
         <ListItemText primary={text} />
@@ -61,8 +62,8 @@ export default function Sidebar() {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItemLink to="/add" icon={<AddCircleOutline/>} text="Add Patient" />
-        <ListItemLink to="/search" icon={<BookOutlined/>} text="View Patients" />
+        <ListItemLink  to="/patients/new" icon={<AddCircleOutline/>} text="Add Patient" />
+        <ListItemLink  to="/patients" icon={<BookOutlined/>} text="View Patients" />
       </List>
     </Drawer>
   );

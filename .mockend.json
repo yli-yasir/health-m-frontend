@@ -1,6 +1,6 @@
 {
     "Patient": {
-      "firstName": "string",
-      "lastName": "string"
+      "fullName": "string",
+      "lastName": "string"      
     }
   }

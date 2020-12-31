@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Snackbar, Fab } from "@material-ui/core";
 import { SaveOutlined } from "@material-ui/icons";
-import FamilyNodeDialog from "../components/FamilyNodeDialog";
-import PedigreeChartCanvas from "../pedigreeChartjs/pedigreeChartCanvas";
+import FamilyNodeDialog from "./FamilyNodeDialog";
+import PedigreeChartCanvas from "../../pedigreeChartjs/pedigreeChartCanvas";
 
 
 export default function PedigreeChart(props) {

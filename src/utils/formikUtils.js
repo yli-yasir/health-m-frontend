@@ -1,5 +1,5 @@
 
-export function makeTouchedErrors(touched,errors){
+export function getTouchedErrors(touched,errors){
 
     const touchedErrors = {};
 
@@ -10,5 +10,6 @@ export function makeTouchedErrors(touched,errors){
       }
       return touchedErrors;
 }
+
 
 

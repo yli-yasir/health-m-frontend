@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from "@material-ui/core";
-import HMDivider from "./HMDivider";
+import HMDivider from "../layout/HMDivider";
 
 export default function FormSection(props) {
   return (

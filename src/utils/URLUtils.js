@@ -12,3 +12,7 @@ export function buildQueryString(oldQueryString,options){
     })
      return "?" + params.toString();
 }
+
+export function getParamValue(queryString,param){
+    return new URLSearchParams(queryString).get(param);
+}
