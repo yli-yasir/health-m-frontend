@@ -48,8 +48,8 @@ export default function AddPatient() {
 function valuesToPatient(values) {
   const diagnosisTreatmentArray = values.diagnosisTreatment;
   const diagnosisTreatmentMap = diagnosisTreatmentArray.reduce(
-    (a, pair) =>
-      pair.diagnosis ? { ...a, [pair.diagnosis]: pair.diagnosisTreatment } : a,
+    (acc, pair) =>
+      pair.diagnosis ? { ...acc, [pair.diagnosis]: pair.treatment } : acc,
     {}
   );
   console.log(diagnosisTreatmentMap);

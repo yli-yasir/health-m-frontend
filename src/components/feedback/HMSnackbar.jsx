@@ -1,6 +1,5 @@
 import { Snackbar } from "@material-ui/core";
 export default function HMSnackbar({ message, clearMessage }) {
-  console.log(message);
   return (
     <Snackbar
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}

@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     width: "90%",
+    minHeight:'250px',
   },
 }));
 
@@ -16,7 +17,7 @@ export default function HMPaper(props) {
   return (
     <React.Fragment>
     <AppBarSpace />
-    <Paper className={classes.paper} elevation={3}>
+    <Paper className={classes.paper + ' ' + (props.className || '')} elevation={3}>
       {props.children}
     </Paper>
     </React.Fragment>

@@ -10,6 +10,8 @@ export async function searchPatients(term, limit, page) {
 }
 
 export async function addPatient(patient) {
+  console.log('submitting');
+  console.log(patient);
   const res = await axios.post(`${BASE_URL}/patients`, patient);
   let patientId;
   if (res.headers.location) {
@@ -20,6 +22,7 @@ export async function addPatient(patient) {
 
 export async function getPatient(id) {
   const res = await axios.get(`${BASE_URL}/patients/${id}`);
+  console.log(res.data);
   return res.data;
 }
 

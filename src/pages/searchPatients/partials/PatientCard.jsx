@@ -7,9 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import boySvg from '../../../assets/boy1.svg';
-import girlSvg from '../../../assets/girl1.svg';
+import {getRandomBoySvg,getRandomGirlSvg} from '../../../utils/miscUtils';
 import {Link} from 'react-router-dom';
+import { EmailOutlined } from '@material-ui/icons';
+
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -36,7 +37,7 @@ export default function PatientCard({patient}){
           component="img"
           alt="Patient Image"
           height="140"
-          image={ patient.gender === 'male' ? boySvg : girlSvg}
+          image={ patient.gender === 'male' ? getRandomBoySvg() : getRandomGirlSvg()}
           classes={{img:classes.cardImg}}
         />
         <CardContent>
@@ -44,7 +45,7 @@ export default function PatientCard({patient}){
             {patient.fullName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Click for more details 
+            {patient.email}<br/>{patient.phoneNumber}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -8,7 +8,7 @@ export default function InfoItem(props){
             </ListItemIcon>
             <ListItemText>
                 <Typography variant='h6'>{props.title}</Typography>
-                {props.text}
+                {props.content}
             </ListItemText>
         </ListItem>
     );
