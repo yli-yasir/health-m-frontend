@@ -17,7 +17,6 @@ export default function getInitialValues() {
     pedigreeChart: "",
     admittorName:"",
     admissionDate: todaysDate,
-    patientAdmittorName: "",
     parentsSeparated: false,
     parentsSeparatedDescription: "",
     parentsDivorced: false,

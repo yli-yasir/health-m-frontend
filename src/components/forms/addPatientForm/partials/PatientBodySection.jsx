@@ -19,7 +19,6 @@ export default function PatientBodySection({
       label="Gender"
       name="gender"
       value={values.gender}
-      name="patientGender"
       onChange={handleChange}
       onBlur={handleBlur}
       radios={[

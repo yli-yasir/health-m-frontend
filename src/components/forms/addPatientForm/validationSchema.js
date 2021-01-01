@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const diagnosisTreatmentSchema = yup
   .object()
-  .shape({ diagnosis: yup.string(), treatment: yup.string().max(250) });
+  .shape({ diagnosis: yup.string(), treatment: yup.string().max(300) });
 
 // Only perform validation that aids user experience.
 // E.g validating a Checkbox seems redundant since it always have a value of true/false

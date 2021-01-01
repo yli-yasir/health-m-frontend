@@ -15,9 +15,10 @@ import DiagnosisTreatmentSection from "./partials/DiagnosisTreatmentSection";
 import PaperPage from "../../presentationals/PaperPage";
 import validationSchema from "./validationSchema";
 import {ProgressButton} from "../../inputs/ProgressButton";
+import HMSnackbar from "../../feedback/HMSnackbar";
 
 export default function AddPatient(props) {
-  const { initialValues,onSubmit } = props;
+  const { initialValues,onSubmit,feedbackMessage,clearFeedbackMessage } = props;
   return (
     <PaperPage>
       <Formik
@@ -27,6 +28,10 @@ export default function AddPatient(props) {
       >
         {form}
       </Formik>
+      <HMSnackbar
+        clearMessage={clearFeedbackMessage}
+        message={feedbackMessage}
+      />
     </PaperPage>
   );
 }
@@ -88,6 +93,7 @@ function form({
           Submit
         </ProgressButton>
       </form>
+
     </MuiPickersUtilsProvider>
   );
 }

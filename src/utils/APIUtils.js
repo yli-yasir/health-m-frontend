@@ -1,16 +1,21 @@
 import axios from "axios";
-import {buildQueryString} from './URLUtils';
+import { buildQueryString } from "./URLUtils";
 const BASE_URL = "http://localhost:8000";
 
 export async function searchPatients(term, limit, page) {
   const skip = limit * (page - 1);
-  const queryString = buildQueryString('',{ q: term, skip });
+  const queryString = buildQueryString("", { q: term, skip });
   const response = await axios.get(`${BASE_URL}/patients${queryString}`);
   return response.data;
 }
 
-export async function addPatient(patient){
-  await axios.post('/patients',patient);
+export async function addPatient(patient) {
+  const res = await axios.post(`${BASE_URL}/patients`, patient);
+  let patientId;
+  if (res.headers.location) {
+    patientId = res.headers.location.match(/[^/]+$/g)[0];
+  }
+  return patientId;
 }
 
 export async function getPatient(id) {
