@@ -5,7 +5,10 @@ import HMTextField from "../../../inputs/HMTextField";
 import { Button, Paper, Typography } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import MEDICAL_CODES from "../../../../values/medicalCodes";
+import {
+  NULL_MEDICAL_CODE,
+  MEDICAL_CODES,
+} from "../../../../values/medicalCodes";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -15,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const dataset = MEDICAL_CODES.map((code) => ({
+const dataset = [NULL_MEDICAL_CODE,...MEDICAL_CODES].map((code) => ({
   key: code,
   value: code,
   label: code,
@@ -55,8 +58,8 @@ export default function DiagnosisTreatmentSection({
               value={values.diagnosisTreatment[index].treatment}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(getTreatmentError(errors,index))}
-              helperText={getTreatmentError(errors,index)}
+              error={Boolean(getTreatmentError(errors, index))}
+              helperText={getTreatmentError(errors, index)}
               disabled={!Boolean(values.diagnosisTreatment[index].diagnosis)}
             />
           </Paper>
@@ -80,9 +83,9 @@ export default function DiagnosisTreatmentSection({
   );
 }
 
-const getTreatmentError = (errors,index)=> {
-  if (errors.diagnosisTreatment && errors.diagnosisTreatment[index]){
+const getTreatmentError = (errors, index) => {
+  if (errors.diagnosisTreatment && errors.diagnosisTreatment[index]) {
     return errors.diagnosisTreatment[index].treatment;
   }
-  return '';
-}
+  return "";
+};

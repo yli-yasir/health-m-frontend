@@ -12,31 +12,36 @@ import PatientAdmissionSection from "./partials/PatientAdmissionSection";
 import FamilySection from "./partials/FamilySection";
 import DoctorNotesSection from "./partials/DoctorNotesSection";
 import DiagnosisTreatmentSection from "./partials/DiagnosisTreatmentSection";
-import PaperPage from "../../presentationals/PaperPage";
 import validationSchema from "./validationSchema";
-import {ProgressButton} from "../../inputs/ProgressButton";
+import ProgressButton from "../../inputs/ProgressButton";
 import HMSnackbar from "../../feedback/HMSnackbar";
+import {Redirect} from 'react-router-dom';
 
-export default function AddPatient(props) {
-  const { initialValues,onSubmit,feedbackMessage,clearFeedbackMessage } = props;
+export default function PatientFormContainer(props) {
+  const { initialValues,onSubmit,feedbackMessage,clearFeedbackMessage,success,onSuccessRedirect } = props;
   return (
-    <PaperPage>
+    <React.Fragment>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {form}
+        {patientForm}
       </Formik>
+      {success && (
+        <Redirect
+          to={onSuccessRedirect}
+        />
+      )}
       <HMSnackbar
         clearMessage={clearFeedbackMessage}
         message={feedbackMessage}
       />
-    </PaperPage>
+    </React.Fragment>
   );
 }
 
-function form({
+function patientForm({
   values,
   errors,
   touched,
@@ -85,11 +90,10 @@ function form({
         <DoctorNotesSection {...sectionProps} />
 
         <ProgressButton
-          disabled={isSubmitting}
           type="submit"
           color="primary"
           variant="contained"
-          isLoading={isSubmitting}>
+          isWorking={isSubmitting}>
           Submit
         </ProgressButton>
       </form>

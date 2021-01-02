@@ -1,8 +1,8 @@
-import AddPatientForm from "../../components/forms/addPatientForm/Main";
-import getInitialValues from "../../components/forms/addPatientForm/initialValues";
+import PatientForm from "../../components/forms/PatientForm/Main";
+import getInitialValues from "../../components/forms/PatientForm/initialValues";
 import { addPatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import PaperPage from '../../components/presentationals/PaperPage';
 // Get an object with the initial values.
 const initialValues = getInitialValues();
 
@@ -24,23 +24,20 @@ export default function AddPatient() {
   }
 
   return (
-    <React.Fragment>
-      <AddPatientForm
+    <PaperPage>
+      <PatientForm
         initialValues={initialValues}
         onSubmit={handleSubmit}
         feedbackMessage={feedbackMessage}
         clearFeedbackMessage={() => setFeedbackMessage("")}
+        success={Boolean(successId)}
+        onSuccessRedirect={{
+          pathname: `/patients/${successId}`,
+          state: { message: 'Patient added successfully!' },
+        }}
       />
 
-      {successId && (
-        <Redirect
-          to={{
-            pathname: `/patients/${successId}`,
-            state: { message: 'Patient added successfully!' },
-          }}
-        />
-      )}
-    </React.Fragment>
+    </PaperPage>
   );
 }
 

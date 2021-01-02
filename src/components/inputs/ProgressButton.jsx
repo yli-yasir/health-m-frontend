@@ -1,11 +1,11 @@
 import { Button,CircularProgress } from "@material-ui/core";
 
-export function ProgressButton(props) {
-    const {isLoading,...rest} = props;
+export default function ProgressButton(props) {
+    const {isWorking,...rest} = props;
   return (
-    <Button {...rest}>
-      {isLoading && <CircularProgress size={24}/>}
-      {!isLoading  && props.children}
+    <Button disabled={isWorking} {...rest}>
+      {isWorking && <CircularProgress size={24}/>}
+      {!isWorking  && props.children}
     </Button>
   );
 }

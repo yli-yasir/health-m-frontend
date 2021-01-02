@@ -10,8 +10,6 @@ export async function searchPatients(term, limit, page) {
 }
 
 export async function addPatient(patient) {
-  console.log('submitting');
-  console.log(patient);
   const res = await axios.post(`${BASE_URL}/patients`, patient);
   let patientId;
   if (res.headers.location) {
@@ -26,6 +24,14 @@ export async function getPatient(id) {
   return res.data;
 }
 
-export async function updatePatient(query, fields) {}
+export async function updatePatient(id,update) {
+  await axios.patch(`${BASE_URL}/patients/${id}`,update);
+  
+}
 
-export async function deletePatient(postId) {}
+export async function deletePatient(id) {
+  await axios.delete(`${BASE_URL}/patients/${id}`)
+
+}
+
+

@@ -7,6 +7,7 @@ import {Box} from '@material-ui/core'
 import AddPatient from './pages/addPatient/Main';
 import SearchPatients from './pages/searchPatients/Main';
 import ViewPatient from './pages/viewPatient/Main'
+import EditPatient from "./pages/editPatient/Main";
 function App() {
   return (
     <Box display='flex'>
@@ -16,6 +17,7 @@ function App() {
         <Content>
         <Switch>
           <Route path="/patients/new" component={AddPatient} />
+          <Route path="/patients/:id/edit" component={EditPatient} />
           <Route path="/patients/:id" component={ViewPatient} />
           <Route path="/patients" component={SearchPatients} />
         </Switch>

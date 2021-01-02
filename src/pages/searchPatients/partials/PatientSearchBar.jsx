@@ -1,5 +1,5 @@
 import SearchBar from "../../../components/inputs/SearchBar";
-import { searchPatients } from "../../../utils/mockAPIUtils";
+import { searchPatients } from "../../../utils/APIUtils";
 import { useState } from "react";
 import { buildQueryString } from "../../../utils/URLUtils";
 

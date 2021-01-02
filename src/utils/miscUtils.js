@@ -19,3 +19,7 @@ export function getRandomGirlSvg(){
 function getRandomElement(arr){
     return arr[Math.floor((Math.random()*arr.length))] ;
 }
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }

@@ -20,6 +20,8 @@ import InfoItem from "../../../components/presentationals/InfoItem";
 import { makeStyles } from "@material-ui/core/styles";
 import StaticPedigreeChart from "../../../components/pedigreeChart/StaticPedigreeChart";
 import { useState } from "react";
+import {capitalizeFirstLetter} from '../../../utils/miscUtils';
+
 const useStyles = makeStyles((theme) => ({
   infoList: {
     width: "100%",
@@ -43,7 +45,7 @@ export default function PatientInfoList({ patient }) {
       <InfoItem
         icon={PermIdentityOutlined}
         title="Gender:"
-        content={patient.gender}
+        content={patient.gender ? capitalizeFirstLetter(patient.gender) : ''}
       />
       <InfoItem
         icon={CakeOutlined}
@@ -77,46 +79,46 @@ export default function PatientInfoList({ patient }) {
         content={patient.admittorName}
       />
 
-      {patient.parentsSeparated && (
-        <InfoItem
-          icon={PageviewOutlined}
-          title="Parent Separation:"
-          content={
-            patient.parentSeparationDescription || "Parents are separated."
-          }
-        />
-      )}
+      <InfoItem
+        icon={PageviewOutlined}
+        title="Parent Separation:"
+        content={
+          patient.parentsSeparated
+            ? patient.parentsSeparatedDescription || "Parents are separated."
+            : "Parents are not separated."
+        }
+      />
 
       {patient.parentsDivorced && (
         <InfoItem
           icon={PageviewOutlined}
           title="Parents Divorce:"
           content={
-            patient.parentsDivorcedDescription || "Parents are divorced."
+            patient.parentsDivorced
+              ? patient.parentsDivorcedDescription || "Parents are divorced."
+              : "Parents are not divorced."
           }
-        />
-      )}
-
-      {patient.parentsDied && (
-        <InfoItem
-          icon={PageviewOutlined}
-          title="Parents Death:"
-          content={patient.parentsDiedDescription || "Death has occured."}
-        />
-      )}
-
-      {patient.stepFamily && (
-        <InfoItem
-          icon={PageviewOutlined}
-          title="Stepfamily:"
-          content={patient.stepFamilyDescription || "Stepfamily members exist."}
         />
       )}
 
       <InfoItem
         icon={PageviewOutlined}
         title="Parents Death:"
-        content={patient.parentsDiedDescription || "Death has occured."}
+        content={
+          patient.parentsDied
+            ? patient.parentsDiedDescription || "Death has occured."
+            : "Death has not occured."
+        }
+      />
+
+      <InfoItem
+        icon={PageviewOutlined}
+        title="Stepfamily:"
+        content={
+          patient.stepFamily
+            ? patient.stepFamilyDescription || "Stepfamily members exist."
+            : "No stepfamily members exist."
+        }
       />
 
       <InfoItem
@@ -153,10 +155,9 @@ export default function PatientInfoList({ patient }) {
           key={key}
           icon={HealingOutlined}
           title={key}
-          content={patient.diagnosisTreatment[key] || 'No Treatment.'}
+          content={patient.diagnosisTreatment[key] || "No Treatment."}
         />
       ))}
-
     </List>
   );
 }
