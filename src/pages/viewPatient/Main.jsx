@@ -2,7 +2,7 @@ import PaperPage from "../../components/presentationals/PaperPage";
 import { Typography } from "@material-ui/core";
 import { Box, Fab } from "@material-ui/core";
 import InfoItem from "../../components/presentationals/InfoItem";
-import Loader from "../../components/containers/Loader";
+import Loader from "../../components/loaders/Loader";
 import HMSnackbar from "../../components/feedback/HMSnackbar";
 import { getPatient } from "../../utils/APIUtils";
 import PatientInfoList from "./partials/PatientInfoList";

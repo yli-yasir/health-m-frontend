@@ -69,7 +69,7 @@ export default function SearchBar({
 
   const handleSuggestionsFetchRequested = async ({ value }) => {
     try {
-      const foundSuggestions = await getSuggestions();
+      const foundSuggestions = await getSuggestions(value);
       setSuggestions(foundSuggestions);
     } catch (e) {
       console.log(e);

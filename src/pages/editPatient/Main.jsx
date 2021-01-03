@@ -6,7 +6,7 @@ import {
   patientToValues,
 } from "../../components/forms/PatientForm/mapping";
 import { useParams } from "react-router-dom";
-import Loader from "../../components/containers/Loader";
+import Loader from "../../components/loaders/Loader";
 import PaperPage from "../../components/presentationals/PaperPage";
 
 export default function EditPatient() {

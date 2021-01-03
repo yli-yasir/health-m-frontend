@@ -21,6 +21,7 @@
     "react-scripts": "4.0.0",
     "react-text-mask": "^5.4.3",
     "react-use": "^15.3.4",
+    "react-waypoint": "^9.0.3",
     "web-vitals": "^0.2.4",
     "yup": "^0.30.0"
   },

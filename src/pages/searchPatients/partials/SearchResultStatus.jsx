@@ -1,7 +1,7 @@
 import React from 'react';
 import {CircularProgress,Typography} from '@material-ui/core';
 
-export default function SearchResultStatus({
+export default function LoadMore({
   isSearching,
   hasResults,
   hasMoreResults,
@@ -10,7 +10,7 @@ export default function SearchResultStatus({
     <React.Fragment>
       {isSearching && <CircularProgress color="primary" size={20} />}
 
-      {!isSearching && !hasResults && (
+      {/* {!isSearching && !hasResults && (
         <Typography variant="caption" align="center" gutterBottom>
           <i>No results found</i>
         </Typography>
@@ -20,7 +20,7 @@ export default function SearchResultStatus({
         <Typography variant="caption" align="center" gutterBottom>
           <i>No more results found</i>
         </Typography>
-      )}
+      )} */}
     </React.Fragment>
   );
 }
