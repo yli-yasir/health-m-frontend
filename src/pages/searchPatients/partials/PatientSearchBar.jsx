@@ -13,7 +13,7 @@ export default function PatientSearchBar() {
       getSuggestions={async (searchTerm)=> await searchPatients(searchTerm,5,1)}
       getSuggestionValue={(patient)=>patient.fullName}
       makeSearchLink={(suggestedSearchTerm)=> ({
-        pathname:'/search',
+        pathname:'/patients',
         search: buildQueryString('',{q:suggestedSearchTerm})
       })}
     />

@@ -21,7 +21,6 @@ export default function BottomScollWaypoint(props) {
   return (<div className={classes.waypoint}>
     <span>&nbsp;</span>    
     <Waypoint onEnter={props.onEnter}/>
-    {/* Elements above will suffice, line below can be removed */}
-    <img src={catSvg} height='50px' width='50px' style={{marginBottom:'8px'}}></img>
+
   </div>);
 }

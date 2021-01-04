@@ -3,11 +3,9 @@ import { buildQueryString } from "./URLUtils";
 const BASE_URL = "http://localhost:8000";
 
 export async function searchPatients(term, limit, page) {
-  console.log(term)
   const queryString = buildQueryString("", { q: term, page,limit });
   console.log(queryString);
   const response = await axios.get(`${BASE_URL}/patients${queryString}`);
-  console.log(response.data);
   return response.data;
 }
 

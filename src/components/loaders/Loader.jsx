@@ -10,7 +10,7 @@ export default function Loader(props) {
   return (
     <React.Fragment>
       {loading && <CircularProgress/>}
-      {!loading && !error && value && props.render(value)}
+      {!loading && !error && props.render(value)}
       {error && <Typography variant='h6'>Something went wrong!</Typography>}
     </React.Fragment>
   );
