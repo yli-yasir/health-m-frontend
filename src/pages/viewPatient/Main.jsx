@@ -14,12 +14,7 @@ import React from "react";
 import { EditOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  centerContent: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   fab: {
     position: "fixed",
     bottom: theme.spacing(4),
@@ -36,7 +31,7 @@ export default function ViewPatient() {
   );
 
   return (
-    <PaperPage className={classes.centerContent}>
+    <PaperPage centerContent={true}>
       <Loader
         load={async () => await getPatient(patientId)}
         deps={[patientId]}

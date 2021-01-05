@@ -8,6 +8,8 @@ import AddPatient from './pages/addPatient/Main';
 import SearchPatients from './pages/searchPatients/Main';
 import ViewPatient from './pages/viewPatient/Main'
 import EditPatient from "./pages/editPatient/Main";
+import Stats from './pages/stats/Main';
+
 function App() {
   return (
     <Box display='flex'>
@@ -20,6 +22,7 @@ function App() {
           <Route path="/patients/:id/edit" component={EditPatient} />
           <Route path="/patients/:id" component={ViewPatient} />
           <Route path="/patients" component={SearchPatients} />
+          <Route path='/stats' component={Stats}/>
         </Switch>
         </Content>
       </Router>

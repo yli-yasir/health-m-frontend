@@ -15,4 +15,4 @@ export default function HMCheckbox(props){
     label={label}
     classes={{root: classes.checkBoxRoot}}
   />);
-}
+}   

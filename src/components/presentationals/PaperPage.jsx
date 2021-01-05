@@ -9,15 +9,25 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     minHeight:'250px',
   },
+  centerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  }
+
 }));
 
 export default function HMPaper(props) {
 
  const classes = useStyles();
+ const propClass = + (props.className || '');
+ const centerContentClass = props.centerContent? classes.centerContent : '';
+
   return (
     <React.Fragment>
     <AppBarSpace />
-    <Paper className={classes.paper + ' ' + (props.className || '')} elevation={3}>
+    <Paper className={classes.paper + ' ' + propClass + ' ' + centerContentClass} elevation={3}>
       {props.children}
     </Paper>
     </React.Fragment>
