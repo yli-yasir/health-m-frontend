@@ -14,11 +14,23 @@ export default function DatasetFilterPanel({ filterDataset }) {
 
   const [ filterActive, setFilterActive ] = useState(false);
 
+  const enableFilter = ()=>{
+    setFilterActive(true);
+    filterDataset(filterState);
+  }
+  
+  const disableFilter = ()=>{
+    setFilterActive(false);
+    filterDataset(null);
+  }
+
   const handleFilterStateChange = (e) => {
-    setFilterState({
+    const filter = {
       ...filterState,
       [e.target.name]: !filterState[e.target.name],
-    });
+    };
+    filterDataset(filter);
+    setFilterState(filter);
   };
 
   const makeProps = (label, name) => ({
@@ -26,6 +38,7 @@ export default function DatasetFilterPanel({ filterDataset }) {
     label,
     checked: filterState[name],
     onChange: handleFilterStateChange,
+    disabled: filterActive? false: true
   });
 
   return (
@@ -38,7 +51,7 @@ export default function DatasetFilterPanel({ filterDataset }) {
         variant="contained"
         color={filterActive ? "primary" : "secondary"}
         startIcon={<FilterList />}
-        onClick={() => setFilterActive(!filterActive)}
+        onClick={filterActive? disableFilter : enableFilter}
       >
         {filterActive ? "ON" : "OFF"}
       </Button>

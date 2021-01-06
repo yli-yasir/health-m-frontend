@@ -29,6 +29,7 @@ export function patientToValues(patient) {
   return initialValues;
 }
 
+// From Db to form 
 function _diagnosisTreatmentObjToArray(diagnosisTreatmentObj) {
   let diagnosisTreatmentArray;
   //Transform the diagnosisTreatmentMap to an array
@@ -44,6 +45,7 @@ function _diagnosisTreatmentObjToArray(diagnosisTreatmentObj) {
   return diagnosisTreatmentArray;
 }
 
+// From form to Db
 function _diagnosisTreatmentArrayToObj(diagnosisTreatmentArray) {
   const diagnosisTreatmentObj = diagnosisTreatmentArray.reduce(
     (acc, pair) =>

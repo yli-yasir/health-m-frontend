@@ -1,39 +1,64 @@
 import React from "react";
-import {Doughnut} from 'react-chartjs-2'
-import PaperPage from '../../components/presentationals/PaperPage';
+import { Doughnut } from "react-chartjs-2";
+import PaperPage from "../../components/presentationals/PaperPage";
 import DatasetFilterPanel from "./partials/DatasetFilterPanel";
-import {Box} from '@material-ui/core';
-
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-}
+import { Box } from "@material-ui/core";
+import { useState } from "react";
+import { searchPatients } from "../../utils/APIUtils";
+import Loader from "../../components/loaders/Loader";
+import { makeChartData } from "../../utils/chartUtils";
+import { set } from "date-fns/esm";
 
 export default function StatsPage() {
-  return (<PaperPage centerContent={true}>
-      <Doughnut data={data} />
-      <DatasetFilterPanel/>
-  </PaperPage>);
+  const [patients, setPatients] = useState([]);
+  const [chartData, setChartData] = useState("");
+
+  const loadData = async () => {
+    const patients = await searchPatients();
+    setPatients(patients);
+    setChartData(makeChartData(patients));
+  };
+
+  function filterChartData(patientFilter) {
+
+    if (!patientFilter){
+      setChartData(makeChartData(patients));
+      return;
+
+    }
+    
+    // A patient matches the filter, if all the values in the
+    // patient filter exist in the patient
+    const filterMatch = (patient) =>{
+      const matchingValues = Object.keys(patientFilter).filter(
+        (key) => patientFilter[key] === patient[key]
+      )
+      return matchingValues.length === Object.keys(patientFilter).length;
+      }
+
+    const filteredPatients = patients.filter((patient) => filterMatch(patient));
+    setChartData(makeChartData(filteredPatients));
+  }
+
+  return (
+    <PaperPage centerContent={true}>
+      <Loader
+        deps={[]}
+        load={loadData}
+        render={() => (
+          <React.Fragment>
+            <Doughnut data={chartData} />
+            <Box
+              display="flex"
+              width="100%"
+              flexDirection="row-reverse"
+              margin={2}
+            >
+              <DatasetFilterPanel filterDataset={filterChartData} />
+            </Box>
+          </React.Fragment>
+        )}
+      />
+    </PaperPage>
+  );
 }

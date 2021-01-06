@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 export default function HMCheckbox(props){
-    const {label,...checkBoxProps} = props;
+    const {label,disabled,...checkBoxProps} = props;
     const classes = useStyles();
-    return   ( <FormControlLabel
+    return   ( <FormControlLabel disabled={disabled}
     control={<Checkbox  {...checkBoxProps} />}
     label={label}
     classes={{root: classes.checkBoxRoot}}
