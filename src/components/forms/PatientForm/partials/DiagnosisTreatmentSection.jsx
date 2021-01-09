@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   NULL_MEDICAL_CODE,
   MEDICAL_CODES,
-} from "../../../../values/medicalCodes";
+} from "../../../../constants/medicalCodes";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

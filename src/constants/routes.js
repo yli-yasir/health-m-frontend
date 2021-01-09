@@ -1,0 +1,2 @@
+const SEARCH= '/search';
+

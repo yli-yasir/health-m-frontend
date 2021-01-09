@@ -34,4 +34,8 @@ export async function deletePatient(id) {
 
 }
 
+export async function login(credentials){
+  return await axios.post(`${BASE_URL}/login`,credentials);
+}
+
 
