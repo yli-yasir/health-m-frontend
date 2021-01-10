@@ -19,21 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormikLoginForm() {
+export default function FormikLoginForm(props) {
 
   async function handleSubmit(
     values,
     setSubmitting,
     setFailMessage,
-    setSuccessful
   ) {
     try {
       await login(values);
-      setSuccessful(true);
+      props.setLoggedIn(true);
     } catch (e) {
       setSubmitting(false);
       const failMessage =
-        e.response.status === AUTH_FAIL
+       e.response &&  e.response.status === AUTH_FAIL
           ? "Invalid Credentials. Please try again."
           : "Something went wrong. Please try again later.";
       setFailMessage(failMessage);
@@ -42,18 +41,17 @@ export default function FormikLoginForm() {
 
   return (
       <FeedbackContainer
-        render={(setFailMessage, setSuccessful) => (
+        render={(setFailMessage) => (
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) =>
-              handleSubmit(values, setSubmitting, setFailMessage,setSuccessful)
+              handleSubmit(values, setSubmitting, setFailMessage)
             }
           >
             {LoginForm}
           </Formik>
         )}
-        onSuccessRedirectTo="/"
       />
   );
 }

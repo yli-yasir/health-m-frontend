@@ -8,15 +8,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink } from "react-router-dom";
 import { AddCircleOutline, BookOutlined } from "@material-ui/icons";
-const drawerWidth = 240;
-
+import ListItemLink from './ListItemLink'
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    width: drawerWidth,
+    width: '240px',
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: '240px',
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -28,26 +27,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ListItemLink(props) {
-  const {text, icon, to } = props;
-  const classes =useStyles();
-  return (
-    <li>
-      <ListItem
-        button
-        component={NavLink}
-        to={to}
-        activeClassName={classes.activeLink}
-        exact={true}
-      >
-        {icon ? <ListItemIcon classes= {{root: classes.listItemRoot}}>{icon}</ListItemIcon> : null}
-        <ListItemText primary={text} />
-      </ListItem>
-    </li>
-  );
-}
 
-export default function Sidebar() {
+
+export default function Sidebar(props) {
   const classes = useStyles();
 
   return (
@@ -61,10 +43,6 @@ export default function Sidebar() {
     >
       <div className={classes.toolbar} />
       <Divider />
-      <List>
-        <ListItemLink  to="/patients/new" icon={<AddCircleOutline/>} text="Add Patient" />
-        <ListItemLink  to="/patients" icon={<BookOutlined/>} text="View Patients" />
-      </List>
+      {props.children}
     </Drawer>
-  );
-}
+  );}
