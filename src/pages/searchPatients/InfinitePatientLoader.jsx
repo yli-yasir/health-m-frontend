@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import BottomScrollWaypoint from "../../../components/misc/BottomScrollWaypoint";
-import Loader from "../../../components/loaders/Loader";
+import BottomScrollWaypoint from "../../components/misc/BottomScrollWaypoint";
+import Loader from "../../components/loaders/Loader";
 import { Typography } from "@material-ui/core";
 
 export default function InfinitePatientLoader({ loadMore, resultsPerPage }) {

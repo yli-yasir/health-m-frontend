@@ -1,20 +1,23 @@
 import React from "react";
-import PatientSearchBar from "./partials/PatientSearchBar";
-import SearchResultsGrid from "./partials/SearchResultsGrid";
+import PatientSearchBar from "./PatientSearchBar";
+import SearchResultsGrid from "./SearchResultsGrid";
 import { searchPatients } from "../../utils/APIUtils";
 import AppBarSpace from "../../components/layout/AppBarSpace";
 import { Box, Typography } from "@material-ui/core";
 import useQuery from "../../hooks/useQuery";
 import { useState, useEffect } from "react";
 import Loader from "../../components/loaders/Loader";
-import InfinitePatientLoader from "./partials/InfinitePatientLoader";
+import InfinitePatientLoader from "./InfinitePatientLoader";
 
 const RESULTS_PER_PAGE = 10;
 
-export default function SearchPatients() {
+export default function SearchPatients({useAppBarControls}) {
+
   const queryParams = useQuery();
   const searchTerm = queryParams.get("q");
   const [results, setResults] = useState([]);
+
+  useAppBarControls(<PatientSearchBar />)
 
   async function search(term, page) {
     const foundResults = await searchPatients(term, RESULTS_PER_PAGE, page);
@@ -25,6 +28,9 @@ export default function SearchPatients() {
 
   return (
     <React.Fragment>
+            <AppBarSpace />
+            <AppBarSpace />
+
       <PatientSearchBar />
       <AppBarSpace />
       <Loader

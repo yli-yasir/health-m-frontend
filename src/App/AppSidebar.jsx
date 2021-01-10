@@ -11,31 +11,49 @@ import { AddCircleOutline, BookOutlined } from "@material-ui/icons";
 import List from "@material-ui/core/List";
 import ListItemLink from "../components/navigation/ListItemLink";
 
-export default function AppSidebar() {
-    return (
-      <Sidebar>
-        <List>
-          <ListItemLink
-            to={ADD_PATIENT_ROUTE}
-            icon={<AddCircleOutline />}
-            text="Add Patient"
-          />
-          <ListItemLink
-            to={SEARCH_ROUTE}
-            icon={<BookOutlined />}
-            text="View Patients"
-          />
-          <ListItemLink
-            to={STATS_ROUTE}
-            icon={<DonutLargeOutlined />}
-            text="Stats"
-          />
-          <ListItemLink
-            to={SETTINGS_ROUTE}
-            icon={<SettingsOutlined />}
-            text="Settings"
-          />
-        </List>
-      </Sidebar>
-    )}
-  
+export default function AppSidebar(props) {
+  const makeListItemLinkProps = (icon, text, to) => ({
+    icon,
+    text,
+    to,
+    onClick: props.toggleDrawer,
+  });
+
+  return (
+    <Sidebar open={props.open} onClose={props.toggleDrawer}>
+      <List>
+        <ListItemLink
+          {...makeListItemLinkProps(
+            <AddCircleOutline />,
+            "Add Patient",
+            ADD_PATIENT_ROUTE
+          )}
+        />
+        <ListItemLink
+          {...makeListItemLinkProps(
+            <BookOutlined />,
+            "View Patients",
+            SEARCH_ROUTE
+          )}
+        />
+
+        <ListItemLink
+          {...makeListItemLinkProps(
+            <DonutLargeOutlined />,
+            "Stats",
+            STATS_ROUTE
+          )}
+        />
+
+        <ListItemLink
+          {...makeListItemLinkProps(
+            <SettingsOutlined />,
+            "Settings",
+            SETTINGS_ROUTE
+          )}
+        />
+
+      </List>
+    </Sidebar>
+  );
+}

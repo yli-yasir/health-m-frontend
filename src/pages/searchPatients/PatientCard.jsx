@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {getRandomBoySvg,getRandomGirlSvg} from '../../../utils/miscUtils';
+import {getRandomBoySvg,getRandomGirlSvg} from '../../utils/miscUtils';
 import {Link} from 'react-router-dom';
 import { EmailOutlined } from '@material-ui/icons';
 

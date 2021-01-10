@@ -5,10 +5,11 @@ import { LOGIN_ROUTE } from "../constants/routes";
 import LoginPage from "../pages/login";
 import { connect } from "react-redux";
 import GuardedApp from "./GuardedApp";
+import React from 'react';
 
 function App(props) {
   return (
-    <Box display="flex">
+    <React.Fragment>
       <CssBaseline />
       <Router>
         <Switch>
@@ -16,7 +17,7 @@ function App(props) {
           <GuardedApp loggedIn={props.loggedIn} />
         </Switch>
       </Router>
-    </Box>
+    </React.Fragment>
   );
 }
 

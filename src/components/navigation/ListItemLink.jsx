@@ -24,6 +24,7 @@ export default function ListItemLink(props) {
           to={to}
           activeClassName={classes.activeLink}
           exact={true}
+          onClick={props.onClick}
         >
           {icon ? <ListItemIcon classes= {{root: classes.listItemRoot}}>{icon}</ListItemIcon> : null}
           <ListItemText primary={text} />
