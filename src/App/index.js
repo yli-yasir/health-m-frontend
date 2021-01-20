@@ -1,11 +1,10 @@
-import { Box } from "@material-ui/core";
+import React from 'react';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LOGIN_ROUTE } from "../constants/routes";
+import { LOGIN_PATH } from "../constants/routePaths";
 import LoginPage from "../pages/login";
 import { connect } from "react-redux";
 import GuardedApp from "./GuardedApp";
-import React from 'react';
 
 function App(props) {
   return (
@@ -13,7 +12,7 @@ function App(props) {
       <CssBaseline />
       <Router>
         <Switch>
-          <Route path={LOGIN_ROUTE} component={LoginPage} />
+          <Route path={LOGIN_PATH} component={LoginPage} />
           <GuardedApp loggedIn={props.loggedIn} />
         </Switch>
       </Router>
