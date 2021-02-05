@@ -11,14 +11,12 @@ import InfinitePatientLoader from "./InfinitePatientLoader";
 
 const RESULTS_PER_PAGE = 10;
 
-export default function SearchPatients({useAppBarControls}) {
-
+export default function SearchPatients({ useAppBarControls }) {
   const queryParams = useQuery();
   const searchTerm = queryParams.get("q");
   const [results, setResults] = useState([]);
 
-  useAppBarControls(<PatientSearchBar />)
-
+  useEffect(()=>console.log('mounted'),[])
   async function search(term, page) {
     const foundResults = await searchPatients(term, RESULTS_PER_PAGE, page);
     const prevResults = page === 1 ? [] : results;
@@ -26,13 +24,12 @@ export default function SearchPatients({useAppBarControls}) {
     return foundResults;
   }
 
+
   return (
     <React.Fragment>
-            <AppBarSpace />
-            <AppBarSpace />
-
-      <PatientSearchBar />
       <AppBarSpace />
+      <AppBarSpace />
+
       <Loader
         load={async () => {
           return await search(searchTerm, 1);
@@ -49,7 +46,7 @@ export default function SearchPatients({useAppBarControls}) {
             <SearchResultsGrid results={results} />
             <InfinitePatientLoader
               loadMore={async (currentPage) => {
-                return await search(searchTerm,currentPage);
+                return await search(searchTerm, currentPage);
               }}
               resultsPerPage={RESULTS_PER_PAGE}
             />

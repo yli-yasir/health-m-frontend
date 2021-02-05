@@ -9,8 +9,8 @@ import { buildQueryString } from "../../utils/URLUtils";
 
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
-    width: "100%",
     position: "relative",
+    width:'40%'
   },
   suggestionsContainerOpen: {
     position: "absolute",
@@ -29,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(2),
     width: "100%",
     backgroundColor: theme.palette.grey[300],
-    "&:hover": {
-      backgroundColor: fade(theme.palette.grey[300], 0.6),
-    },
+
   },
   inputRoot: {
     width: "100%",

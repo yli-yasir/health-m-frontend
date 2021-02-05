@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.grey[300],
     },
+    marginTop: theme.spacing(4)
   },
 }));
 
@@ -29,7 +30,7 @@ export default function PatientSearchBar() {
       }
       getSuggestionValue={(patient) => patient.fullName}
       makeSearchLink={(suggestedSearchTerm) => ({
-        pathname: "/patients",
+        pathname: "/search",
         search: buildQueryString("", { q: suggestedSearchTerm }),
       })}
     />

@@ -1,54 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Box, Zoom } from "@material-ui/core";
+import {Zoom } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import AppBar from "./AppBar";
 import routes from "./routes";
 import { LOGIN_PATH } from "../constants/routePaths";
+import { TransitionGroup } from "react-transition-group";
+import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import Main from '../components/layout/Main';
 
-export default function GuardedApp(props) {
-  const [appBarControls, setAppBarControls] = useState(null);
+function GuardedApp(props) {
 
-  const useAppBarControls = (controls) => {
-    useEffect(() => {
-      setAppBarControls(controls);
-      return () => setAppBarControls(null);
-    }, []);
-  };
+  const location = useLocation();
 
   return (
     <React.Fragment>
       {!props.loggedIn && <Redirect to={LOGIN_PATH} />}
       {props.loggedIn && (
-        <React.Fragment>
-          <AppBar>{appBarControls}</AppBar>
-          <Box
-            component="main"
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            width="100%"
-            p={2}
-          >
-            <Switch>
-              {routes.map((route) => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  render={(props) => (
-                    <Zoom in={true} timeout={6000}>
-                      <route.Component
-                        {...props}
-                        useAppBarControls={useAppBarControls}
-                      />
-                    </Zoom>
-                  )}
-                />
-              ))}
-            </Switch>
-          </Box>
-        </React.Fragment>
+          <TransitionGroup component={null}>
+            <Zoom timeout={1000} key={location.pathname}>
+              <Main>
+                <Switch location={location}>                  
+                  {routes.map((route) => (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      component={route.Component}
+                    />
+                  ))}
+                </Switch>
+              </Main>
+            </Zoom>
+          </TransitionGroup>
       )}
     </React.Fragment>
   );
 }
+
+export default connect((state) => ({ loggedIn: state.loggedIn }))(GuardedApp);

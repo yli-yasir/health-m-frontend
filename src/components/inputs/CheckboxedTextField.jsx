@@ -11,8 +11,8 @@ export default function CheckboxedText(props) {
         onChange={props.onCheckboxChange}
         label={props.checkboxLabel}
       />
-
-      {props.isChecked && (
+        
+        {props.isChecked && (
         <HMTextField
           value={props.textFieldValue}
           label={props.checkboxLabel + " Description"}
@@ -25,6 +25,7 @@ export default function CheckboxedText(props) {
           rows={4}
         />
       )}
+    
     </React.Fragment>
   );
 }

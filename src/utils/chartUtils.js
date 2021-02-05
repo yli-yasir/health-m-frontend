@@ -65,10 +65,10 @@ function _getMedicalCodeColors(medicalCodes){
 
     for (let i = 0; i < medicalCodes.length; i++) {
         medicalCodeColors.push(
-          `hsla(${360 * (i / medicalCodes.length)},80%,50%,0.7)`
+          `hsla(${360 * (i / medicalCodes.length)},100%,60%,0.2)`
         );
         medicalCodeBorderColors.push(
-          `hsl(${360 * (i / medicalCodes.length)},100%,50%)`
+          `hsl(${360 * (i / medicalCodes.length)},100%,60%,1)`
         );
       }
       return [medicalCodeColors,medicalCodeBorderColors];

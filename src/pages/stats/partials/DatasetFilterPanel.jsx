@@ -1,4 +1,4 @@
-import { Paper, Button } from "@material-ui/core";
+import { Paper, Button,Box } from "@material-ui/core";
 import Formik from "formik";
 import React, { useState } from "react";
 import HMCheckbox from "../../../components/inputs/HMCheckbox";
@@ -43,6 +43,7 @@ export default function DatasetFilterPanel({ filterDataset }) {
 
   return (
     <Paper variant="outlined">
+      <Box p={2}>
       <HMCheckbox {...makeProps("Parents Death", "parentsDied")} />
       <HMCheckbox {...makeProps("Parents Separation", "parentsSeparated")} />
       <HMCheckbox {...makeProps("Parents Divorce", "parentsDivorced")} />
@@ -55,6 +56,7 @@ export default function DatasetFilterPanel({ filterDataset }) {
       >
         {filterActive ? "ON" : "OFF"}
       </Button>
+      </Box>
     </Paper>
   );
 }
