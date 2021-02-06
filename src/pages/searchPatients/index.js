@@ -2,12 +2,13 @@ import React from "react";
 import PatientSearchBar from "./PatientSearchBar";
 import SearchResultsGrid from "./SearchResultsGrid";
 import { searchPatients } from "../../utils/APIUtils";
-import AppBarSpace from "../../components/layout/AppBarSpace";
+import AppBarSpace from "../../components/AppBar/AppBarSpace";
 import { Box, Typography } from "@material-ui/core";
 import useQuery from "../../hooks/useQuery";
 import { useState, useEffect } from "react";
 import Loader from "../../components/loaders/Loader";
 import InfinitePatientLoader from "./InfinitePatientLoader";
+import Page from "../../components/Page";
 
 const RESULTS_PER_PAGE = 10;
 
@@ -26,7 +27,7 @@ export default function SearchPatients({ useAppBarControls }) {
 
 
   return (
-    <React.Fragment>
+    <Page>
       <AppBarSpace />
       <AppBarSpace />
 
@@ -53,6 +54,6 @@ export default function SearchPatients({ useAppBarControls }) {
           </Box>
         )}
       />
-    </React.Fragment>
+    </Page>
   );
 }

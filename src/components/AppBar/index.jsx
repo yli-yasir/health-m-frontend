@@ -6,9 +6,9 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
-import Logo from "../components/icons/Logo";
+import Logo from "../icons/Logo";
 import {Menu} from '@material-ui/icons'
-import AppDrawer from "./Drawer";
+import Drawer from "../Drawer";
 import {Box} from '@material-ui/core/';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,7 @@ export default function AppBar(props) {
         {props.children}
         </Box>
       </Toolbar>
-      <AppDrawer open={isDrawerOpen} toggleDrawer={toggleDrawer} />
+      <Drawer open={isDrawerOpen} toggleDrawer={toggleDrawer} />
     </MaterialAppBar>
   );
 }

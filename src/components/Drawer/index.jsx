@@ -1,10 +1,11 @@
 import React from "react";
-import Sidebar from "../components/navigation/Sidebar";
-import List from "@material-ui/core/List";
-import ListItemLink from "../components/navigation/ListItemLink";
+import Sidebar from "./Sidebar";
+import List from "../List";
+import ListItem from "../List/ListItem";
+import ListItemLink from "../List/ListItemLink";
 import navLinks from "./navLinks";
 import {connect} from 'react-redux';
-import {setLoggedIn} from "../redux/actions";
+import {setLoggedIn} from "../../redux/actions";
 import {ExitToApp} from '@material-ui/icons'
 
 function Drawer(props) {
@@ -18,11 +19,11 @@ function Drawer(props) {
             {...navLink}
           />
         ))}
-        <ListItemLink
+        <ListItem
+        button
         onClick={()=>props.setLoggedIn(false)}
-        to=""
         icon={<ExitToApp/>}
-        label="Logout"/>
+        text="Logout"/>
       </List>
     </Sidebar>
   );
