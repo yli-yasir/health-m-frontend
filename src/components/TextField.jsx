@@ -1,8 +1,8 @@
-import { TextField } from "@material-ui/core";
+import { TextField as MaterialTextField } from "@material-ui/core";
 import { useEffect } from "react";
-function HMTextField(props) {
+function TextField(props) {
   return (
-    <TextField
+    <MaterialTextField
       variant="outlined"
       color="secondary"
       fullWidth={true}
@@ -13,4 +13,4 @@ function HMTextField(props) {
   );
 }
 
-export default HMTextField;
+export default TextField;

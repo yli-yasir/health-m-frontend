@@ -1,18 +1,22 @@
-export function buildQueryString(oldQueryString,options){
+import {SEARCH_PATH} from "../constants/routePaths";
 
-    let params = new URLSearchParams(oldQueryString);
+export function buildQueryString(oldQueryString, options) {
+  let params = new URLSearchParams(oldQueryString);
 
-    Object.keys(options).forEach((key)=>{
-        if (options[key]){
-        params.set(key,options[key])
-        }
-        else{
-            params.delete(key)
-        }
-    })
-     return "?" + params.toString();
+  Object.keys(options).forEach((key) => {
+    if (options[key]) {
+      params.set(key, options[key]);
+    } else {
+      params.delete(key);
+    }
+  });
+  return "?" + params.toString();
 }
 
-export function getParamValue(queryString,param){
-    return new URLSearchParams(queryString).get(param);
+export function getParamValue(queryString, param) {
+  return new URLSearchParams(queryString).get(param);
+}
+
+export function makeSearchLink(term) {
+    return `/search?q=${term}`;
 }
