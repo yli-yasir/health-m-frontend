@@ -1,4 +1,4 @@
-import HMTextField from "../../../inputs/HMTextField";
+import HMTextField from "../../../TextField";
 import FormSection from "../../../presentationals/FormSection";
 
 export default function PatientNameSection({

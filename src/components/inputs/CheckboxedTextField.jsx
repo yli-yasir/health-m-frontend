@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HMCheckbox from "./HMCheckbox";
-import HMTextField from "../inputs/HMTextField";
+import HMTextField from "../TextField";
 
 export default function CheckboxedText(props) {
   return (

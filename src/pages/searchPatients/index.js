@@ -17,7 +17,7 @@ export default function SearchPatients({ useAppBarControls }) {
   const searchTerm = queryParams.get("q");
   const [results, setResults] = useState([]);
 
-  useEffect(()=>console.log('mounted'),[])
+  useEffect(() => console.log("mounted"), []);
   async function search(term, page) {
     const foundResults = await searchPatients(term, RESULTS_PER_PAGE, page);
     const prevResults = page === 1 ? [] : results;
@@ -25,12 +25,9 @@ export default function SearchPatients({ useAppBarControls }) {
     return foundResults;
   }
 
-
   return (
     <Page>
-      <AppBarSpace />
-      <AppBarSpace />
-
+      <PatientSearchBar />
       <Loader
         load={async () => {
           return await search(searchTerm, 1);

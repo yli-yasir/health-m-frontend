@@ -6,20 +6,22 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import { buildQueryString } from "../../utils/URLUtils";
+import SearchInput from "./SearchInput";
+import SuggestionsContainer from "./SuggestionsContainer";
+import Suggestion from "./Suggestion";
 
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
     position: "relative",
     width: "40%",
-  }
+  },
 }));
 
 export default function SearchBar({
-  text,
-  onTextChange,
+  value,
+  onChange,
   getSuggestions,
   getSuggestionValue,
-  makeSearchLink,
 }) {
   const [suggestions, setSuggestions] = useState([]);
 
@@ -40,21 +42,21 @@ export default function SearchBar({
     <Autosuggest
       onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
       onSuggestionsClearRequested={handleSuggestionsClearRequested}
-      inputProps={{
-        value: text,
-        onChange: onTextChange,
+      inputProps={{ value, onChange }}
+      renderInputComponent={(inputProps) => <SearchInput {...inputProps} />}
+      renderSuggestionsContainer={({ containerProps, children }) => {
+
+        return (
+          <SuggestionsContainer {...containerProps}>
+            {children}
+          </SuggestionsContainer>
+        );
       }}
-      renderInputComponent={SearchField}
-      renderSuggestionsContainer={SuggestionsContainer}
-      renderSuggestion={(suggestionItem) =>
-        renderSuggestionWithValue(
-          getSuggestionValue(suggestionItem),
-          makeSearchLink
-        )
-      }
+      renderSuggestion={(suggestion) => (
+        <Suggestion value={getSuggestionValue(suggestion)} />
+      )}
       suggestions={suggestions}
       getSuggestionValue={getSuggestionValue}
     />
   );
 }
-

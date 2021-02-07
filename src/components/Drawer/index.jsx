@@ -14,7 +14,7 @@ function Drawer(props) {
       <List>
         {navLinks.map((navLink) => (
           <ListItemLink
-            key={navLink.label}
+            key={navLink.text}
             onClick={props.toggleDrawer}
             {...navLink}
           />

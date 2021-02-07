@@ -2,6 +2,8 @@ import React from "react";
 import { MenuItem } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import {makeSearchLink} from "../../utils/URLUtils";
 
 const useStyles = makeStyles((theme) => ({
   suggestion: {
@@ -21,17 +23,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Suggestion({value}) {
-  const classes = useStyles();
+  //const classes = useStyles();
   return (
     <MenuItem
       component={Link}
-      className={classes.suggestion}
       to={makeSearchLink(value)}
     >
       <SearchIcon color="primary" />
-      <div className={classes.suggestion}>
-        &nbsp;&nbsp;&nbsp;{value}
-      </div>
+      <div>&nbsp;&nbsp;&nbsp;{value}</div>
     </MenuItem>
   );
 }

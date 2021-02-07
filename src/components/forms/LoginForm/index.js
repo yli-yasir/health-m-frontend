@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { getTouchedErrors } from "../../../utils/formikUtils";
-import HMTextField from "../../inputs/HMTextField";
+import HMTextField from "../../TextField";
 import ProgressButton from "../../inputs/ProgressButton";
 import validationSchema from "./validationSchema";
 import { makeStyles } from "@material-ui/core";

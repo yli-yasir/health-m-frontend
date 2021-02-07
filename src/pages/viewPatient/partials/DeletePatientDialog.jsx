@@ -1,4 +1,4 @@
-import HMTexField from "../../../components/inputs/HMTextField";
+import TextField from "../../../components/TextField";
 import {
   Button,
   Dialog,
@@ -26,7 +26,7 @@ export default function DeletePatientDialog({
           Please confirm that you would like to delete this patient by entering
           the patients email.
         </DialogContentText>
-        <HMTexField
+        <TextField
           autoFocus
           margin="dense"
           label="Patient Email Address"
