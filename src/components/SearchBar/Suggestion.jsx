@@ -1,37 +1,21 @@
 import React from "react";
-import { MenuItem } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {makeSearchLink} from "../../utils/URLUtils";
+import { makeSearchLink } from "../../utils/URLUtils";
+import ListItemLink from "../List/ListItemLink";
 
-const useStyles = makeStyles((theme) => ({
-  suggestion: {
-    "& .suggestionLink": {
-      width: "100%",
-      textDecoration: "none",
-      color: theme.palette.grey[700],
-    },
-    "& .suggestionText": {
-      width: "100%",
-      display: "block",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-    },
-  },
-}));
 
-function Suggestion({value}) {
-  //const classes = useStyles();
+function Suggestion({ value }) {
+
+  // react-autosuggest already renders these items in an li. 
+  // To avoid this nesting, component prop is set to React.Fragment.  
   return (
-    <MenuItem
-      component={Link}
+    <ListItemLink
+      icon={<SearchIcon color="primary" />}
       to={makeSearchLink(value)}
-    >
-      <SearchIcon color="primary" />
-      <div>&nbsp;&nbsp;&nbsp;{value}</div>
-    </MenuItem>
+      text={value}
+      component={React.Fragment}
+    />
   );
 }
 

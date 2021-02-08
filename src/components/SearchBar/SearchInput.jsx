@@ -7,23 +7,22 @@ import { makeSearchLink } from "../../utils/URLUtils";
 import { InputAdornment } from "@material-ui/core";
 
 // Class component because it will be passed a ref.
-class SearchInput extends React.Component {
-  render() {
-    return (
-      <TextField
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton component={Link} to={makeSearchLink(this.props.value)}>
-                <SearchIcon color="primary" />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        {...this.props}
-      />
-    );
-  }
-}
+const SearchInput = React.forwardRef((props, ref) => {
+  return (
+    <TextField
+      ref={ref}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton component={Link} to={makeSearchLink(props.value)}>
+              <SearchIcon color="primary" />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+      {...props}
+    />
+  );
+});
 
 export default SearchInput;

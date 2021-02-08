@@ -1,8 +1,10 @@
 import { TextField as MaterialTextField } from "@material-ui/core";
+import React from 'react';
 
-function TextField(props) {
+const TextField = React.forwardRef((props, ref) => {
   return (
     <MaterialTextField
+      ref={ref}
       variant="outlined"
       color="secondary"
       fullWidth={true}
@@ -11,6 +13,6 @@ function TextField(props) {
       {...props}
     />
   );
-}
+});
 
 export default TextField;

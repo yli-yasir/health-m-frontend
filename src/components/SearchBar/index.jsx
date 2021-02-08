@@ -13,7 +13,6 @@ import Suggestion from "./Suggestion";
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
     position: "relative",
-    width: "40%",
   },
 }));
 
@@ -23,6 +22,9 @@ export default function SearchBar({
   getSuggestions,
   getSuggestionValue,
 }) {
+
+  const classes = useStyles();
+
   const [suggestions, setSuggestions] = useState([]);
 
   const handleSuggestionsFetchRequested = async ({ value }) => {
@@ -40,6 +42,7 @@ export default function SearchBar({
 
   return (
     <Autosuggest
+      theme={{ container: classes.autoSuggestRoot}}
       onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
       onSuggestionsClearRequested={handleSuggestionsClearRequested}
       inputProps={{ value, onChange }}

@@ -7,8 +7,6 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     zIndex: 1,
     marginTop: theme.spacing(1),
-    left: theme.spacing(3),
-    right: theme.spacing(3),
     width:"100%",
     "& ul": {
       margin: 0,
