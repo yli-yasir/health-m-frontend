@@ -2,58 +2,50 @@ import React from "react";
 import PatientSearchBar from "./PatientSearchBar";
 import SearchResultsGrid from "./SearchResultsGrid";
 import { searchPatients } from "../../utils/APIUtils";
-import AppBarSpace from "../../components/AppBar/AppBarSpace";
-import { Box, Typography } from "@material-ui/core";
 import useQuery from "../../hooks/useQuery";
 import { useState, useEffect } from "react";
-import Loader from "../../components/loaders/Loader";
-import InfinitePatientLoader from "./InfinitePatientLoader";
+import { Waypoint } from "react-waypoint";
 import Page from "../../components/Page";
+import LoadingBox from "../../components/LoadingBox";
+import { useAsync } from "react-use";
 
 const RESULTS_PER_PAGE = 10;
 
 export default function SearchPatients() {
-
-  const queryParams = useQuery();
-
-  const searchTerm = queryParams.get("q");
-  
+  const searchTerm = useQuery().get("q");
+  const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
 
-  useEffect(() => console.log("mounted"), []);
-  async function search(term, page) {
-    const foundResults = await searchPatients(term, RESULTS_PER_PAGE, page);
+  //Reset page to 1 when the search term is changed.
+  useEffect(() => {
+    console.log("resettomg page");
+    setPage(1);
+  }, [searchTerm]);
+
+  const fetchState = useAsync(async () => {
+    return await searchPatients(searchTerm, RESULTS_PER_PAGE, page);
+  }, [searchTerm, page]);
+
+  //Whenever new fetch results come...
+  useEffect(() => {
+    const newResults = fetchState.value || [];
     const prevResults = page === 1 ? [] : results;
-    setResults([...prevResults, ...foundResults]);
-    return foundResults;
-  }
+    setResults([...prevResults, ...newResults]);
+  }, [fetchState.value]);
+
+  const hasMoreResults =
+    (fetchState.value ? fetchState.value.length : 0) ===
+    RESULTS_PER_PAGE;
 
   return (
     <Page>
       <PatientSearchBar />
-      <Loader
-        load={async () => {
-          return await search(searchTerm, 1);
-        }}
-        deps={[searchTerm]}
-        render={() => (
-          <Box
-            minHeight="100vh"
-            display="flex"
-            alignItems="center"
-            flexDirection="column"
-            position="relative"
-          >
-            <SearchResultsGrid results={results} />
-            <InfinitePatientLoader
-              loadMore={async (currentPage) => {
-                return await search(searchTerm, currentPage);
-              }}
-              resultsPerPage={RESULTS_PER_PAGE}
-            />
-          </Box>
+      <LoadingBox loading={fetchState.loading} error={fetchState.error}>
+        <SearchResultsGrid results={results} />
+        {hasMoreResults && (
+          <Waypoint onEnter={() => setPage(page + 1)}></Waypoint>
         )}
-      />
+      </LoadingBox>
     </Page>
   );
 }

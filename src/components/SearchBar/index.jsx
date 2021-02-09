@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputBase, Button, Box } from "@material-ui/core";
 import { MenuItem, Paper } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -9,6 +9,7 @@ import { buildQueryString } from "../../utils/URLUtils";
 import SearchInput from "./SearchInput";
 import SuggestionsContainer from "./SuggestionsContainer";
 import Suggestion from "./Suggestion";
+import { useAsyncFn } from "react-use";
 
 const useStyles = makeStyles((theme) => ({
   autoSuggestRoot: {
@@ -28,27 +29,27 @@ export default function SearchBar({
 
   const [suggestions, setSuggestions] = useState([]);
 
-  const handleSuggestionsFetchRequested = async ({ value }) => {
-    try {
-      const foundSuggestions = await getSuggestions(value);
-      setSuggestions(foundSuggestions);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // useAsyncFn will return state and a callback that handles
+  // race conditions, and will only update its state if component is still mounted.
+  const [suggestionsFetchState, fetchSuggestions] = useAsyncFn(
+    async ({ value }) => {
+      return await getSuggestions(value)},
+    []
+  );
 
-  const handleSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
+  //If the value to suggestionFetchState has changed.
+  useEffect(() => {
+    setSuggestions(suggestionsFetchState.value || []);
+  }, [suggestionsFetchState.value]);
 
   return (
     <Autosuggest
       theme={{
         container: classes.autoSuggestRoot + (` ${className}` || ""),
       }}
-      onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
-      onSuggestionsClearRequested={handleSuggestionsClearRequested}
-      inputProps={{ value, onChange,placeholder }}
+      onSuggestionsFetchRequested={fetchSuggestions}
+      onSuggestionsClearRequested={() => setSuggestions([])}
+      inputProps={{ value, onChange, placeholder }}
       renderInputComponent={(inputProps) => <SearchInput {...inputProps} />}
       renderSuggestionsContainer={({ containerProps, children }) => {
         return (
