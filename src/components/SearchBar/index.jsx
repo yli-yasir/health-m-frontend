@@ -21,8 +21,9 @@ export default function SearchBar({
   onChange,
   getSuggestions,
   getSuggestionValue,
+  placeholder,
+  className,
 }) {
-
   const classes = useStyles();
 
   const [suggestions, setSuggestions] = useState([]);
@@ -42,13 +43,14 @@ export default function SearchBar({
 
   return (
     <Autosuggest
-      theme={{ container: classes.autoSuggestRoot}}
+      theme={{
+        container: classes.autoSuggestRoot + (` ${className}` || ""),
+      }}
       onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
       onSuggestionsClearRequested={handleSuggestionsClearRequested}
-      inputProps={{ value, onChange }}
+      inputProps={{ value, onChange,placeholder }}
       renderInputComponent={(inputProps) => <SearchInput {...inputProps} />}
       renderSuggestionsContainer={({ containerProps, children }) => {
-
         return (
           <SuggestionsContainer {...containerProps}>
             {children}

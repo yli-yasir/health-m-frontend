@@ -12,9 +12,12 @@ import Page from "../../components/Page";
 
 const RESULTS_PER_PAGE = 10;
 
-export default function SearchPatients({ useAppBarControls }) {
+export default function SearchPatients() {
+
   const queryParams = useQuery();
+
   const searchTerm = queryParams.get("q");
+  
   const [results, setResults] = useState([]);
 
   useEffect(() => console.log("mounted"), []);

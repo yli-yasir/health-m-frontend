@@ -11,6 +11,7 @@ const SearchInput = React.forwardRef((props, ref) => {
   return (
     <TextField
       ref={ref}
+      placeholder={props.placeholder}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
