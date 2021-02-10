@@ -1,16 +1,37 @@
 import PatientCard from "./PatientCard";
-import SearchResultStatus from "./SearchResultStatus";
-import {Box} from '@material-ui/core';
+import { Box, Zoom } from "@material-ui/core";
+import { TransitionGroup } from "react-transition-group";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function SearchResultsContainer({ results}) {
+const useStyles = makeStyles((theme) => ({
+  container: {
+    [theme.breakpoints.up("xs")]: {
+      width: "95%",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "80%",
+    }
+  },
+}));
+
+export default function SearchResultsContainer({ results }) {
+
+  const classes = useStyles();
+
   return (
-    <Box display='flex' flexWrap='wrap' justifyContent='center'>
-      {results.map((patient) => (
-        <PatientCard 
-        key={patient._id}
-        patient={patient}
-        />
-      ))}
+    <Box
+      className={classes.container}
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+    >
+      <TransitionGroup enter={true} component={null}>
+        {results.map((patient) => (
+          <Zoom key={patient._id} timeout={500}>
+            <PatientCard patient={patient} />
+          </Zoom>
+        ))}
+      </TransitionGroup>
     </Box>
   );
 }

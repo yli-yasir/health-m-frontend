@@ -2,7 +2,6 @@ import SearchBar from "../../components/SearchBar";
 import { searchPatients } from "../../utils/APIUtils";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useAsyncFn } from "react-use";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {

@@ -20,3 +20,7 @@ export function getParamValue(queryString, param) {
 export function makeSearchLink(term) {
     return `/search?q=${term}`;
 }
+
+export function makePatientLink(patientId){
+  return `/patients/${patientId}`
+}
