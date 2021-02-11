@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { InputBase, Button, Box } from "@material-ui/core";
-import { MenuItem, Paper } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import { Link } from "react-router-dom";
+import {makeStyles } from "@material-ui/core/styles";
 import Autosuggest from "react-autosuggest";
-import { buildQueryString } from "../../utils/URLUtils";
 import SearchInput from "./SearchInput";
 import SuggestionsContainer from "./SuggestionsContainer";
 import Suggestion from "./Suggestion";
@@ -23,6 +18,7 @@ export default function SearchBar({
   getSuggestions,
   getSuggestionValue,
   placeholder,
+  makeSearchLink,
   className,
 }) {
   const classes = useStyles();
@@ -33,7 +29,8 @@ export default function SearchBar({
   // race conditions, and will only update its state if component is still mounted.
   const [suggestionsFetchState, fetchSuggestions] = useAsyncFn(
     async ({ value }) => {
-      return await getSuggestions(value)},
+      return await getSuggestions(value);
+    },
     []
   );
 
@@ -50,7 +47,9 @@ export default function SearchBar({
       onSuggestionsFetchRequested={fetchSuggestions}
       onSuggestionsClearRequested={() => setSuggestions([])}
       inputProps={{ value, onChange, placeholder }}
-      renderInputComponent={(inputProps) => <SearchInput {...inputProps} />}
+      renderInputComponent={(inputProps) => (
+        <SearchInput makeSearchLink={makeSearchLink} {...inputProps} />
+      )}
       renderSuggestionsContainer={({ containerProps, children }) => {
         return (
           <SuggestionsContainer {...containerProps}>
@@ -59,10 +58,14 @@ export default function SearchBar({
         );
       }}
       renderSuggestion={(suggestion) => (
-        <Suggestion value={getSuggestionValue(suggestion)} />
+        <Suggestion
+          makeSearchLink={makeSearchLink}
+          value={getSuggestionValue(suggestion)}
+        />
       )}
       suggestions={suggestions}
       getSuggestionValue={getSuggestionValue}
     />
   );
 }
+

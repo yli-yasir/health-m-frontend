@@ -5,15 +5,15 @@ import { makeSearchLink } from "../../utils/URLUtils";
 import ListItemLink from "../List/ListItemLink";
 
 
-function Suggestion({ value }) {
+function Suggestion(props) {
 
   // react-autosuggest already renders these items in an li. 
   // To avoid this nesting, component prop is set to React.Fragment.  
   return (
     <ListItemLink
       icon={<SearchIcon color="primary" />}
-      to={makeSearchLink(value)}
-      text={value}
+      to={props.makeSearchLink(props.value)}
+      text={props.value}
       component={React.Fragment}
     />
   );

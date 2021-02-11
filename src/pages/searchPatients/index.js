@@ -8,6 +8,7 @@ import { Waypoint } from "react-waypoint";
 import Page from "../../components/Page";
 import LoadingBox from "../../components/LoadingBox";
 import { useAsync } from "react-use";
+import { Typography } from "@material-ui/core";
 
 const RESULTS_PER_PAGE = 10;
 
@@ -34,8 +35,7 @@ export default function SearchPatients() {
   }, [fetchState.value]);
 
   const hasMoreResults =
-    (fetchState.value ? fetchState.value.length : 0) ===
-    RESULTS_PER_PAGE;
+    (fetchState.value ? fetchState.value.length : 0) === RESULTS_PER_PAGE;
 
   return (
     <Page>
@@ -44,6 +44,9 @@ export default function SearchPatients() {
         <SearchResultsGrid results={results} />
         {hasMoreResults && (
           <Waypoint onEnter={() => setPage(page + 1)}></Waypoint>
+        )}
+        {results.length === 0 && (
+          <Typography variant="caption">No results found</Typography>
         )}
       </LoadingBox>
     </Page>

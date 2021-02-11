@@ -2,9 +2,11 @@ import SearchBar from "../../components/SearchBar";
 import { searchPatients } from "../../utils/APIUtils";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { makePatientSearchLink } from "../../utils/URLUtils";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.up("xs")]: {
       width: "95%",
     },
@@ -30,6 +32,7 @@ export default function PatientSearchBar() {
       onChange={(e, { newValue }) => setValue(newValue)}
       getSuggestions={async (value) => await searchPatients(value, 5, 1)}
       getSuggestionValue={(patient) => patient.fullName}
+      makeSearchLink={makePatientSearchLink}
     />
   );
 }

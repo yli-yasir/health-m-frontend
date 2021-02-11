@@ -17,7 +17,7 @@ export function getParamValue(queryString, param) {
   return new URLSearchParams(queryString).get(param);
 }
 
-export function makeSearchLink(term) {
+export function makePatientSearchLink(term) {
     return `/search?q=${term}`;
 }
 
