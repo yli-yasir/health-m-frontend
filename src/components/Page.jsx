@@ -5,7 +5,7 @@ import AppBarSpace from "./AppBar/AppBarSpace";
 function Page(props) {
   return (
     <React.Fragment>
-      <AppBar />
+      <AppBar title="Search Patients" />
       <AppBarSpace />
       {props.children}
     </React.Fragment>

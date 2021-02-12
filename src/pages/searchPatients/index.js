@@ -1,52 +1,32 @@
 import React from "react";
 import PatientSearchBar from "./PatientSearchBar";
 import SearchResultsGrid from "./SearchResultsGrid";
-import { searchPatients } from "../../utils/APIUtils";
-import useQuery from "../../hooks/useQuery";
-import { useState, useEffect } from "react";
 import { Waypoint } from "react-waypoint";
 import Page from "../../components/Page";
 import LoadingBox from "../../components/LoadingBox";
-import { useAsync } from "react-use";
 import { Typography } from "@material-ui/core";
-
-const RESULTS_PER_PAGE = 10;
+import usePatientSearch from "./usePatientSearch";
 
 export default function SearchPatients() {
-  const searchTerm = useQuery().get("q");
-  const [page, setPage] = useState(1);
-  const [results, setResults] = useState([]);
 
-  //Reset page to 1 when the search term is changed.
-  useEffect(() => {
-    console.log("resettomg page");
-    setPage(1);
-  }, [searchTerm]);
-
-  const fetchState = useAsync(async () => {
-    return await searchPatients(searchTerm, RESULTS_PER_PAGE, page);
-  }, [searchTerm, page]);
-
-  //Whenever new fetch results come...
-  useEffect(() => {
-    const newResults = fetchState.value || [];
-    const prevResults = page === 1 ? [] : results;
-    setResults([...prevResults, ...newResults]);
-  }, [fetchState.value]);
-
-  const hasMoreResults =
-    (fetchState.value ? fetchState.value.length : 0) === RESULTS_PER_PAGE;
+  const {
+    page,
+    setPage,
+    totalResults,
+    fetchState,
+    hasMoreResults,
+  } = usePatientSearch();
 
   return (
-    <Page>
+    <Page title="Search Patients">
       <PatientSearchBar />
       <LoadingBox loading={fetchState.loading} error={fetchState.error}>
-        <SearchResultsGrid results={results} />
+        <SearchResultsGrid results={totalResults} />
         {hasMoreResults && (
           <Waypoint onEnter={() => setPage(page + 1)}></Waypoint>
         )}
-        {results.length === 0 && (
-          <Typography variant="caption">No results found</Typography>
+        {totalResults.length === 0 && (
+          <Typography variant="caption">No results</Typography>
         )}
       </LoadingBox>
     </Page>

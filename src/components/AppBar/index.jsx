@@ -43,7 +43,7 @@ export default function AppBar(props) {
         </IconButton>
         <Logo height="50px" width="50px" />
         <Typography variant="h6" className={classes.title}>
-          Health-M
+          {"Health-M / " + props.title} 
         </Typography>
         <Box display='flex' flexGrow='1'>
         {props.children}
