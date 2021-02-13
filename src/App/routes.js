@@ -8,8 +8,8 @@ import {
   VIEW_PATIENT_PATH,
 } from "../constants/routePaths";
 
-import AddPatient from "../pages/addPatient/Main";
-import SearchPatients from "../pages/searchPatients";
+import AddPatient from "../pages/AddPatient";
+import SearchPatients from "../pages/SearchPatients";
 import ViewPatient from "../pages/viewPatient/Main";
 import EditPatient from "../pages/editPatient/Main";
 import Stats from "../pages/stats/Main";
