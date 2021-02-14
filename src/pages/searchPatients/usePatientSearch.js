@@ -22,8 +22,10 @@ export default function usePatientSearch() {
   //Whenever new fetch results come...
   useEffect(() => {
     const newResults = fetchState.value || [];
-    const prevResults = page === 1 ? [] : totalResults;
-    setTotalResults([...prevResults, ...newResults]);
+    setTotalResults((prevResults) => {
+      prevResults = page === 1 ? [] : prevResults;
+      return [...prevResults, ...newResults];
+    });
   }, [fetchState.value]);
 
   const hasMoreResults =
