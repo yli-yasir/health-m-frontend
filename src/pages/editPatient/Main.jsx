@@ -1,10 +1,10 @@
-import PatientForm from "../../components/forms/PatientForm/Main";
+import PatientForm from "../../components/PatientForm";
 import { updatePatient, getPatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
 import {
   valuesToPatient,
   patientToValues,
-} from "../../components/forms/PatientForm/mapping";
+} from "../../components/PatientForm/mapping";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/loaders/Loader";
 import PaperPage from "../../components/presentationals/PaperPage";

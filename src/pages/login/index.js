@@ -1,5 +1,5 @@
 import { Paper, Box } from "@material-ui/core";
-import LoginForm from "../../components/forms/LoginForm";
+import LoginForm from "../../components/LoginForm";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/icons/Logo";
 import { connect } from "react-redux";

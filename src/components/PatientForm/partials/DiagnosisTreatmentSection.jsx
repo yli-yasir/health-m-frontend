@@ -1,14 +1,14 @@
 import React from "react";
-import FormSection from "../../../presentationals/FormSection";
-import HMSelect from "../../../inputs/HMSelect";
-import HMTextField from "../../../TextField";
+import FormSection from "presentationals/FormSection";
+import HMSelect from "inputs/HMSelect";
+import HMTextField from "TextField";
 import { Button, Paper, Typography } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   NULL_MEDICAL_CODE,
   MEDICAL_CODES,
-} from "../../../../constants/medicalCodes";
+} from "constants/medicalCodes";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

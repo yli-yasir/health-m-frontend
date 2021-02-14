@@ -1,6 +1,6 @@
-import HMTextField from "../../../TextField";
-import FormSection from "../../../presentationals/FormSection";
-import PhoneField from "../../../inputs/PhoneField";
+import HMTextField from "TextField";
+import FormSection from "presentationals/FormSection";
+import PhoneField from "inputs/PhoneField";
 
 export default function PatientContactInfoSection({
   values,

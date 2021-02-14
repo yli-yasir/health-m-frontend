@@ -1,7 +1,7 @@
-import HMTextField from "../../../TextField";
-import FormSection from "../../../presentationals/FormSection";
-import HMRadioGroup from "../../../inputs/HMRadioGroup";
-import HMDatePicker from "../../../inputs/HMDatePicker";
+import HMTextField from "TextField";
+import FormSection from "presentationals/FormSection";
+import HMRadioGroup from "inputs/HMRadioGroup";
+import HMDatePicker from "inputs/HMDatePicker";
 
 import {InputAdornment} from "@material-ui/core";
 

@@ -7,14 +7,14 @@ import PatientNameSection from "./partials/PatientNameSection";
 import PatientBodySection from "./partials/PatientBodySection";
 import PedigreeChartSection from "./partials/PedigreeChartSection";
 import PatientContactInfoSection from "./partials/PatientContactInfoSection";
-import { getTouchedErrors } from "../../../utils/formikUtils";
+import { getTouchedErrors } from "utils/formikUtils";
 import PatientAdmissionSection from "./partials/PatientAdmissionSection";
 import FamilySection from "./partials/FamilySection";
 import DoctorNotesSection from "./partials/DoctorNotesSection";
 import DiagnosisTreatmentSection from "./partials/DiagnosisTreatmentSection";
 import validationSchema from "./validationSchema";
-import ProgressButton from "../../inputs/ProgressButton";
-import HMSnackbar from "../../feedback/HMSnackbar";
+import ProgressButton from "inputs/ProgressButton";
+import HMSnackbar from "feedback/HMSnackbar";
 import {Redirect} from 'react-router-dom';
 
 export default function PatientFormContainer(props) {

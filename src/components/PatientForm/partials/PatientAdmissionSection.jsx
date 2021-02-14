@@ -1,6 +1,6 @@
-import HMTextField from "../../../TextField";
-import FormSection from "../../../presentationals/FormSection";
-import HMDatePicker from "../../../inputs/HMDatePicker";
+import HMTextField from "TextField";
+import FormSection from "presentationals/FormSection";
+import HMDatePicker from "inputs/HMDatePicker";
 
 export default function PatientAdmissionSection({
   values,

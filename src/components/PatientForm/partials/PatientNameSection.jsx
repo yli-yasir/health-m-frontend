@@ -1,5 +1,5 @@
-import HMTextField from "../../../TextField";
-import FormSection from "../../../presentationals/FormSection";
+import TextField from "../../TextField";
+import FormSection from "../../FormSection";
 
 export default function PatientNameSection({
   values,
@@ -11,7 +11,7 @@ export default function PatientNameSection({
 
   return (
     <FormSection title="Patient Name">
-      <HMTextField
+      <TextField
         name="fullName"
         label="Full Name"
         value={values.fullName}

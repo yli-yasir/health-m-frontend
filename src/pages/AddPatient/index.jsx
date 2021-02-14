@@ -1,10 +1,10 @@
-import PatientForm from "../../components/forms/PatientForm/Main";
-import getInitialValues from "../../components/forms/PatientForm/initialValues";
+import PatientForm from "../../components/PatientForm";
+import getInitialValues from "../../components/PatientForm/initialValues";
 import { addPatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
 import Page from "../../components/Page";
 import ResponsivePaper from "../../components/ResponsivePaper";
-import { valuesToPatient } from "../../components/forms/PatientForm/mapping";
+import { valuesToPatient } from "../../components/PatientForm/mapping";
 // Get an object with the initial values.
 const initialValues = getInitialValues();
 

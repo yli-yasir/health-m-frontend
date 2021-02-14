@@ -1,5 +1,5 @@
-import FormSection from "../../../presentationals/FormSection";
-import HMTextField from "../../../TextField";
+import FormSection from "presentationals/FormSection";
+import HMTextField from "TextField";
 
 export default function DoctorNotesSection({
   onChange : handleChange,
