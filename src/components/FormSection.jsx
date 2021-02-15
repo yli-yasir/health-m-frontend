@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { Typography } from "@material-ui/core";
-import HMDivider from "../layout/HMDivider";
+import SimpleDivider from "./SimpleDivider";
 
 export default function FormSection(props) {
   return (
@@ -9,7 +9,7 @@ export default function FormSection(props) {
         {props.title}
       </Typography>
       {props.children}
-      <HMDivider></HMDivider>
+      <SimpleDivider />
     </React.Fragment>
   );
 }
