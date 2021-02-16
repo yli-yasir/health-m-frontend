@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LOGIN_PATH } from "../constants/routePaths";
-import LoginPage from "../pages/login";
+import { LOGIN_PATH } from "./routePaths";
+import LoginPage from "../pages/Login";
 import GuardedApp from "./GuardedApp";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route path={LOGIN_PATH} component={LoginPage} />
-          <GuardedApp/>
+          <GuardedApp />
         </Switch>
       </Router>
     </React.Fragment>

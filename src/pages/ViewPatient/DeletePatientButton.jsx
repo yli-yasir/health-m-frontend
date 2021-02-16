@@ -1,8 +1,8 @@
 import DeletePatientDialog from "./DeletePatientDialog";
-import ProgressButton from "../../../components/inputs/ProgressButton";
-import { deletePatient } from "../../../utils/APIUtils";
+import ProgressButton from "../../components/inputs/ProgressButton";
+import { deletePatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
-import HMSnackbar from "../../../components/feedback/HMSnackbar";
+import HMSnackbar from "../../components/Snackbar";
 import { Redirect } from "react-router-dom";
 import { DeleteForeverOutlined } from "@material-ui/icons";
 

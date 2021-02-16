@@ -1,5 +1,5 @@
 import { fabric } from "fabric/dist/fabric";
-import PedigreeChartCanvas from '../../pedigreeChartjs/pedigreeChartCanvas';
+import PedigreeChartCanvas from './pedigreeChart';
 import { useEffect,useState } from "react";
 
 export default function StaticPedigreeChart(props) {

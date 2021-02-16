@@ -1,15 +1,15 @@
-import FormikTextField from "../../FormikTextField";
-import FormSection from "../FormSection";
+import TextField from "../inputs/TextField";
+import Section from "../layout/Section";
 import { FULL_NAME } from "./inputNames";
 
 export default function PatientNameSection({ formikBag }) {
   return (
-    <FormSection title="Patient Name">
-      <FormikTextField
+    <Section title="Patient Name">
+      <TextField
         name={FULL_NAME}
         label="Full Name"
         formikBag={formikBag}
       />
-    </FormSection>
+    </Section>
   );
 }

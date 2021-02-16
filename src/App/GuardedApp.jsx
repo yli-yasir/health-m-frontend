@@ -1,11 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Zoom } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import routes from "./routes";
-import { LOGIN_PATH } from "../constants/routePaths";
-import { TransitionGroup } from "react-transition-group";
-import { useLocation } from "react-router-dom";
+import { LOGIN_PATH } from "./routePaths";
 import { connect } from "react-redux";
 import Main from "../components/layout/Main";
 

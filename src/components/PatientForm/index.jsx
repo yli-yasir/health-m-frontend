@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
-import { Formik, validateYupSchema } from "formik";
-import { Button, Paper, Box } from "@material-ui/core";
+import React from "react";
+import { Formik } from "formik";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import PatientNameSection from "./partials/PatientNameSection";
-import PatientBodySection from "./partials/PatientBodySection";
-import PedigreeChartSection from "./partials/PedigreeChartSection";
-import PatientContactInfoSection from "./partials/PatientContactInfoSection";
-import { getTouchedErrors } from "utils/formikUtils";
-import PatientAdmissionSection from "./partials/PatientAdmissionSection";
-import FamilySection from "./partials/FamilySection";
-import DoctorNotesSection from "./partials/DoctorNotesSection";
-import DiagnosisTreatmentSection from "./partials/DiagnosisTreatmentSection";
+import PatientNameSection from "./PatientNameSection";
+import PatientBodySection from "./PatientBodySection";
+import PedigreeChartSection from "./PedigreeChartSection";
+import PatientContactInfoSection from "./PatientContactInfoSection";
+import { getTouchedErrors } from "../../utils/formikUtils";
+import PatientAdmissionSection from "./PatientAdmissionSection";
+import FamilySection from "./FamilySection";
+import DoctorNotesSection from "./DoctorNotesSection";
+import DiagnosisTreatmentSection from "./DiagnosisTreatmentSection";
 import validationSchema from "./validationSchema";
-import ProgressButton from "inputs/ProgressButton";
-import HMSnackbar from "feedback/HMSnackbar";
+import ProgressButton from "../inputs/ProgressButton";
+import HMSnackbar from "../Snackbar";
 import {Redirect} from 'react-router-dom';
 
 export default function PatientFormContainer(props) {
@@ -65,10 +64,10 @@ function patientForm({
         <PatientNameSection {...sectionProps} />
 
         {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
-        <PatientBodySection
+        {/* <PatientBodySection
           onBirthDateChange={(date) => setFieldValue("birthDate", date)}
           {...sectionProps}
-        />
+        /> */}
 
         <PatientContactInfoSection {...sectionProps} />
 

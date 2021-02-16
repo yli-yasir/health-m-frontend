@@ -2,7 +2,7 @@ import React from "react";
 import PatientSearchBar from "./PatientSearchBar";
 import SearchResultsGrid from "./SearchResultsGrid";
 import { Waypoint } from "react-waypoint";
-import Page from "../../components/Page";
+import Page from "../../components/layout/Page";
 import LoadingBox from "../../components/LoadingBox";
 import { Typography } from "@material-ui/core";
 import usePatientSearch from "./usePatientSearch";

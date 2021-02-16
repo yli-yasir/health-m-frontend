@@ -3,7 +3,7 @@ import {
   SEARCH_PATH,
   SETTINGS_PATH,
   STATS_PATH,
-} from "../../constants/routePaths";
+} from "../../App/routePaths";
 import {
   DonutLargeOutlined,
   SettingsOutlined,

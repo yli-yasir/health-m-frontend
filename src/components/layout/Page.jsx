@@ -1,6 +1,5 @@
 import React from "react";
-import AppBar from "./AppBar";
-import AppBarSpace from "./AppBar/AppBarSpace";
+import AppBar,{AppBarSpace} from "../AppBar";
 
 function Page(props) {
   return (

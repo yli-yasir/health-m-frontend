@@ -2,8 +2,8 @@ import PatientForm from "../../components/PatientForm";
 import getInitialValues from "../../components/PatientForm/initialValues";
 import { addPatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
-import Page from "../../components/Page";
-import ResponsivePaper from "../../components/ResponsivePaper";
+import Page from "../../components/layout/Page";
+import ResponsivePaper from "../../components/layout/ResponsivePaper";
 import { valuesToPatient } from "../../components/PatientForm/mapping";
 // Get an object with the initial values.
 const initialValues = getInitialValues();

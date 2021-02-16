@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box, Snackbar, Fab } from "@material-ui/core";
 import { SaveOutlined } from "@material-ui/icons";
 import FamilyNodeDialog from "./FamilyNodeDialog";
-import PedigreeChartCanvas from "../../pedigreeChartjs/pedigreeChartCanvas";
+import PedigreeChartCanvas from "./pedigreeChart";
 
 
 export default function PedigreeChart(props) {

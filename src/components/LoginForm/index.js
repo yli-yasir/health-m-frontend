@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { getTouchedErrors } from "../../utils/formikUtils";
-import HMTextField from "../TextField";
+import HMTextField from "../inputs/TextField";
 import ProgressButton from "../inputs/ProgressButton";
 import validationSchema from "./validationSchema";
 import { makeStyles } from "@material-ui/core";
@@ -8,9 +8,9 @@ import { login } from "../../utils/APIUtils";
 import { useState } from "react";
 import { AUTH_FAIL } from "../../constants/httpStatusCodes";
 import initialValues from "./initialValues";
-import HMSnackbar from "../feedback/HMSnackbar";
 import React from "react";
-import FeedbackContainer from "../feedback/FeedbackContainer";
+import FeedbackContainer from "../FeedbackContainer";
+
 const useStyles = makeStyles((theme) => ({
   form: { width: "100%" },
   submitButton: {

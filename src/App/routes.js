@@ -1,19 +1,18 @@
 import {
   ADD_PATIENT_PATH,
   EDIT_PATIENT_PATH,
-  LOGIN_PATH,
   SEARCH_PATH,
   SETTINGS_PATH,
   STATS_PATH,
   VIEW_PATIENT_PATH,
-} from "../constants/routePaths";
+} from "./routePaths";
 
 import AddPatient from "../pages/AddPatient";
 import SearchPatients from "../pages/SearchPatients";
-import ViewPatient from "../pages/viewPatient/Main";
-import EditPatient from "../pages/editPatient/Main";
-import Stats from "../pages/stats/Main";
-import Settings from "../pages/settings";
+import ViewPatient from "../pages/ViewPatient";
+import EditPatient from "../pages/EditPatient";
+import Stats from "../pages/Stats";
+import Settings from "../pages/Settings";
 
 import { Redirect } from "react-router-dom";
 

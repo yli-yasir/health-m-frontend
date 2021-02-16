@@ -1,4 +1,3 @@
-import PaperPage from "../../../components/presentationals/PaperPage";
 import { List, Typography, Dialog } from "@material-ui/core";
 import {
   PermIdentityOutlined,
@@ -16,11 +15,11 @@ import {
   HealingOutlined,
 } from "@material-ui/icons";
 import { Box, Button } from "@material-ui/core";
-import InfoItem from "../../../components/presentationals/InfoItem";
+import ListItem from "../../components/List/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
-import StaticPedigreeChart from "../../../components/pedigreeChart/StaticPedigreeChart";
+import StaticPedigreeChart from "../../components/PedigreeChart/StaticPedigreeChart";
 import { useState } from "react";
-import {capitalizeFirstLetter} from '../../../utils/miscUtils';
+import { capitalizeFirstLetter } from "../../utils/miscUtils";
 
 const useStyles = makeStyles((theme) => ({
   infoList: {
@@ -37,49 +36,49 @@ export default function PatientInfoList({ patient }) {
 
   return (
     <List className={classes.infoList}>
-      <InfoItem
+      <ListItem
         icon={AssignmentOutlined}
         title="Full Name:"
         content={patient.fullName}
       />
-      <InfoItem
+      <ListItem
         icon={PermIdentityOutlined}
         title="Gender:"
-        content={patient.gender ? capitalizeFirstLetter(patient.gender) : ''}
+        content={patient.gender ? capitalizeFirstLetter(patient.gender) : ""}
       />
-      <InfoItem
+      <ListItem
         icon={CakeOutlined}
         title="Birthdate:"
         content={new Date(patient.birthDate).toDateString()}
       />
-      <InfoItem
+      <ListItem
         icon={AssessmentOutlined}
         title="Weight:"
         content={`${patient.bodyWeight} Kg`}
       />
-      <InfoItem
+      <ListItem
         icon={LocationOnOutlined}
         title="Address:"
         content={patient.address}
       />
-      <InfoItem
+      <ListItem
         icon={PermPhoneMsgOutlined}
         title="Phone:"
         content={patient.phoneNumber}
       />
-      <InfoItem icon={EmailOutlined} title="Email:" content={patient.email} />
-      <InfoItem
+      <ListItem icon={EmailOutlined} title="Email:" content={patient.email} />
+      <ListItem
         icon={TodayOutlined}
         title="Admission Date:"
         content={new Date(patient.admissionDate).toDateString()}
       />
-      <InfoItem
+      <ListItem
         icon={EventAvailableOutlined}
         title="Admittor Name:"
         content={patient.admittorName}
       />
 
-      <InfoItem
+      <ListItem
         icon={PageviewOutlined}
         title="Parent Separation:"
         content={
@@ -90,7 +89,7 @@ export default function PatientInfoList({ patient }) {
       />
 
       {patient.parentsDivorced && (
-        <InfoItem
+        <ListItem
           icon={PageviewOutlined}
           title="Parents Divorce:"
           content={
@@ -101,7 +100,7 @@ export default function PatientInfoList({ patient }) {
         />
       )}
 
-      <InfoItem
+      <ListItem
         icon={PageviewOutlined}
         title="Parents Death:"
         content={
@@ -111,7 +110,7 @@ export default function PatientInfoList({ patient }) {
         }
       />
 
-      <InfoItem
+      <ListItem
         icon={PageviewOutlined}
         title="Stepfamily:"
         content={
@@ -121,7 +120,7 @@ export default function PatientInfoList({ patient }) {
         }
       />
 
-      <InfoItem
+      <ListItem
         icon={AccountTreeOutlined}
         title="Pedigree Chart:"
         content={
@@ -151,7 +150,7 @@ export default function PatientInfoList({ patient }) {
       </Dialog>
 
       {Object.keys(patient.diagnosisTreatment).map((key) => (
-        <InfoItem
+        <ListItem
           key={key}
           icon={HealingOutlined}
           title={key}

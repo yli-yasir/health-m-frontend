@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import SimpleDivider from "./SimpleDivider";
+import SimpleDivider from "../SimpleDivider";
 
 export default function FormSection(props) {
   return (

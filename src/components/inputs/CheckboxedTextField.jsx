@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import HMCheckbox from "./HMCheckbox";
-import HMTextField from "../TextField";
+import Checkbox from "./Checkbox";
+import TextField from "./TextField";
 
 export default function CheckboxedText(props) {
   return (
     <React.Fragment>
-      <HMCheckbox
+      <Checkbox
         name={props.checkboxName}
         checked={props.isChecked}
         onChange={props.onCheckboxChange}
@@ -13,7 +13,7 @@ export default function CheckboxedText(props) {
       />
         
         {props.isChecked && (
-        <HMTextField
+        <TextField
           value={props.textFieldValue}
           label={props.checkboxLabel + " Description"}
           onChange={props.onTextFieldChange}

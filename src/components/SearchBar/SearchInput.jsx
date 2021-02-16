@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import TextField from "../TextField";
+import TextField from "../inputs/TextField";
 import { Link, useHistory } from "react-router-dom";
 import { InputAdornment } from "@material-ui/core";
 

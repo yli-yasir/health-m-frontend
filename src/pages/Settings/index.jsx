@@ -1,5 +1,5 @@
 import { Button, Paper, Zoom } from "@material-ui/core";
-import PaperPage from "../../components/presentationals/PaperPage";
+import ResponsivePaper from "../../components/layout/ResponsivePaper";
 import { connect } from "react-redux";
 import { mapLanguageToProps } from "../../redux/mapState";
 import { setLanguage } from "../../redux/actions";

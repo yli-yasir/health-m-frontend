@@ -1,5 +1,5 @@
 import getInitialValues from "./initialValues";
-import { NULL_MEDICAL_CODE } from "constants/medicalCodes";
+import { NULL_MEDICAL_CODE } from "./medicalCodes";
 // Transform the input values object into an object which conforms to our REST API spec.
 export function valuesToPatient(values) {
   const diagnosisTreatmentObj = _diagnosisTreatmentArrayToObj(

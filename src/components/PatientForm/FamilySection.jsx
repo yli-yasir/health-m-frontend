@@ -1,5 +1,5 @@
-import FormSection from "presentationals/FormSection";
-import CheckboxedTextField from "inputs/CheckboxedTextField";
+import FormSection from "../layout/Section";
+import CheckboxedTextField from "../inputs/CheckboxedTextField";
 
 export default function FamilySection({
   values,

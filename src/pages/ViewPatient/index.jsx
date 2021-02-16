@@ -1,15 +1,15 @@
-import PaperPage from "../../components/presentationals/PaperPage";
+import ResponsivePaper from "../../components/layout/ResponsivePaper";
 import { Typography } from "@material-ui/core";
 import { Box, Fab } from "@material-ui/core";
-import InfoItem from "../../components/presentationals/InfoItem";
-import Loader from "../../components/loaders/Loader";
-import HMSnackbar from "../../components/feedback/HMSnackbar";
+import InfoItem from "../../components/List/ListItem";
+import Loader from "../../components/Loader";
+import Snackbar from "../../components/Snackbar";
 import { getPatient } from "../../utils/APIUtils";
-import PatientInfoList from "./partials/PatientInfoList";
+import PatientInfoList from "./PatientInfoList";
 import { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import DeletePatientButton from "./partials/DeletePatientButton";
+import DeletePatientButton from "./DeletePatientButton";
 import React from "react";
 import { EditOutlined } from "@material-ui/icons";
 
@@ -31,7 +31,7 @@ export default function ViewPatient() {
   );
 
   return (
-    <PaperPage centerContent={true}>
+    <ResponsivePaper centerContent={true}>
       <Loader
         load={async () => await getPatient(patientId)}
         deps={[patientId]}
@@ -53,10 +53,10 @@ export default function ViewPatient() {
         )}
       />
 
-      <HMSnackbar
+      <Snackbar
         message={redirectMessage}
         clearMessage={() => setRedirectMessage("")}
       />
-    </PaperPage>
+    </ResponsivePaper>
   );
 }

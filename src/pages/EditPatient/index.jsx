@@ -6,8 +6,8 @@ import {
   patientToValues,
 } from "../../components/PatientForm/mapping";
 import { useParams } from "react-router-dom";
-import Loader from "../../components/loaders/Loader";
-import PaperPage from "../../components/presentationals/PaperPage";
+import Loader from "../../components/Loader";
+import ResponsivePaper from "../../components/layout/ResponsivePaper";
 
 export default function EditPatient() {
   const { id: patientId } = useParams();
@@ -28,7 +28,7 @@ export default function EditPatient() {
   }
 
   return (
-    <PaperPage>
+    <ResponsivePaper>
       <Loader
         load={async () => await getPatient(patientId)}
         deps={[patientId]}
@@ -46,6 +46,6 @@ export default function EditPatient() {
           />
         )}
       />
-    </PaperPage>
+    </ResponsivePaper>
   );
 }

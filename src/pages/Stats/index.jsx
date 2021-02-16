@@ -1,11 +1,11 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
-import PaperPage from "../../components/presentationals/PaperPage";
-import DatasetFilterPanel from "./partials/DatasetFilterPanel";
+import ResponsivePaper from "../../components/layout/ResponsivePaper";
+import DatasetFilterPanel from "./DatasetFilterPanel";
 import { Box } from "@material-ui/core";
 import { useState } from "react";
 import { searchPatients } from "../../utils/APIUtils";
-import Loader from "../../components/loaders/Loader";
+import Loader from "../../components/Loader";
 import { makeChartData } from "../../utils/chartUtils";
 import { set } from "date-fns/esm";
 
@@ -41,7 +41,7 @@ export default function StatsPage() {
   }
 
   return (
-    <PaperPage centerContent={true}>
+    <ResponsivePaper centerContent={true}>
       <Loader
         deps={[]}
         load={loadData}
@@ -59,6 +59,6 @@ export default function StatsPage() {
           </React.Fragment>
         )}
       />
-    </PaperPage>
+    </ResponsivePaper>
   );
 }

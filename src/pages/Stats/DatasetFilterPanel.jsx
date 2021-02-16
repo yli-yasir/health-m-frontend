@@ -1,7 +1,7 @@
 import { Paper, Button,Box } from "@material-ui/core";
 import Formik from "formik";
 import React, { useState } from "react";
-import HMCheckbox from "../../../components/inputs/HMCheckbox";
+import HMCheckbox from "../../components/inputs/Checkbox";
 import { FilterList, FilterVintage } from "@material-ui/icons";
 
 export default function DatasetFilterPanel({ filterDataset }) {

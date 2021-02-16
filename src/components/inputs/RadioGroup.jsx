@@ -1,16 +1,16 @@
 import {
   FormControl,
   FormLabel,
-  RadioGroup,
+  RadioGroup as MaterialRadioGroup,
   Radio,
   FormControlLabel,
 } from "@material-ui/core";
 
-export default function HMRadioGroup(props) {
+export default function RadioGroup(props) {
   return (
     <FormControl margin="normal" fullWidth={true} component="fieldset">
       <FormLabel component="legend">{props.label}</FormLabel>
-      <RadioGroup
+      <MaterialRadioGroup
         aria-label="gender"
         name={props.name}
         value={props.value}
@@ -26,7 +26,7 @@ export default function HMRadioGroup(props) {
           />
         ))}
 
-      </RadioGroup>
+      </MaterialRadioGroup>
 
       
     </FormControl>

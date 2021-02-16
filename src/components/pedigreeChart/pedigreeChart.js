@@ -1,7 +1,6 @@
 import { fabric } from "fabric/dist/fabric";
-import { makeImageElement } from "../utils/fabricUtils";
-import removeIconSrc from "../assets/delete.svg";
-import addIconSrc from "../assets/family.svg";
+import removeIconSrc from "../../assets/delete.svg";
+import addIconSrc from "../../assets/family.svg";
 
 export default class PedigreeChartCanvas extends fabric.Canvas {
   static COMMON_FAMILY_NODE_CONFIG = { originX: "center", originY: "center" };
@@ -288,4 +287,11 @@ export default class PedigreeChartCanvas extends fabric.Canvas {
 
   }
   
+}
+
+
+export function makeImageElement(src) {
+  const imgElement = document.createElement("img");
+  imgElement.src = src;
+  return imgElement;
 }

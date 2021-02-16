@@ -7,10 +7,10 @@ import {
   IconButton,
 } from "@material-ui/core";
 import Logo from "../icons/Logo";
-import {Menu} from '@material-ui/icons'
+import {Menu as MenuIcon} from '@material-ui/icons'
 import Drawer from "../Drawer";
 import {Box} from '@material-ui/core/';
-
+import AppBarSpace from './AppBarSpace';
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppBar(props) {
+function AppBar(props) {
   const classes = useStyles();
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function AppBar(props) {
           color='inherit'
           onClick={toggleDrawer}
         >
-          <Menu/>
+          <MenuIcon/>
         </IconButton>
         <Logo height="50px" width="50px" />
         <Typography variant="h6" className={classes.title}>
@@ -53,3 +53,6 @@ export default function AppBar(props) {
     </MaterialAppBar>
   );
 }
+
+export default AppBar;
+export {AppBarSpace};

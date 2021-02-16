@@ -1,5 +1,5 @@
 import React from 'react';
-import HMSnackbar from '../feedback/HMSnackbar';
+import Snackbar from './Snackbar';
 
 import { useState } from "react";
 import {Redirect} from 'react-router-dom';
@@ -10,7 +10,7 @@ export default function FeedbackContainer({render}) {
     return (
       <React.Fragment>
         {render(setfailMessage,setSuccessful,isSuccessful)}
-        <HMSnackbar
+        <Snackbar
           message={failMessage}
           clearMessage={() => setfailMessage("")}
         />

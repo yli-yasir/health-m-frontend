@@ -1,4 +1,4 @@
-import {SEARCH_PATH} from "../constants/routePaths";
+import {SEARCH_PATH} from "../App/routePaths";
 
 export function buildQueryString(oldQueryString, options) {
   let params = new URLSearchParams(oldQueryString);
