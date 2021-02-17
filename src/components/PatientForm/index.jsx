@@ -14,10 +14,17 @@ import DiagnosisTreatmentSection from "./DiagnosisTreatmentSection";
 import validationSchema from "./validationSchema";
 import ProgressButton from "../inputs/ProgressButton";
 import HMSnackbar from "../Snackbar";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 export default function PatientFormContainer(props) {
-  const { initialValues,onSubmit,feedbackMessage,clearFeedbackMessage,success,onSuccessRedirect } = props;
+  const {
+    initialValues,
+    onSubmit,
+    feedbackMessage,
+    clearFeedbackMessage,
+    success,
+    onSuccessRedirect,
+  } = props;
   return (
     <React.Fragment>
       <Formik
@@ -27,11 +34,7 @@ export default function PatientFormContainer(props) {
       >
         {patientForm}
       </Formik>
-      {success && (
-        <Redirect
-          to={onSuccessRedirect}
-        />
-      )}
+      {success && <Redirect to={onSuccessRedirect} />}
       <HMSnackbar
         clearMessage={clearFeedbackMessage}
         message={feedbackMessage}
@@ -50,7 +53,7 @@ function patientForm({
   isSubmitting,
   setFieldValue,
 }) {
-  const sectionProps = {
+  const formikBag = {
     values,
     errors: getTouchedErrors(touched, errors),
     onChange: handleChange,
@@ -60,16 +63,13 @@ function patientForm({
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      
       <form onSubmit={handleSubmit}>
-        <PatientNameSection {...sectionProps} />
 
-        {/* Birthdate is a special input, therefore it needs a custom onChange handler */}
-        {/* <PatientBodySection
-          onBirthDateChange={(date) => setFieldValue("birthDate", date)}
-          {...sectionProps}
-        /> */}
+        <PatientNameSection formikBag={formikBag} />
+        <PatientBodySection formikBag={formikBag} />
 
-        <PatientContactInfoSection {...sectionProps} />
+        {/* <PatientContactInfoSection {...sectionProps} />
 
         <PatientAdmissionSection
           onAdmissionDateChange={(date) => setFieldValue("admissionDate", date)}
@@ -94,9 +94,8 @@ function patientForm({
           variant="contained"
           isWorking={isSubmitting}>
           Submit
-        </ProgressButton>
+        </ProgressButton> */}
       </form>
-
     </MuiPickersUtilsProvider>
   );
 }

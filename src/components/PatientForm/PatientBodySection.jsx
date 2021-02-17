@@ -1,46 +1,39 @@
-// import TextField from "../inputs/TextField";
-// import FormSection from "../layout/Section";
-// import RadioGroup from "../inputs/RadioGroup";
-// import DatePicker from "../inputs/DatePicker";
-// import { InputAdornment } from "@material-ui/core";
-// import { GENDER, BODY_WEIGHT, BIRTH_DATE } from "./inputNames";
+import FormikTextField from "../inputs/FormikTextField";
+import Section from "../layout/Section";
+import FormikRadioGroup from "../inputs/FormikRadioGroup";
+import FormikDatePicker from "../inputs/FormikDatePicker";
+import { InputAdornment } from "@material-ui/core";
+import { GENDER, BODY_WEIGHT, BIRTH_DATE } from "./inputNames";
 
-// export default function PatientBodySection({ formikBag, onBirthDateChange }) {
-//   return (
-//     <FormSection title="Patient Body Info.">
-//       <RadioGroup
-//         label="Gender"
-//         name="gender"
-//         value={values.gender}
-//         onChange={handleChange}
-//         onBlur={handleBlur}
-//         radios={[
-//           { value: "male", label: "Male" },
-//           { value: "female", label: "Female" },
-//         ]}
-//       />
+export default function PatientBodySection({ formikBag }) {
+  return (
+    <Section title="Patient Body Info.">
+      <FormikRadioGroup
+        name={GENDER}
+        label="Gender"
+        formikBag={formikBag}
+        radios={[
+          { value: "male", label: "Male" },
+          { value: "female", label: "Female" },
+        ]}
+      />
 
-//       <TextField
-//         name="bodyWeight"
-//         label="Body Weight"
-//         value={values.bodyWeight}
-//         error={Boolean(errors.bodyWeight)}
-//         helperText={errors.bodyWeight}
-//         type="number"
-//         onChange={handleChange}
-//         onBlur={handleBlur}
-//         InputProps={{
-//           startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-//         }}
-//       />
+      <FormikTextField
+        name={BODY_WEIGHT}
+        label="Body Weight"
+        formikBag={formikBag}
+        type="number"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+        }}
+      />
 
-//       <DatePicker
-//         value={values.birthDate}
-//         onChange={handleBirthDateChange}
-//         onBlur={handleBlur}
-//         label="Birth Date"
-//         maxDate={new Date(new Date().getFullYear() - 1, new Date().getMonth())}
-//       />
-//     </FormSection>
-//   );
-// }
+      <FormikDatePicker
+        name={BIRTH_DATE}
+        label="Birth Date"
+        formikBag={formikBag}
+        maxDate={new Date(new Date().getFullYear() - 1, new Date().getMonth())}
+      />
+    </Section>
+  );
+}
