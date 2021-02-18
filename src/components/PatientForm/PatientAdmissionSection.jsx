@@ -1,33 +1,22 @@
-import HMTextField from "../inputs/TextField";
+import FormikTextField from "../inputs/FormikTextField";
 import FormSection from "../layout/Section";
-import HMDatePicker from "../inputs/DatePicker";
+import FormikDatePicker from "../inputs/FormikDatePicker";
+import { ADMISSION_DATE, ADMITTOR_NAME } from "./inputNames";
 
-export default function PatientAdmissionSection({
-  values,
-  errors,
-  onBlur: handleBlur,
-  onChange: handleChange,
-  onAdmissionDateChange: handleAdmissionDateChange
-}) {
+export default function PatientAdmissionSection({ formikBag }) {
   return (
     <FormSection title="Admission Info.">
-
-      <HMDatePicker
-        value={values.admissionDate}
-        onChange={handleAdmissionDateChange}
-        onBlur={handleBlur}
+      <FormikDatePicker
+        name={ADMISSION_DATE}
         label="Admission Date"
+        formikBag={formikBag}
         maxDate={new Date()}
       />
 
-      <HMTextField
-        name="admittorName"
+      <FormikTextField
+        name={ADMITTOR_NAME}
         label="Patient admitted by"
-        value={values.admittorName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={Boolean(errors.admittorName)}
-        helperText={errors.admittorName}
+        formikBag={formikBag}
       />
     </FormSection>
   );

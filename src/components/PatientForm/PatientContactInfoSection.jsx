@@ -1,30 +1,20 @@
-import HMTextField from "../inputs/TextField";
+import FormikTextField from "../inputs/FormikTextField";
 import FormSection from "../layout/Section";
-import PhoneField from "../inputs/PhoneField";
+import FormikPhoneField from "../inputs/FormikPhoneField";
+import { ADDRESS, EMAIL, PHONE_NUMBER } from "./inputNames";
 
-export default function PatientContactInfoSection({
-  values,
-  errors,
-  onBlur: handleBlur,
-  onChange: handleChange,
-}) {
-  const makeProps = (name, label) => ({
-    name,
-    label,
-    value: values[name],
-    error: Boolean(errors[name]),
-    helperText: errors[name],
-    onChange: handleChange,
-    onBlur: handleBlur,
-  });
-
+export default function PatientContactInfoSection({ formikBag }) {
   return (
     <FormSection title="Contact Info.">
-      <HMTextField {...makeProps("address", "Address")} />
+      <FormikTextField name={ADDRESS} label="Address" formikBag={formikBag} />
 
-      <HMTextField {...makeProps("email", "Email")} />
+      <FormikTextField name={EMAIL} label="Email" formikBag={formikBag} />
 
-      <PhoneField {...makeProps("phoneNumber", "Phone Number")} />
+      <FormikPhoneField
+        name={PHONE_NUMBER}
+        label="Phone Number"
+        formikBag={formikBag}
+      />
     </FormSection>
   );
 }

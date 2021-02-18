@@ -63,36 +63,27 @@ function patientForm({
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      
       <form onSubmit={handleSubmit}>
-
         <PatientNameSection formikBag={formikBag} />
         <PatientBodySection formikBag={formikBag} />
-
-        {/* <PatientContactInfoSection {...sectionProps} />
-
-        <PatientAdmissionSection
-          onAdmissionDateChange={(date) => setFieldValue("admissionDate", date)}
-          {...sectionProps}
-        />
-
+        <PatientContactInfoSection formikBag={formikBag} />
+        <PatientAdmissionSection formikBag={formikBag}/>
+        {/*
         <FamilySection {...sectionProps} />
-
         <PedigreeChartSection
           chartData={values.pedigreeChart}
           saveChart={(json) => {
             setFieldValue("pedigreeChart", json);
           }}
         />
-
         <DiagnosisTreatmentSection {...sectionProps} />
         <DoctorNotesSection {...sectionProps} />
-
         <ProgressButton
           type="submit"
           color="primary"
           variant="contained"
-          isWorking={isSubmitting}>
+          isWorking={isSubmitting}
+        >
           Submit
         </ProgressButton> */}
       </form>
