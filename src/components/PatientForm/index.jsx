@@ -68,8 +68,8 @@ function patientForm({
         <PatientBodySection formikBag={formikBag} />
         <PatientContactInfoSection formikBag={formikBag} />
         <PatientAdmissionSection formikBag={formikBag}/>
+        <FamilySection formikBag={formikBag} />
         {/*
-        <FamilySection {...sectionProps} />
         <PedigreeChartSection
           chartData={values.pedigreeChart}
           saveChart={(json) => {

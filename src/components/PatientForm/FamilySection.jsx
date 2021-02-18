@@ -1,67 +1,46 @@
 import FormSection from "../layout/Section";
-import CheckboxedTextField from "../inputs/CheckboxedTextField";
+import FormikCheckboxedTextField from "../inputs/FormikCheckboxedTextField";
+import {
+  PARENTS_SEPARATED,
+  PARENTS_SEPARATED_DESCRIPTION,
+  PARENTS_DIVORCED,
+  PARENTS_DIVORCED_DESCRIPTION,
+  PARENTS_DIED,
+  PARENTS_DIED_DESCRIPTION,
+  STEP_FAMILY,
+  STEP_FAMILY_DESCRIPTION,
+} from "./inputNames";
 
-export default function FamilySection({
-  values,
-  errors,
-  onBlur: handleBlur,
-  onChange: handleChange,
-  setFieldValue,
-}) {
-
-  function makeProps(label, checkboxName, textFieldName) {
-    return {
-      checkboxLabel: label,
-      checkboxName,
-      textFieldName,
-      isChecked: values[checkboxName],
-      textFieldValue: values[textFieldName],
-      onCheckboxChange: (e) => {
-        setFieldValue(checkboxName, e.target.checked);
-        setFieldValue(textFieldName, "");
-      },
-      onTextFieldChange: handleChange,
-      onBlur: handleBlur,
-      textFieldError: Boolean(errors[textFieldName]),
-      helperText: errors[textFieldName],
-    };
-  }
-
+export default function FamilySection({ formikBag }) {
   return (
     <FormSection title="Family Info.">
-      <CheckboxedTextField
-        {...makeProps(
-          "Parents Separation",
-          "parentsSeparated",
-          "parentsSeparatedDescription"
-        )}
+      <FormikCheckboxedTextField
+        checkboxLabel="Parents Separation"
+        checkboxName={PARENTS_SEPARATED}
+        textFieldName={PARENTS_SEPARATED_DESCRIPTION}
+        formikBag={formikBag}
       />
 
-      <CheckboxedTextField
-        {...makeProps(
-          "Parents Divorce",
-          "parentsDivorced",
-          "parentsDivorcedDescription"
-        )}
+      <FormikCheckboxedTextField
+        checkboxLabel="Parents Divorce"
+        checkboxName={PARENTS_DIVORCED}
+        textFieldName={PARENTS_DIVORCED_DESCRIPTION}
+        formikBag={formikBag}
       />
 
-      <CheckboxedTextField
-        {...makeProps(
-          "Parents Died",
-          "parentsDied",
-          "parentsDiedDescription"
-        )}
+      <FormikCheckboxedTextField
+        checkboxLabel="Parents Died"
+        checkboxName={PARENTS_DIED}
+        textFieldName={PARENTS_DIED_DESCRIPTION}
+        formikBag={formikBag}
       />
 
-      <CheckboxedTextField
-        {...makeProps(
-          "Step Family",
-          "stepFamily",
-          "stepFamilyDescription"
-        )}
+      <FormikCheckboxedTextField
+        checkboxLabel="Step Family"
+        checkboxName={STEP_FAMILY}
+        textFieldName={STEP_FAMILY_DESCRIPTION}
+        formikBag={formikBag}
       />
-
-
     </FormSection>
   );
 }

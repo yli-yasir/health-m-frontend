@@ -25,10 +25,10 @@ const validationSchema = yup.object().shape({
     .min(2, "Too Short!")
     .max(50, "Too long!")
     .required("Required"),
-  parentsSeparatedDescription: yup.string().max(2000, "Too long!").optional(),
-  parentsDivorcedDescription: yup.string().max(2000, "Too long!").optional(),
-  parentsDiedDescription: yup.string().max(2000, "Too long!").optional(),
-  stepFamilyDescription: yup.string().max(2000, "Too long!").optional(),
+  parentsSeparatedDescription: yup.string().min(2, "Too Short!").max(500, "Too long!").optional(),
+  parentsDivorcedDescription: yup.string().max(500, "Too long!").optional(),
+  parentsDiedDescription: yup.string().max(500, "Too long!").optional(),
+  stepFamilyDescription: yup.string().max(500, "Too long!").optional(),
   diagnosisTreatment: yup.array().of(diagnosisTreatmentSchema),
   doctorNotes: yup.string().max(10000, "Too long!").required("Required"),
 });
