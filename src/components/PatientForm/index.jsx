@@ -71,10 +71,8 @@ function patientForm({
         <PatientAdmissionSection formikBag={formikBag}/>
         <FamilySection formikBag={formikBag} />
         <PedigreeChartSection formikBag={formikBag}/>
-                {/*
-
-        <DiagnosisTreatmentSection {...sectionProps} />
-        <DoctorNotesSection {...sectionProps} />
+        <DiagnosisTreatmentSection formikBag={formikBag} />
+        <DoctorNotesSection formikBag={formikBag} />
         <ProgressButton
           type="submit"
           color="primary"
@@ -82,7 +80,7 @@ function patientForm({
           isWorking={isSubmitting}
         >
           Submit
-        </ProgressButton> */}
+        </ProgressButton>
       </form>
     </MuiPickersUtilsProvider>
   );

@@ -5,10 +5,8 @@ import HMTextField from "../inputs/TextField";
 import { Button, Paper, Typography } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  NULL_MEDICAL_CODE,
-  MEDICAL_CODES,
-} from "./medicalCodes";
+import { NULL_MEDICAL_CODE, MEDICAL_CODES } from "./medicalCodes";
+import {DIAGNOSIS_TREATMENT} from "./inputNames";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,48 +16,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const dataset = [NULL_MEDICAL_CODE,...MEDICAL_CODES].map((code) => ({
+const dataset = [NULL_MEDICAL_CODE, ...MEDICAL_CODES].map((code) => ({
   key: code,
   value: code,
   label: code,
 }));
 
-export default function DiagnosisTreatmentSection({
-  values,
-  errors,
-  onChange: handleChange,
-  onBlur: handleBlur,
-  setFieldValue,
-}) {
+export default function DiagnosisTreatmentSection({ formikBag }) {
+  const { values, errors, onChange, onBlur, setFieldValue } = formikBag;
   const classes = useStyles();
 
   return (
     <FormSection title="Diagnosis & Treatment">
-      {values.diagnosisTreatment.map((medicalCode, index) => {
+      {values[DIAGNOSIS_TREATMENT].map((medicalCode, index) => {
+
+        const itemKey = `${DIAGNOSIS_TREATMENT}[${index}]`;
+        const treatmentError = getTreatmentError(errors, index)
         return (
           // It's not recommended to depend on index when generating keys
           // However, it's going to be used here because performance is not currently an issue.
           <Paper
             variant="outlined"
             className={classes.paper}
-            key={`diagnosisTreatment[${index}]`}
+            key={itemKey}
           >
             <Typography variant="h6">{"Diagnosis " + (index + 1)}</Typography>
             <HMSelect
               label="Diagnosis"
               items={dataset}
-              onChange={handleChange}
-              name={`diagnosisTreatment[${index}].diagnosis`}
+              onChange={onChange}
+              name={`${itemKey}.diagnosis`}
               value={values.diagnosisTreatment[index].diagnosis}
             />
             <HMTextField
               label="Treatment"
-              name={`diagnosisTreatment[${index}].treatment`}
+              name={`${itemKey}.treatment`}
               value={values.diagnosisTreatment[index].treatment}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={Boolean(getTreatmentError(errors, index))}
-              helperText={getTreatmentError(errors, index)}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={Boolean(treatmentError)}
+              helperText={treatmentError}
               disabled={!Boolean(values.diagnosisTreatment[index].diagnosis)}
             />
           </Paper>
