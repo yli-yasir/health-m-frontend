@@ -1,20 +1,21 @@
 import FormSection from "../layout/Section";
 import PedigreeChart from "../PedigreeChart";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Dialog, Button, Slide } from "@material-ui/core";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
-import { Typography, Paper, Box } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
+import { PEDIGREE_CHART } from "./inputNames";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
 export default function PedigreeChartSection(props) {
+  const { values, setFieldValue } = props.formikBag;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,7 +23,6 @@ export default function PedigreeChartSection(props) {
 
   const handleClose = () => {
     setOpen(false);
-
   };
 
   return (
@@ -37,7 +37,10 @@ export default function PedigreeChartSection(props) {
         TransitionComponent={Slide}
       >
         <PedigreeChartAppBar onClose={handleClose} classes={classes} />
-        <PedigreeChart chartData={props.chartData} saveChart={props.saveChart}/>
+        <PedigreeChart
+          chartData={values[PEDIGREE_CHART]}
+          saveChart={(value) => setFieldValue(PEDIGREE_CHART, value)}
+        />
       </Dialog>
     </FormSection>
   );
@@ -57,11 +60,8 @@ function PedigreeChartAppBar({ onClose: handleClose, classes }) {
             <Close />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Pedigree Chart
+            Pedigree Chart Editor
           </Typography>
-          {/* <Button autoFocus color="inherit" onClick={handleClose}>
-        save
-      </Button> */}
         </Toolbar>
       </AppBar>
       <div className={classes.toolbar}></div>

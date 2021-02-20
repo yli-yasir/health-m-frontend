@@ -53,6 +53,7 @@ function patientForm({
   isSubmitting,
   setFieldValue,
 }) {
+
   const formikBag = {
     values,
     errors: getTouchedErrors(touched, errors),
@@ -69,13 +70,9 @@ function patientForm({
         <PatientContactInfoSection formikBag={formikBag} />
         <PatientAdmissionSection formikBag={formikBag}/>
         <FamilySection formikBag={formikBag} />
-        {/*
-        <PedigreeChartSection
-          chartData={values.pedigreeChart}
-          saveChart={(json) => {
-            setFieldValue("pedigreeChart", json);
-          }}
-        />
+        <PedigreeChartSection formikBag={formikBag}/>
+                {/*
+
         <DiagnosisTreatmentSection {...sectionProps} />
         <DoctorNotesSection {...sectionProps} />
         <ProgressButton
