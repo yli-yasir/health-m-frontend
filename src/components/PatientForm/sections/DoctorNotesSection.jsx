@@ -1,6 +1,6 @@
-import FormSection from "../layout/Section";
-import FormikTextField from "../inputs/FormikTextField";
-import { DOCTOR_NOTES } from "./inputNames";
+import FormSection from "../../layout/Section";
+import FormikTextField from "../../inputs/FormikTextField";
+import { DOCTOR_NOTES } from "../inputNames";
 
 export default function DoctorNotesSection({ formikBag }) {
   return (

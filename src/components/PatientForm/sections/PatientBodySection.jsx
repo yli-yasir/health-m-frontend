@@ -1,9 +1,9 @@
-import FormikTextField from "../inputs/FormikTextField";
-import Section from "../layout/Section";
-import FormikRadioGroup from "../inputs/FormikRadioGroup";
-import FormikDatePicker from "../inputs/FormikDatePicker";
+import FormikTextField from "../../inputs/FormikTextField";
+import Section from "../../layout/Section";
+import FormikRadioGroup from "../../inputs/FormikRadioGroup";
+import FormikDatePicker from "../../inputs/FormikDatePicker";
 import { InputAdornment } from "@material-ui/core";
-import { GENDER, BODY_WEIGHT, BIRTH_DATE } from "./inputNames";
+import { GENDER, BODY_WEIGHT, BIRTH_DATE } from "../inputNames";
 
 export default function PatientBodySection({ formikBag }) {
   return (

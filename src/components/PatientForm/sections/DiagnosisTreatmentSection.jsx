@@ -1,12 +1,12 @@
 import React from "react";
-import FormSection from "../layout/Section";
-import HMSelect from "../inputs/Select";
-import HMTextField from "../inputs/TextField";
+import FormSection from "../../layout/Section";
+import HMSelect from "../../inputs/Select";
+import HMTextField from "../../inputs/TextField";
 import { Button, Paper, Typography } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import { NULL_MEDICAL_CODE, MEDICAL_CODES } from "./medicalCodes";
-import {DIAGNOSIS_TREATMENT} from "./inputNames";
+import { NULL_MEDICAL_CODE, MEDICAL_CODES } from "../medicalCodes";
+import {DIAGNOSIS_TREATMENT} from "../inputNames";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

@@ -1,5 +1,5 @@
-import FormSection from "../layout/Section";
-import FormikCheckboxedTextField from "../inputs/FormikCheckboxedTextField";
+import FormSection from "../../layout/Section";
+import FormikCheckboxedTextField from "../../inputs/FormikCheckboxedTextField";
 import {
   PARENTS_SEPARATED,
   PARENTS_SEPARATED_DESCRIPTION,
@@ -9,7 +9,7 @@ import {
   PARENTS_DIED_DESCRIPTION,
   STEP_FAMILY,
   STEP_FAMILY_DESCRIPTION,
-} from "./inputNames";
+} from "../inputNames";
 
 export default function FamilySection({ formikBag }) {
   return (

@@ -1,7 +1,7 @@
-import FormikTextField from "../inputs/FormikTextField";
-import FormSection from "../layout/Section";
-import FormikDatePicker from "../inputs/FormikDatePicker";
-import { ADMISSION_DATE, ADMITTOR_NAME } from "./inputNames";
+import FormikTextField from "../../inputs/FormikTextField";
+import FormSection from "../../layout/Section";
+import FormikDatePicker from "../../inputs/FormikDatePicker";
+import { ADMISSION_DATE, ADMITTOR_NAME } from "../inputNames";
 
 export default function PatientAdmissionSection({ formikBag }) {
   return (

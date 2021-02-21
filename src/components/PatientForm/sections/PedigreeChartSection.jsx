@@ -1,12 +1,12 @@
-import FormSection from "../layout/Section";
-import PedigreeChart from "../PedigreeChart";
+import FormSection from "../../layout/Section";
+import PedigreeChart from "../../PedigreeChart";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Dialog, Button, Slide } from "@material-ui/core";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import { PEDIGREE_CHART } from "./inputNames";
+import { PEDIGREE_CHART } from "../inputNames";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,

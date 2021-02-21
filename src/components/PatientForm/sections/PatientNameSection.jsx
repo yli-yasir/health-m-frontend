@@ -1,6 +1,6 @@
-import FormikTextField from "../inputs/FormikTextField";
-import Section from "../layout/Section";
-import { FULL_NAME } from "./inputNames";
+import FormikTextField from "../../inputs/FormikTextField";
+import Section from "../../layout/Section";
+import { FULL_NAME } from "../inputNames";
 
 export default function PatientNameSection({ formikBag }) {
   return (

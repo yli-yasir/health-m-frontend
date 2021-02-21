@@ -1,7 +1,7 @@
-import FormikTextField from "../inputs/FormikTextField";
-import FormSection from "../layout/Section";
-import FormikPhoneField from "../inputs/FormikPhoneField";
-import { ADDRESS, EMAIL, PHONE_NUMBER } from "./inputNames";
+import FormikTextField from "../../inputs/FormikTextField";
+import FormSection from "../../layout/Section";
+import FormikPhoneField from "../../inputs/FormikPhoneField";
+import { ADDRESS, EMAIL, PHONE_NUMBER } from "../inputNames";
 
 export default function PatientContactInfoSection({ formikBag }) {
   return (
