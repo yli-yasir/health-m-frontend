@@ -2,15 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import PatientNameSection from "./PatientNameSection";
-import PatientBodySection from "./PatientBodySection";
-import PedigreeChartSection from "./PedigreeChartSection";
-import PatientContactInfoSection from "./PatientContactInfoSection";
 import { getTouchedErrors } from "../../utils/formikUtils";
-import PatientAdmissionSection from "./PatientAdmissionSection";
-import FamilySection from "./FamilySection";
-import DoctorNotesSection from "./DoctorNotesSection";
-import DiagnosisTreatmentSection from "./DiagnosisTreatmentSection";
+import sections from "./sections";
 import validationSchema from "./validationSchema";
 import ProgressButton from "../inputs/ProgressButton";
 import HMSnackbar from "../Snackbar";
@@ -32,7 +25,7 @@ export default function PatientFormContainer(props) {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {patientForm}
+        {renderPatientForm}
       </Formik>
       {success && <Redirect to={onSuccessRedirect} />}
       <HMSnackbar
@@ -43,7 +36,7 @@ export default function PatientFormContainer(props) {
   );
 }
 
-function patientForm({
+function renderPatientForm({
   values,
   errors,
   touched,
@@ -53,7 +46,6 @@ function patientForm({
   isSubmitting,
   setFieldValue,
 }) {
-
   const formikBag = {
     values,
     errors: getTouchedErrors(touched, errors),
@@ -65,14 +57,9 @@ function patientForm({
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form onSubmit={handleSubmit}>
-        <PatientNameSection formikBag={formikBag} />
-        <PatientBodySection formikBag={formikBag} />
-        <PatientContactInfoSection formikBag={formikBag} />
-        <PatientAdmissionSection formikBag={formikBag}/>
-        <FamilySection formikBag={formikBag} />
-        <PedigreeChartSection formikBag={formikBag}/>
-        <DiagnosisTreatmentSection formikBag={formikBag} />
-        <DoctorNotesSection formikBag={formikBag} />
+        {sections.map((Section) => (
+          <Section formikBag={formikBag} />
+        ))}
         <ProgressButton
           type="submit"
           color="primary"
