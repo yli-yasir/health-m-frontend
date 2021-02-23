@@ -1,5 +1,5 @@
 import React from 'react';
-import Snackbar from './Snackbar';
+import Snackbar from '../Snackbar';
 
 import { useState } from "react";
 import {Redirect} from 'react-router-dom';
