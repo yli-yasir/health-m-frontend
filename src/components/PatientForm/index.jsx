@@ -6,33 +6,22 @@ import { getTouchedErrors } from "../../utils/formikUtils";
 import sections from "./sections";
 import validationSchema from "./validationSchema";
 import ProgressButton from "../inputs/ProgressButton";
-import HMSnackbar from "../Snackbar";
-import { Redirect } from "react-router-dom";
+import FeedbackContainer from "../FeedbackContainer";
 
 export default function PatientFormContainer(props) {
-  const {
-    initialValues,
-    onSubmit,
-    feedbackMessage,
-    clearFeedbackMessage,
-    success,
-    onSuccessRedirect,
-  } = props;
+
+  const { initialValues, onSubmit,feedbackMessage } = props;
+
   return (
-    <React.Fragment>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {renderPatientForm}
-      </Formik>
-      {success && <Redirect to={onSuccessRedirect} />}
-      <HMSnackbar
-        clearMessage={clearFeedbackMessage}
-        message={feedbackMessage}
-      />
-    </React.Fragment>
+    <FeedbackContainer message={feedbackMessage}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {renderPatientForm}
+    </Formik>
+    </FeedbackContainer>
   );
 }
 
@@ -46,6 +35,7 @@ function renderPatientForm({
   isSubmitting,
   setFieldValue,
 }) {
+
   const formikBag = {
     values,
     errors: getTouchedErrors(touched, errors),

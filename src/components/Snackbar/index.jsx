@@ -1,17 +1,18 @@
-import { Snackbar } from "@material-ui/core";
-export default function HMSnackbar({ message, clearMessage }) {
+import { Snackbar as MaterialSnackbar } from "@material-ui/core";
+
+export default function Snackbar({open,setOpen,message }) {
   return (
-    <Snackbar
+    <MaterialSnackbar
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      open={Boolean(message)}
+      open={open}
       onClose={(event, reason) => {
         if (reason === "clickaway") {
           return;
         }
-        clearMessage();
+        setOpen(false);
       }}
       message={message}
-      autoHideDuration={6000}
+      autoHideDuration={3000}
     />
   );
 }
