@@ -49,7 +49,7 @@ function renderPatientForm({
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form onSubmit={handleSubmit}>
         {sections.map((Section) => (
-          <Section formikBag={formikBag} />
+          <Section key={Section.name} formikBag={formikBag} />
         ))}
         <ProgressButton
           type="submit"
