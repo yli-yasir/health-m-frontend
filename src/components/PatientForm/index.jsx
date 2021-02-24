@@ -10,18 +10,19 @@ import FeedbackContainer from "../FeedbackContainer";
 
 export default function PatientFormContainer(props) {
 
-  const { initialValues, onSubmit,feedbackMessage } = props;
+  const { initialValues, onSubmit, feedbackMessage, onFeedbackMessageClose } = props;
 
   return (
-    <FeedbackContainer message={feedbackMessage}>
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {renderPatientForm}
-    </Formik>
-    </FeedbackContainer>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {renderPatientForm}
+      </Formik>
+      <Snackbar message={feedbackMessage} onClose={onFeedbackMessageClose} />
+    </>
   );
 }
 

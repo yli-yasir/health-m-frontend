@@ -8,7 +8,7 @@ import {
 } from "./routePaths";
 
 import AddPatient from "../pages/AddPatient";
-import SearchPatients from "../pages/SearchPatients";
+import SearchPatients from "../pages/SeachPatients";
 import ViewPatient from "../pages/ViewPatient";
 import EditPatient from "../pages/EditPatient";
 import Stats from "../pages/Stats";

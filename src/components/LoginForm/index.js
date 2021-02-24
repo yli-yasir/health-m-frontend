@@ -27,7 +27,7 @@ export default function FormikLoginForm(props) {
     setFailMessage,
   ) {
     try {
-      await login(values);
+      // await login(values);
       props.setLoggedIn(true);
     } catch (e) {
       setSubmitting(false);

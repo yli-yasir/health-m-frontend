@@ -11,6 +11,7 @@ import useFetch from "../../hooks/useFetch";
 const initialValues = getInitialValues();
 
 export default function AddPatient() {
+  
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
   const [submitState, handleSubmit] = useFetch(
@@ -25,6 +26,7 @@ export default function AddPatient() {
     }
   );
 
+
   return (
     <Page title="Add Patient">
       <ResponsivePaper>
@@ -32,6 +34,12 @@ export default function AddPatient() {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           feedbackMessage={feedbackMessage}
+          onFeedbackMessageClose={()=>{
+            //Clear the message to close the snackbar
+            setFeedbackMessage("");
+            // Do any further logic here....
+          }
+          }
         />
       </ResponsivePaper>
     </Page>
