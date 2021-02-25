@@ -6,12 +6,15 @@ import Page from "../../components/layout/Page";
 import ResponsivePaper from "../../components/layout/ResponsivePaper";
 import { valuesToPatient } from "../../components/PatientForm/mapping";
 import useFetch from "../../hooks/useFetch";
+import { Redirect } from "react-router-dom";
+import { makePatientLink } from "../../utils/URLUtils";
 
 // Get an object with the initial values.
 const initialValues = getInitialValues();
 
 export default function AddPatient() {
-  
+
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
   const [submitState, handleSubmit] = useFetch(
@@ -19,13 +22,15 @@ export default function AddPatient() {
       const patient = valuesToPatient(values);
       return await addPatient(patient);
     },
-    () =>{
-      submitState.value
-        ? setFeedbackMessage("Patient submitted.")
-        : setFeedbackMessage("Something went wrong.")
+    {
+      onSuccess: () => {
+        setFeedbackMessage("Patient Submitted. Redirecting you...");
+      },
+      onError: () => {
+        setFeedbackMessage("Something went wrong.");
+      },
     }
   );
-
 
   return (
     <Page title="Add Patient">
@@ -34,14 +39,16 @@ export default function AddPatient() {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           feedbackMessage={feedbackMessage}
-          onFeedbackMessageClose={()=>{
+          onFeedbackMessageClose={() => {
             //Clear the message to close the snackbar
             setFeedbackMessage("");
-            // Do any further logic here....
-          }
-          }
+            if (submitState.value) {
+              setShouldRedirect(true);
+            }
+          }}
         />
       </ResponsivePaper>
+      {shouldRedirect && <Redirect to={makePatientLink(submitState.value)} />}
     </Page>
   );
 }

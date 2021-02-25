@@ -8,7 +8,6 @@ export default function FeedbackContainer(props) {
 
   useEffect(() => {
     props.message && setMessageShown(true);
-    console.log(props.message)
   }, [props.message]);
 
   return (

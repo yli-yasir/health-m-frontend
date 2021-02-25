@@ -40,19 +40,17 @@ export default function FormikLoginForm(props) {
   }
 
   return (
-      <FeedbackContainer
-        render={(setFailMessage) => (
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) =>
-              handleSubmit(values, setSubmitting, setFailMessage)
+              handleSubmit(values, setSubmitting)
             }
           >
             {LoginForm}
           </Formik>
-        )}
-      />
+
   );
 }
 
