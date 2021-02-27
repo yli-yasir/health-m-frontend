@@ -1,10 +1,10 @@
 import { useAsyncFn } from "react-use";
 import { useEffect } from "react";
 
-export default function useFetch(asyncFn, callbacks = {}) {
+export default function useFetch(asyncFn, callbacks = {},deps) {
   // useAsyncFn will return state and a callback that handles
   // race conditions, and will only update its state if component is still mounted.
-  const [fetchState, fetchFn] = useAsyncFn(asyncFn);
+  const [fetchState, fetchFn] = useAsyncFn(asyncFn,deps);
 
   useEffect(() => {
     //onLoad

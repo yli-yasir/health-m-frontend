@@ -10,7 +10,6 @@ import {
   TodayOutlined,
   CakeOutlined,
   PageviewOutlined,
-  InvertColorsOffSharp,
   AccountTreeOutlined,
   HealingOutlined,
 } from "@material-ui/icons";
