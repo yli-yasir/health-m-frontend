@@ -9,8 +9,7 @@ import Main from "../components/layout/Main";
 function GuardedApp(props) {
   return (
     <React.Fragment>
-      {!props.loggedIn && <Redirect to={LOGIN_PATH} />}
-      {props.loggedIn && (
+      {props.loggedIn ? (
         <Main>
           <Switch>
             {routes.map((route) => (
@@ -22,6 +21,8 @@ function GuardedApp(props) {
             ))}
           </Switch>
         </Main>
+      ) : (
+        <Redirect to={LOGIN_PATH} />
       )}
     </React.Fragment>
   );

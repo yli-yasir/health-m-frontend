@@ -20,21 +20,19 @@ export default function StatsPage() {
   };
 
   function filterChartData(patientFilter) {
-
-    if (!patientFilter){
+    if (!patientFilter) {
       setChartData(makeChartData(patients));
       return;
-
     }
-    
+
     // A patient matches the filter, if all the values in the
     // patient filter exist in the patient
-    const filterMatch = (patient) =>{
+    const filterMatch = (patient) => {
       const matchingValues = Object.keys(patientFilter).filter(
-        (key) => patientFilter[key] === patient[key]
-      )
+        key => patientFilter[key] === patient[key]
+      );
       return matchingValues.length === Object.keys(patientFilter).length;
-      }
+    };
 
     const filteredPatients = patients.filter((patient) => filterMatch(patient));
     setChartData(makeChartData(filteredPatients));
