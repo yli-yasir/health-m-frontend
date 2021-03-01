@@ -18,8 +18,6 @@ export default function SearchPatients() {
 
   const { loading, error } = fetchState;
 
-  const waypointShown = hasMoreResults && !fetchState.loading;
-
   return (
     <Page title="Search Patients">
       <PatientSearchBar />
