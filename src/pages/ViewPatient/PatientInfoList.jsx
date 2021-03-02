@@ -1,73 +1,182 @@
-// import { List, Typography, Dialog } from "@material-ui/core";
-// import InfoItem from "../../components/List/InfoItem";
-// import { makeStyles } from "@material-ui/core/styles";
-// import { useState } from "react";
-// import { capitalizeFirstLetter } from "../../utils/stringUtils";
-// import { MailOutline } from "@material-ui/icons";
-// const useStyles = makeStyles((theme) => ({
-//   infoList: {
-//     width: "100%",
-//   },
-// }));
+import {
+  PermIdentityOutlined,
+  AssignmentOutlined,
+  AssessmentOutlined,
+  PermPhoneMsgOutlined,
+  LocationOnOutlined,
+  EmailOutlined,
+  EventAvailableOutlined,
+  TodayOutlined,
+  CakeOutlined,
+  PageviewOutlined,
+  AccountTreeOutlined,
+  HealingOutlined,
+} from "@material-ui/icons";
+import { List, Button } from "@material-ui/core";
+import InfoItem from "../../components/List/InfoItem";
+import { makeStyles } from "@material-ui/core/styles";
+import { useState, Fragment } from "react";
+import StaticPedigreeChartDialog from "../../components/PedigreeChart/StaticPedigreeChartDialog";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
-// export default function PatientInfoList({ patient }) {
-//   const classes = useStyles();
+const useStyles = makeStyles((theme) => ({
+  infoList: {
+    width: "100%",
+  },
+}));
 
-//   const [isPedigreeChartDialogOpen, setPedigreeChartDialogOpen] = useState(
-//     false
-//   );
-//     console.log(InfoItem)
-//   return (
-//     <List className={classes.infoList}>
+export default function PatientInfoList(props) {
+  const classes = useStyles();
 
-//       {/* {Object.keys(patient).map(
-//         (key) =>
-//           fieldMeta[key] &&  (
-//             <InfoItem
-//               key={key}
-//               icon={fieldMeta[key].icon}
-//               title={fieldMeta[key].label}
-//             ></InfoItem>
-//           )
-//       )}
+  const [isPedigreeChartDialogOpen, setPedigreeChartDialogOpen] = useState(
+    false
+  );
 
-//       {/* <InfoItem */}
-//         icon={AccountTreeOutlined}
-//         title="Pedigree Chart:"
-//         content={
-//           <Button
-//             variant="outlined"
-//             onClick={() => setPedigreeChartDialogOpen(true)}
-//           >
-//             View Chart
-//           </Button>
-//         }
-//       />
+  const {
+    fullName,
+    gender,
+    birthDate,
+    bodyWeight,
+    address,
+    phoneNumber,
+    email,
+    admissionDate,
+    admittorName,
+    parentsSeparated,
+    parentsSeparatedDescription,
+    parentsDied,
+    parentsDiedDescription,
+    parentsDivorced,
+    parentsDivorcedDescription,
+    stepFamily,
+    stepFamilyDescription,
+    pedigreeChart,
+    diagnosisTreatment,
+  } = props.patient;
 
-//       <Dialog
-//         open={isPedigreeChartDialogOpen}
-//         onClose={() => {
-//           setPedigreeChartDialogOpen(false);
-//         }}
-//       >
-//         <StaticPedigreeChart
-//           chartData={patient.pedigreeChart}
-//           failComponent={
-//             <Box p={2}>
-//               <Typography variant="subtitle1">Not Available</Typography>
-//             </Box>
-//           }
-//         />
-//       </Dialog>
+  return (
+    <Fragment>
+      <List className={classes.infoList}>
+        <InfoItem
+          icon={AssignmentOutlined}
+          title="Full Name:"
+          content={fullName}
+        />
 
-//       {Object.keys(patient.diagnosisTreatment).map((key) => (
-//         <InfoItem
-//           key={key}
-//           icon={HealingOutlined}
-//           title={key}
-//           content={patient.diagnosisTreatment[key] || "No Treatment."}
-//         />
-//       ))} */}
-//     </List>
-//   );
-// }
+        <InfoItem
+          icon={PermIdentityOutlined}
+          title="Gender:"
+          content={gender ? capitalizeFirstLetter(gender) : ""}
+        />
+
+        <InfoItem
+          icon={CakeOutlined}
+          title="Birthdate:"
+          content={new Date(birthDate).toDateString()}
+        />
+
+        <InfoItem
+          icon={AssessmentOutlined}
+          title="Weight:"
+          content={`${bodyWeight} Kg`}
+        />
+
+        <InfoItem
+          icon={LocationOnOutlined}
+          title="Address:"
+          content={address}
+        />
+
+        <InfoItem
+          icon={PermPhoneMsgOutlined}
+          title="Phone:"
+          content={phoneNumber}
+        />
+
+        <InfoItem icon={EmailOutlined} title="Email:" content={email} />
+
+        <InfoItem
+          icon={TodayOutlined}
+          title="Admission Date:"
+          content={new Date(admissionDate).toDateString()}
+        />
+
+        <InfoItem
+          icon={EventAvailableOutlined}
+          title="Admittor Name:"
+          content={admittorName}
+        />
+
+        <InfoItem
+          icon={PageviewOutlined}
+          title="Parent Separation:"
+          content={
+            parentsSeparated
+              ? parentsSeparatedDescription || "Parents are separated."
+              : "Parents are not separated."
+          }
+        />
+
+        <InfoItem
+          icon={PageviewOutlined}
+          title="Parents Divorce:"
+          content={
+            parentsDivorced
+              ? parentsDivorcedDescription || "Parents are divorced."
+              : "Parents are not divorced."
+          }
+        />
+
+        <InfoItem
+          icon={PageviewOutlined}
+          title="Parents Death:"
+          content={
+            parentsDied
+              ? parentsDiedDescription || "Death has occured."
+              : "Death has not occured."
+          }
+        />
+
+        <InfoItem
+          icon={PageviewOutlined}
+          title="Stepfamily:"
+          content={
+            stepFamily
+              ? stepFamilyDescription || "Stepfamily members exist."
+              : "No stepfamily members exist."
+          }
+        />
+
+        <InfoItem
+          icon={AccountTreeOutlined}
+          title="Pedigree Chart:"
+          content={
+            <Button
+              variant="outlined"
+              onClick={() => setPedigreeChartDialogOpen(true)}
+            >
+              View Chart
+            </Button>
+          }
+        />
+
+        {Object.keys(diagnosisTreatment).map((key) => (
+          <InfoItem
+            key={key}
+            icon={HealingOutlined}
+            title={key}
+            content={diagnosisTreatment[key] || "No Treatment."}
+          />
+        ))}
+      </List>
+
+      <StaticPedigreeChartDialog
+        isOpen={isPedigreeChartDialogOpen}
+        onClose={() => {
+          setPedigreeChartDialogOpen(false);
+        }}
+        chartData={pedigreeChart}
+      />
+    </Fragment>
+  );
+}

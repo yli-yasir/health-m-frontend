@@ -9,7 +9,6 @@ import { InView } from "react-intersection-observer";
 
 export default function SearchPatients() {
   const {
-    page,
     setPage,
     totalResults,
     fetchState,
@@ -26,13 +25,13 @@ export default function SearchPatients() {
         {!loading && totalResults.length === 0 && (
           <Typography variant="caption">No results</Typography>
         )}
-        {!loading && hasMoreResults && (
-          <InView
-            as="div"
-            onChange={(inView) => inView && setPage((page) => page + 1)}
-          />
-        )}
       </LoadingBox>
+      {!loading && hasMoreResults && (
+        <InView
+          as="div"
+          onChange={(inView) => inView && setPage((page) => page + 1)}
+        />
+      )}
     </Page>
   );
 }
