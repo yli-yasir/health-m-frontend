@@ -57,6 +57,7 @@ export default function PatientInfoList(props) {
   return (
     <Fragment>
       <List className={classes.infoList}>
+        {/* Not using map because generated InfoItem content prop is not uniform. */}
         <InfoItem
           icon={AssignmentOutlined}
           title="Full Name:"

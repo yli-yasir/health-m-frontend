@@ -22,7 +22,6 @@ export async function addPatient(patient) {
 
 export async function getPatient(id) {
   const res = await axiosWithCredentials.get(`${BASE_URL}/patients/${id}`);
-  console.log(res.data);
   return res.data;
 }
 
