@@ -16,15 +16,14 @@ export default function DeletePatientDialog({
   confirmationWord
 }) {
   
-  const [currentConfirmationWord, setCurrentConfirmationWord] = useState("");
+  const [enteredConfirmationWord, setEnteredConfirmationWord] = useState("");
 
   return (
     <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Are you sure?</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please confirm that you would like to delete this patient by entering
-          the patients email.
+          Please confirm that you would like to delete this patient by entering <b>{confirmationWord}</b>
         </DialogContentText>
         <TextField
           autoFocus
@@ -32,15 +31,15 @@ export default function DeletePatientDialog({
           label="Patient Email Address"
           type="email"
           fullWidth
-          value={currentConfirmationWord}
-          onChange={(e)=> setCurrentConfirmationWord(e.target.value)}
+          value={enteredConfirmationWord}
+          onChange={(e)=> setEnteredConfirmationWord(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button disabled={currentConfirmationWord!==confirmationWord} onClick={onDelete} color="primary">
+        <Button disabled={enteredConfirmationWord!==confirmationWord} onClick={onDelete} color="primary">
           Delete
         </Button>
       </DialogActions>

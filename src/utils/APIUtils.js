@@ -26,12 +26,12 @@ export async function getPatient(id) {
 }
 
 export async function updatePatient(id,update) {
-  await axiosWithCredentials.patch(`${BASE_URL}/patients/${id}`,update);
+  return await axiosWithCredentials.patch(`${BASE_URL}/patients/${id}`,update);
   
 }
 
 export async function deletePatient(id) {
-  await axiosWithCredentials.delete(`${BASE_URL}/patients/${id}`)
+  return await axiosWithCredentials.delete(`${BASE_URL}/patients/${id}`)
 
 }
 
