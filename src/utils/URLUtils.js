@@ -1,4 +1,4 @@
-import {SEARCH_PATH} from "../App/routePaths";
+import { SEARCH_PATH } from "../App/routePaths";
 
 export function buildQueryString(oldQueryString, options) {
   let params = new URLSearchParams(oldQueryString);
@@ -18,9 +18,13 @@ export function getParamValue(queryString, param) {
 }
 
 export function makePatientSearchLink(term) {
-    return `/search?q=${term}`;
+  return `/search?q=${term}`;
 }
 
-export function makePatientLink(patientId){
-  return `/patients/${patientId}`
+export function makePatientLink(patientId) {
+  return `/patients/${patientId}`;
+}
+
+export function makePatientEditLink(patientId) {
+  return `${makePatientLink(patientId)}/edit`;
 }

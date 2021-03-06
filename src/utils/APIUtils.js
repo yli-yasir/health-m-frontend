@@ -14,9 +14,8 @@ export async function searchPatients(term, limit, page) {
 export async function addPatient(patient) {
   const res = await axiosWithCredentials.post(`${BASE_URL}/patients`, patient);
   let patientId;
-  if (res.headers.location) {
-    patientId = res.headers.location.match(/[^/]+$/g)[0];
-  }
+  //Extract the id out of the response location header
+  patientId = res.headers.location.match(/[^/]+$/g)[0];
   return patientId;
 }
 

@@ -33,7 +33,7 @@ export default function ViewPatient() {
 
   const { id } = useParams();
 
-  const fetchState = useAsync(async () => getPatient(id), [id]);
+  const fetchState = useAsync(async () => await getPatient(id), [id]);
 
   const { value: patient, loading, error } = fetchState;
 
