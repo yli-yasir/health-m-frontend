@@ -11,9 +11,7 @@ import Snackbar from "../Snackbar";
 export default function PatientFormContainer(props) {
   const {
     initialValues,
-    onSubmit,
-    feedbackMessage,
-    onFeedbackMessageClose,
+    onSubmit
   } = props;
 
   return (
@@ -25,7 +23,6 @@ export default function PatientFormContainer(props) {
       >
         {renderPatientForm}
       </Formik>
-      <Snackbar message={feedbackMessage} onClose={onFeedbackMessageClose} />
     </>
   );
 }

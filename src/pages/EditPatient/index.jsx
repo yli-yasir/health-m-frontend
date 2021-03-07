@@ -1,51 +1,66 @@
 import PatientForm from "../../components/PatientForm";
-import { updatePatient, getPatient } from "../../utils/APIUtils";
+import { updatePatient as upPatient } from "../../utils/APIUtils";
 import React, { useState } from "react";
-import {
-  valuesToPatient,
-  patientToValues,
-} from "../../components/PatientForm/mapping";
-import { useParams } from "react-router-dom";
-import Loader from "../../components/Loader";
+import { valuesToPatient } from "../../components/PatientForm/mapping";
+import { Redirect, useParams } from "react-router-dom";
+import Page from "../../components/layout/Page";
 import ResponsivePaper from "../../components/layout/ResponsivePaper";
+import usePatientInputValues from "./usePatientInputValues";
+import { makePatientLink } from "../../utils/URLUtils";
+import useFetch from "../../hooks/useFetch";
+import LoadingBox from "../../components/LoadingBox";
+import Snackbar from "../../components/Snackbar";
 
 export default function EditPatient() {
-  const { id: patientId } = useParams();
+  const { id } = useParams();
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [success, setSuccess] = useState(false);
 
-  async function handleSubmit(values, { setSubmitting }) {
-    const patient = valuesToPatient(values);
-    try {
-      await updatePatient(patientId,patient);
-      setSuccess(true);
-    } catch (e) {
-      console.error(e);
-      setFeedbackMessage("Something went wrong!");
-      setSubmitting(false);
-    }
-  }
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  const [patientLoadState, patientInputValues] = usePatientInputValues(id);
+
+  const {
+    loading: isPatientLoading,
+    error: patientLoadError,
+  } = patientLoadState;
+
+  const { patientUpdateState, updatePatient } = useFetch(
+    async (inputValues) => {
+      const patient = valuesToPatient(inputValues);
+      return await upPatient(id, patient);
+    },
+    {
+      onSuccess: () =>
+        setFeedbackMessage("Patient updated! Redirecting you..."),
+      onError: () => setFeedbackMessage("Something went wrong!"),
+    },
+    [id]
+  );
 
   return (
-    <ResponsivePaper>
-      <Loader
-        load={async () => await getPatient(patientId)}
-        deps={[patientId]}
-        render={(patient) => (
-          <PatientForm
-            initialValues={patientToValues(patient)}
-            onSubmit={handleSubmit}
-            feedbackMessage={feedbackMessage}
-            clearFeedbackMessage={() => setFeedbackMessage("")}
-            success={success}
-            onSuccessRedirect={{
-              pathname: `/patients/${patientId}`,
-              state: { message: "Patient updated successfully!" },
-            }}
-          />
-        )}
-      />
-    </ResponsivePaper>
+    <Page title="Edit Patient">
+      <ResponsivePaper>
+        <LoadingBox loading={isPatientLoading} error={patientLoadError}>
+          {patientInputValues && (
+            <PatientForm
+              initialValues={patientInputValues}
+              onSubmit={updatePatient}
+            />
+          )}
+        </LoadingBox>
+        <Snackbar
+          message={feedbackMessage}
+          onClose={() => {
+            //Clear the message to close the snackbar
+            setFeedbackMessage("");
+            if (patientUpdateState.value) {
+              setShouldRedirect(true);
+            }
+          }}
+        />
+        {shouldRedirect && <Redirect to={makePatientLink(id)} />}
+      </ResponsivePaper>
+    </Page>
   );
 }

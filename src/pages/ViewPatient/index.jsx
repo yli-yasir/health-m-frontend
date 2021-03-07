@@ -14,6 +14,7 @@ import PatientControls from "./PatientControls";
 const useStyles = makeStyles((theme) => ({
   paper: { position: "relative" },
   patientImg: {
+    padding: theme.spacing(1),
     objectFit: "cover",
     backgroundColor: theme.palette.grey[200],
     borderRadius: theme.spacing(1),
