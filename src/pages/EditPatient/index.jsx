@@ -25,7 +25,7 @@ export default function EditPatient() {
     error: patientLoadError,
   } = patientLoadState;
 
-  const { patientUpdateState, updatePatient } = useFetch(
+  const [ patientUpdateState, updatePatient ] = useFetch(
     async (inputValues) => {
       const patient = valuesToPatient(inputValues);
       return await upPatient(id, patient);
@@ -40,7 +40,7 @@ export default function EditPatient() {
 
   return (
     <Page title="Edit Patient">
-      <ResponsivePaper>
+      <ResponsivePaper centerContent>
         <LoadingBox loading={isPatientLoading} error={patientLoadError}>
           {patientInputValues && (
             <PatientForm
@@ -49,6 +49,8 @@ export default function EditPatient() {
             />
           )}
         </LoadingBox>
+        </ResponsivePaper>
+
         <Snackbar
           message={feedbackMessage}
           onClose={() => {
@@ -60,7 +62,6 @@ export default function EditPatient() {
           }}
         />
         {shouldRedirect && <Redirect to={makePatientLink(id)} />}
-      </ResponsivePaper>
     </Page>
   );
 }

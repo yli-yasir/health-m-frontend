@@ -49,6 +49,7 @@ function renderPatientForm({
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <form
+      style={{width:"100%"}}
         onSubmit={(e) => {
           e.preventDefault();
           if (!isValid) {
