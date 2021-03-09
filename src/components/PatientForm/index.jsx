@@ -48,6 +48,7 @@ function renderPatientForm({
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      {/* Shouldn't use inline CSS / not Scalable etc. */}
       <form
       style={{width:"100%"}}
         onSubmit={(e) => {
