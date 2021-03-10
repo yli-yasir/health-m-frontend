@@ -1,5 +1,6 @@
 
 export const makeChartData = (patients) => {
+  
   const [addedMedicalCodes, medicalCodeCounts] = _getMedicalCodeData(patients);
 
   const [backgroundColors, borderColors] = _getMedicalCodeColors(
