@@ -55,9 +55,8 @@ function _getMedicalCodeData(patients) {
 }
 
 // Returns a an object which contains
-// First element in the pair, is an array of background colors
-// Second element in the pair, is an array of border colors
-// data in both elements corresponds through their indexes
+// an array of background colors
+// an array of border colors
 function _getMedicalCodeColors(medicalCodes) {
   const medicalCodeColors = [];
   const medicalCodeBorderColors = [];
