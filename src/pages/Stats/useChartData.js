@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAsync } from "react-use";
 import { searchPatients } from "../../utils/APIUtils";
-import { makeChartData } from "../../utils/chartUtils";
+import { makeChartData } from "./chartUtils";
 
-export default function useChartData(filter) {
+export default function useChartData(isFilterActive,filter) {
   const patientsLoadState = useAsync(async () => await searchPatients(), []);
 
   const { value: patients } = patientsLoadState;
@@ -12,14 +12,15 @@ export default function useChartData(filter) {
 
   useEffect(() => {
     if (patients) {
-      const filteredPatients = filterPatients(patients, filter);
-      const chartData = makeChartData(filteredPatients);
+      const basePatients = isFilterActive ?  filterPatients(patients, filter) : patients;
+      const chartData = makeChartData(basePatients);
       setChartData(chartData);
     }
-  }, [patients,filter]);
+  }, [patients,isFilterActive,filter]);
 
   return [patientsLoadState, chartData];
 }
+
 
 function filterPatients(patients, filter) {
   if (!filter) {
@@ -39,6 +40,5 @@ function filterPatients(patients, filter) {
   const filteredPatients = patients.filter((patient) =>
     isPatientMatch(patient)
   );
-
   return filteredPatients;
 }
