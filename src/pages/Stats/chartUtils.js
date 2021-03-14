@@ -1,72 +1,63 @@
 
 export function makeChartData(patients) {
 
-  const { uniqueMedicalCodes, medicalCodeCounts } = _getMedicalCodeData(patients);
-
+  const medicalCodeCount = _getMedicalCodeCount(patients);
+  const labels = Object.keys(medicalCodeCount);
+  const data = Object.values(medicalCodeCount);
   const { medicalCodeColors, medicalCodeBorderColors } = _getMedicalCodeColors(
-    uniqueMedicalCodes
+    labels.length
   );
 
-  const chartData = uniqueMedicalCodes.length > 0 ?  {
-    labels: uniqueMedicalCodes,
+  const chartData = labels.length > 0 ? {
+    labels,
     datasets: [
       {
         label: "Patients",
-        data: medicalCodeCounts,
+        data,
         backgroundColor: medicalCodeColors,
         borderColor: medicalCodeBorderColors,
         borderWidth: 1,
       },
     ],
   } :
-  blankChartData
+    blankChartData
 
   return chartData;
 };
 
 
 // Returns an object which contains
-// an array containing unique medical code strings.
-// an array containing the count of the medical code with the same index in the first array. 
-function _getMedicalCodeData(patients) {
-  const uniqueMedicalCodes = [];
-  const medicalCodeCounts = [];
+// medicalCode as a key, and the number of occurences as a value.
+// NEED TO IMPROVE READABILITY
+function _getMedicalCodeCount(patients) {
+
+  const medicalCodesCount = {};
   //For each patient
-  for (let patientIndex = 0; patientIndex < patients.length; patientIndex++) {
-    const patient = patients[patientIndex];
-    const patientMedicalCodes = Object.keys(patient.diagnosisTreatment);
-    // For each medical code this patient has
-    for (let medicalCodeIndex = 0; medicalCodeIndex < patientMedicalCodes.length; medicalCodeIndex++) {
-      const medicalCode = patientMedicalCodes[medicalCodeIndex];
-      const indexInUnique = uniqueMedicalCodes.indexOf(medicalCode);
-      // If this medical code hasn't been added  yet
-      if (indexInUnique < 0) {
-        uniqueMedicalCodes.push(medicalCode);
-        medicalCodeCounts.push(1);
-      }
-      //If the medical code had already been added before
-      else {
-        medicalCodeCounts[indexInUnique]++;
-      }
+  for (let i = 0; i < patients.length; i++) {
+    const patientMedicalCodes = Object.keys(patients[i].diagnosisTreatment);
+    for (let j = 0; j < patientMedicalCodes.length; j++) {
+      const patientMedicalCode = patientMedicalCodes[j];
+      const oldCount = medicalCodesCount[patientMedicalCode]
+      medicalCodesCount[patientMedicalCode] = oldCount ?
+        oldCount + 1 : 1;
     }
   }
-  return { uniqueMedicalCodes, medicalCodeCounts }
-
+  return medicalCodesCount;
 }
 
 // Returns a an object which contains
 // an array of background colors
 // an array of border colors
-function _getMedicalCodeColors(medicalCodes) {
+function _getMedicalCodeColors(colorCount) {
   const medicalCodeColors = [];
   const medicalCodeBorderColors = [];
 
-  for (let i = 0; i < medicalCodes.length; i++) {
+  for (let i = 0; i < colorCount; i++) {
     medicalCodeColors.push(
-      `hsla(${360 * (i / medicalCodes.length)},100%,60%,0.2)`
+      `hsla(${360 * (i / colorCount)},100%,60%,0.2)`
     );
     medicalCodeBorderColors.push(
-      `hsl(${360 * (i / medicalCodes.length)},100%,60%,1)`
+      `hsl(${360 * (i / colorCount)},100%,60%,1)`
     );
   }
   return { medicalCodeColors, medicalCodeBorderColors };
