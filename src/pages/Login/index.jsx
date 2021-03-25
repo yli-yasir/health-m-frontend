@@ -1,10 +1,9 @@
-import { Paper, Box } from "@material-ui/core";
+import { Paper, Box,Slide, Typography } from "@material-ui/core";
 import LoginForm from "../../components/LoginForm";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/icons/Logo";
-import { connect } from "react-redux";
-import { setLoggedIn } from "../../redux/actions";
 import {Redirect} from "react-router-dom";
+import {SEARCH_PATH} from "../../App/routePaths";
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -17,9 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginPage(props) {
+export default function LoginPage(props) {
   const classes = useStyles();
-  console.log(props.loggedIn)
   return (
     <Box
       display="flex"
@@ -28,15 +26,16 @@ function LoginPage(props) {
       height="100vh"
       width="100vw"
     >
-      {props.loggedIn && <Redirect to="/" />}
+      {props.loggedIn && <Redirect to={SEARCH_PATH} />}
+      <Slide direction="down" in={true} timeout={1500}>
       <Paper className={classes.formContainer}>
+        <Typography variant="h2">Health-M</Typography>
         <Logo height="128px" width="128px" />
         <LoginForm setLoggedIn={props.setLoggedIn} />
       </Paper>
+      </Slide>
     </Box>
   );
 }
 
-export default connect((state) => ({ loggedIn: state.loggedIn }), {
-  setLoggedIn,
-})(LoginPage);
+

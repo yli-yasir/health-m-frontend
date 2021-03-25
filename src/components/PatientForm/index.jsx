@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Fragment} from "react";
 import { Formik } from "formik";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -6,7 +6,6 @@ import { getElementWithError, getTouchedErrors } from "../../utils/formikUtils";
 import sections from "./sections";
 import validationSchema from "./validationSchema";
 import ProgressButton from "../inputs/ProgressButton";
-import Snackbar from "../Snackbar";
 
 export default function PatientFormContainer(props) {
   const {
@@ -15,7 +14,7 @@ export default function PatientFormContainer(props) {
   } = props;
 
   return (
-    <>
+    <Fragment>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -23,7 +22,7 @@ export default function PatientFormContainer(props) {
       >
         {renderPatientForm}
       </Formik>
-    </>
+    </Fragment>
   );
 }
 

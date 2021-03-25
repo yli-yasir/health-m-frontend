@@ -27,7 +27,7 @@ export default function SearchResultsContainer({ results }) {
     >
       <TransitionGroup enter={true} component={null}>
         {results.map((patient) => (
-          <Zoom key={patient._id} timeout={500}>
+          <Zoom key={patient._id} timeout={750}>
             <PatientCard patient={patient} />
           </Zoom>
         ))}
