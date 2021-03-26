@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { setLoggedIn } from "../redux/actions";
 import { useAsync } from "react-use";
 import { verifyLoggedIn } from "../utils/APIUtils";
+import LoadingBackdrop from "../components/LoadingBackdrop";
 
 function App(props) {
 
@@ -20,12 +21,14 @@ function App(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Router>
-        <Switch>
-          <Route path={LOGIN_PATH} component={LoginPage} />
-          <GuardedApp loggedIn={props.loggedIn} />
-        </Switch>
-      </Router>
+      {loginVerification.loading ?
+        <LoadingBackdrop open={true}/> :
+        <Router>
+          <Switch>
+            <Route path={LOGIN_PATH} component={LoginPage} />
+            <GuardedApp loggedIn={props.loggedIn} />
+          </Switch>
+        </Router>}
     </React.Fragment>
   );
 }
