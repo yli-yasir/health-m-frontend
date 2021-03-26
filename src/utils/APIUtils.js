@@ -38,4 +38,8 @@ export async function login(credentials){
   return await axiosWithCredentials.post(`${BASE_URL}/login`,credentials);
 }
 
+export async function verifyLoggedIn(){
+  return await axiosWithCredentials.get(`${BASE_URL}/login`);
+}
+
 

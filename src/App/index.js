@@ -4,19 +4,32 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LOGIN_PATH } from "./routePaths";
 import LoginPage from "../pages/Login";
 import GuardedApp from "./GuardedApp";
+import { connect } from "react-redux";
+import { setLoggedIn } from "../redux/actions";
+import { useAsync } from "react-use";
+import { verifyLoggedIn } from "../utils/APIUtils";
 
-function App() {
+function App(props) {
+
+  const loginVerification = useAsync(async () => {
+    const response = await verifyLoggedIn();
+    props.setLoggedIn(true);
+    return response;
+  }, []);
+
   return (
     <React.Fragment>
       <CssBaseline />
       <Router>
         <Switch>
           <Route path={LOGIN_PATH} component={LoginPage} />
-          <GuardedApp />
+          <GuardedApp loggedIn={props.loggedIn} />
         </Switch>
       </Router>
     </React.Fragment>
   );
 }
 
-export default App;
+export default connect((state) => ({ loggedIn: state.loggedIn }), {
+  setLoggedIn,
+})(App);

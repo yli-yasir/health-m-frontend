@@ -3,10 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import routes from "./routes";
 import { LOGIN_PATH } from "./routePaths";
-import { connect } from "react-redux";
 import Main from "../components/layout/Main";
 
-function GuardedApp(props) {
+export default function GuardedApp(props) {
   return (
     <React.Fragment>
       {props.loggedIn ? (
@@ -28,4 +27,3 @@ function GuardedApp(props) {
   );
 }
 
-export default connect((state) => ({ loggedIn: state.loggedIn }))(GuardedApp);

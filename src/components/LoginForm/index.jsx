@@ -12,8 +12,6 @@ import FormikTextField from "../inputs/FormikTextField";
 import Snackbar from "../Snackbar";
 import {SEARCH_PATH} from "../../App/routePaths";
 import {Redirect} from 'react-router-dom';
-import { connect } from "react-redux";
-import { setLoggedIn } from "../../redux/actions";
 import {AUTH_FAIL} from "../../constants/httpStatusCodes";
 const useStyles = makeStyles((theme) => ({
   form: { width: "100%" },
@@ -23,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginFormFormik(props) {
+export default function LoginFormFormik(props) {
 
   const [feedbackMessage, setFeedbackMessage] = useState('')
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -114,6 +112,3 @@ function LoginForm({
 }
 
 
-export default connect((state) => ({ loggedIn: state.loggedIn }), {
-  setLoggedIn,
-})(LoginFormFormik);
