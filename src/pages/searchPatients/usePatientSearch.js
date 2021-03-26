@@ -12,6 +12,7 @@ export default function usePatientSearch() {
 
   //Reset page to 1 when the search term is changed.
   useEffect(() => {
+    setTotalResults([]);
     setPage(1);
   }, [searchTerm]);
 
@@ -24,7 +25,6 @@ export default function usePatientSearch() {
     if (fetchState.value) {
       const newResults = fetchState.value;
       setTotalResults((prevResults) => {
-        prevResults = page === 1 ? [] : prevResults;
         return [...prevResults, ...newResults];
       });
     }

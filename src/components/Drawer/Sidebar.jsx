@@ -1,14 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { NavLink } from "react-router-dom";
-import { AddCircleOutline, BookOutlined } from "@material-ui/icons";
-import ListItemLink from '../List/ListItemLink'
+import { Drawer, Divider, Typography } from "@material-ui/core";
+import Logo from "../icons/Logo";
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: '240px',
@@ -18,9 +11,19 @@ const useStyles = makeStyles((theme) => ({
     width: '240px',
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  logoBar: {
+    ...theme.mixins.toolbar,
+    maxHeight: "64px",
+    display:"flex",
+    padding: theme.spacing(1, 2),
+    alignItems:'center',
+  },
+  logo:{
+    height:'100%',
+    marginRight:theme.spacing(2)
+  },
   activeLink: {
-    color: theme.palette.secondary.main 
+    color: theme.palette.secondary.main
   },
   listItemRoot: {
     color: 'inherit'
@@ -41,8 +44,12 @@ export default function Sidebar(props) {
       anchor="left"
       {...props}
     >
-      <div className={classes.toolbar} />
+      <div className={classes.logoBar} >
+        <Logo className={classes.logo} />
+        <Typography variant="h6">Health-M</Typography>
+      </div>
       <Divider />
       {props.children}
     </Drawer>
-  );}
+  );
+}
