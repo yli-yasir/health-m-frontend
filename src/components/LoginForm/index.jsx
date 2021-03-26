@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginFormFormik(props) {
 
   const [feedbackMessage, setFeedbackMessage] = useState('')
-  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const [submitState, handleSubmit] = useFetch(async (values) => await login(values), {
     onSuccess: () => setFeedbackMessage('Logged in! Redirecting you...'),
@@ -47,14 +46,11 @@ export default function LoginFormFormik(props) {
       >
         {LoginForm}
       </Formik>
-      <Snackbar message={feedbackMessage} onClose={() => {
-        setFeedbackMessage('');
+      <Snackbar message={feedbackMessage} setMessage={setFeedbackMessage} onClose={() => {
         if (submitState.value){
         props.setLoggedIn(true);
-        setShouldRedirect(true);
         }
       }} />
-      {shouldRedirect && <Redirect to={SEARCH_PATH}/>}
     </Fragment>
 
   );

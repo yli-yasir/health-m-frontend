@@ -53,9 +53,8 @@ export default function EditPatient() {
 
         <Snackbar
           message={feedbackMessage}
+          setMessage={setFeedbackMessage}
           onClose={() => {
-            //Clear the message to close the snackbar
-            setFeedbackMessage("");
             if (patientUpdateState.value) {
               setShouldRedirect(true);
             }

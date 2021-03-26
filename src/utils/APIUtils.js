@@ -42,4 +42,7 @@ export async function verifyLoggedIn(){
   return await axiosWithCredentials.get(`${BASE_URL}/login`);
 }
 
+export async function logout(){
+  return await axiosWithCredentials.post(`${BASE_URL}/logout`)
+}
 

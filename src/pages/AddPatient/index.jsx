@@ -39,9 +39,8 @@ export default function AddPatient() {
       </ResponsivePaper>
       <Snackbar
         message={feedbackMessage}
+        setMessage={setFeedbackMessage}
         onClose={() => {
-          //Clear the message to close the snackbar
-          setFeedbackMessage("");
           if (submitState.value) {
             setShouldRedirect(true);
           }

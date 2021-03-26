@@ -77,8 +77,8 @@ export default function PatientControls(props) {
 
       <Snackbar
         message={feedbackMessage}
+        setMessage={setFeedbackMessage}
         onClose={() => {
-          setFeedbackMessage("");
           hasDeleted && setShouldRedirect(true);
         }}
       />

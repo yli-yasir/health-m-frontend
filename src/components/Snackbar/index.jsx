@@ -1,7 +1,7 @@
 import { Snackbar as MaterialSnackbar } from "@material-ui/core";
 
 export default function Snackbar(props) {
-  const { message, duration, onClose, ...otherProps } = props;
+  const { message,setMessage, autoHideDuration, onClose, ...otherProps } = props;
   return (
     <MaterialSnackbar
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
@@ -15,7 +15,11 @@ export default function Snackbar(props) {
         onClose();
       }}
       message={message}
-      autoHideDuration={duration || 3000}
+      autoHideDuration={autoHideDuration || 3000}
+      onClose={()=>{
+        setMessage('');
+        onClose && onClose();
+      }}
       {...otherProps}
     />
   );
