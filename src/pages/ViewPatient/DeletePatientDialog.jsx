@@ -23,7 +23,7 @@ export default function DeletePatientDialog({
       <DialogTitle id="form-dialog-title">Are you sure?</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please confirm that you would like to delete this patient by entering <b>{confirmationWord || 'confirm'}</b>
+          Please confirm that you would like to delete this patient by entering <b>{confirmationWord}</b>
         </DialogContentText>
         <TextField
           autoFocus
