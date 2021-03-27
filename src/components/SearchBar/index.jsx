@@ -1,42 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Autosuggest from "react-autosuggest";
 import SearchInput from "./SearchInput";
 import SuggestionsContainer from "./SuggestionsContainer";
 import Suggestion from "./Suggestion";
-import useAsyncAutoSuggest from "./useAsyncAutoSuggest";
-
-const useStyles = makeStyles((theme) => ({
-  autoSuggestRoot: {
-    position: "relative",
-  },
-}));
+import useAutoSuggestAsync from "./useAutoSuggestAsync";
+import useAutoSuggestTheme from "./useAutoSuggestTheme";
 
 export default function SearchBar({
   value,
   onChange,
   getSuggestions,
   getSuggestionValue,
+  onSuggestionSelected,
+  onSearch,
   placeholder,
-  makeSearchLink,
-  className,
+  className
 }) {
-  const classes = useStyles();
 
-  const { suggestions, setSuggestions, fetchSuggestions } = useAsyncAutoSuggest(
+  const theme = useAutoSuggestTheme();
+
+  const { suggestions, setSuggestions, fetchSuggestions } = useAutoSuggestAsync(
     getSuggestions
   );
 
   return (
     <Autosuggest
-      theme={{
-        container: classes.autoSuggestRoot + (` ${className}` || ""),
-      }}
+      theme={{...theme ,container: `${theme.container} ${className}`}}
       onSuggestionsFetchRequested={fetchSuggestions}
       onSuggestionsClearRequested={() => setSuggestions([])}
       inputProps={{ value, onChange, placeholder }}
       renderInputComponent={(inputProps) => (
-        <SearchInput makeSearchLink={makeSearchLink} {...inputProps} />
+        <SearchInput onSearch={onSearch} {...inputProps} />
       )}
       renderSuggestionsContainer={({ containerProps, children }) => {
         return (
@@ -47,12 +41,12 @@ export default function SearchBar({
       }}
       renderSuggestion={(suggestion) => (
         <Suggestion
-          makeSearchLink={makeSearchLink}
           value={getSuggestionValue(suggestion)}
         />
       )}
       suggestions={suggestions}
       getSuggestionValue={getSuggestionValue}
+      onSuggestionSelected={(e,{suggestionValue}) => onSearch(suggestionValue)}
     />
   );
 }

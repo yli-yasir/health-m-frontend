@@ -7,7 +7,7 @@ import { InputAdornment } from "@material-ui/core";
 
 // Class component because it will be passed a ref.
 const SearchInput = React.forwardRef((props, ref) => {
-  const { makeSearchLink, ...otherProps } = props;
+  const { onSearch, ...otherProps } = props;
 
   const history = useHistory();
 
@@ -15,7 +15,7 @@ const SearchInput = React.forwardRef((props, ref) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        history.push(makeSearchLink(props.value));
+        onSearch(props.value);
       }}
     >
       <TextField
@@ -24,7 +24,7 @@ const SearchInput = React.forwardRef((props, ref) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton component={Link} to={makeSearchLink(props.value)}>
+              <IconButton onClick={()=>onSearch(props.value)}>
                 <SearchIcon color="primary" />
               </IconButton>
             </InputAdornment>

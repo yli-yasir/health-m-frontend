@@ -3,6 +3,7 @@ import { searchPatients } from "../../utils/APIUtils";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { makePatientSearchLink } from "../../utils/URLUtils";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -24,15 +25,17 @@ export default function PatientSearchBar() {
 
   const [value, setValue] = useState("");
 
+  const history = useHistory();
+
   return (
     <SearchBar
       className={classes.searchBar}
       placeholder="Patient Name or Email"
       value={value}
       onChange={(e, { newValue }) => setValue(newValue)}
+      onSearch={(inputValue) => history.push(makePatientSearchLink(inputValue)) }
       getSuggestions={async (value) => await searchPatients(value, 5, 1)}
       getSuggestionValue={(patient) => patient.fullName}
-      makeSearchLink={makePatientSearchLink}
     />
   );
 }
