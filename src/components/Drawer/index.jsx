@@ -7,19 +7,12 @@ import navLinks from "./navLinks";
 import { connect } from 'react-redux';
 import { setLoggedIn } from "../../redux/actions";
 import { ExitToApp } from '@material-ui/icons'
-import useFetch from "../../hooks/useFetch";
 import { logout } from "../../utils/APIUtils";
 import Snackbar from "../Snackbar";
 
 function Drawer(props) {
 
   const [feedbackMessage, setFeedbackMessage] = useState('');
-
-  const [logoutState, requestLogout] = useFetch(async () => await logout(), {
-    onLoad: () => setFeedbackMessage("Logging out..."),
-    onSuccess: () => setFeedbackMessage("Logged out! Redirecting you..."),
-    onError: () => setFeedbackMessage("Something went wrong")
-  }, [])
 
   return (
     <Sidebar open={props.open} onClose={props.toggleDrawer}>
@@ -34,16 +27,16 @@ function Drawer(props) {
         ))}
         <ListItem
           button
-          onClick={requestLogout}
+          onClick={() => { 
+            logout();
+            setFeedbackMessage("Logged out! Redirecting you...");
+          }}
           icon={<ExitToApp />}
           text="Logout" />
-        <Snackbar message={feedbackMessage} setMessage={setFeedbackMessage}
-          autoHideDuration={1000}
-          onClose={() => {
-            if (logoutState.value) {
-              props.setLoggedIn(false)
-            }
-          }} />
+      <Snackbar message={feedbackMessage} setMessage={setFeedbackMessage} onClose={() => {
+        props.setLoggedIn(false);
+        
+      }} />
       </List>
     </Sidebar>
   );

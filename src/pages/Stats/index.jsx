@@ -28,7 +28,7 @@ export default function StatsPage() {
     <Page title="Stats">
       <ResponsivePaper centerContent={true}>
         <LoadingBox loading={loading} error={error}>
-          {chartData && (
+          {!loading && chartData && (
             <Fragment>
               <Typography variant="h5">Medical Codes</Typography>
               <Doughnut data={chartData} />

@@ -10,16 +10,11 @@ export default function Snackbar(props) {
         if (reason === "clickaway") {
           return;
         }
-        //This function should set the message to a falsy value
-        // to close the snackbar
-        onClose();
-      }}
-      message={message}
-      autoHideDuration={autoHideDuration || 3000}
-      onClose={()=>{
         setMessage('');
         onClose && onClose();
       }}
+      message={message}
+      autoHideDuration={autoHideDuration || 3000}
       {...otherProps}
     />
   );

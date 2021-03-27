@@ -47,6 +47,7 @@ export default function LoginFormFormik(props) {
         {LoginForm}
       </Formik>
       <Snackbar message={feedbackMessage} setMessage={setFeedbackMessage} onClose={() => {
+        console.log('hi')
         if (submitState.value){
         props.setLoggedIn(true);
         }
