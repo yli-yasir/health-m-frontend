@@ -8,11 +8,14 @@ const useStyles = makeStyles((theme) => ({
     backdrop: {
         alignItems: "flex-start",
         paddingTop: theme.spacing(12),
+        backgroundColor: theme.palette.primary.dark,
+
     },
     content:{
         display:"flex",
         flexDirection:"column",
         alignItems:"center",
+        color:'white'
     },
     progress:{
         width:"75%",
