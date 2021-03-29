@@ -21,7 +21,7 @@ function App(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      {true ?
+      {loginVerification.loading ?
         <LoadingBackdrop open={true}/> :
         <Router>
           <Switch>
