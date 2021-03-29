@@ -30,13 +30,10 @@ function Drawer(props) {
           onClick={() => { 
             logout();
             setFeedbackMessage("Logged out! Redirecting you...");
+            props.setLoggedIn(false);
           }}
           icon={<ExitToApp />}
           text="Logout" />
-      <Snackbar message={feedbackMessage} setMessage={setFeedbackMessage} onClose={() => {
-        props.setLoggedIn(false);
-        
-      }} />
       </List>
     </Sidebar>
   );
