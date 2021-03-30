@@ -32,7 +32,7 @@ export default function StatsPage() {
             <Fragment>
               <Typography variant="h5">Medical Codes</Typography>
               <Doughnut data={chartData} />
-              <Box display="flex" width="100%" flexDirection="row-reverse">
+              <Box mt={4} display="flex" width="100%" flexDirection="row-reverse">
               <FilterPanel
                 filter={filter}
                 setFilter={setFilter}

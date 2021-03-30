@@ -8,11 +8,8 @@ import { connect } from 'react-redux';
 import { setLoggedIn } from "../../redux/actions";
 import { ExitToApp } from '@material-ui/icons'
 import { logout } from "../../utils/APIUtils";
-import Snackbar from "../Snackbar";
 
 function Drawer(props) {
-
-  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   return (
     <Sidebar open={props.open} onClose={props.toggleDrawer}>
@@ -29,7 +26,6 @@ function Drawer(props) {
           button
           onClick={() => { 
             logout();
-            setFeedbackMessage("Logged out! Redirecting you...");
             props.setLoggedIn(false);
           }}
           icon={<ExitToApp />}

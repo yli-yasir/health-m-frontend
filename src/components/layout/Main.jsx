@@ -9,7 +9,6 @@ function Main(props) {
       flexDirection="column"
       alignItems="center"
       width="100%"
-      p={2}
       {...otherProps}
     >{children}</Box>
   );

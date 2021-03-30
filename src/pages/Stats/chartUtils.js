@@ -15,6 +15,8 @@ export function makeChartData(patients) {
         label: "Patients",
         data,
         backgroundColor: medicalCodeColors,
+        hoverBackgroundColor: medicalCodeColors,
+        hoverBorderColor: medicalCodeColors,
         borderColor: medicalCodeBorderColors,
         borderWidth: 1,
       },

@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     minHeight: "250px",
     marginTop: theme.spacing(3),
-    [theme.breakpoints.up('sm')]:{
+    [theme.breakpoints.up('xs')]:{
       width:'90%'
     },
     [theme.breakpoints.up('md')]:{
