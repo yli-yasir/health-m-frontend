@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     minHeight: "250px",
-    marginTop: theme.spacing(3),
+    margin: theme.spacing(3,0),
     [theme.breakpoints.up('xs')]:{
       width:'90%'
     },
