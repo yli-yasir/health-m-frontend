@@ -1,6 +1,6 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { LOGIN_PATH } from "./routePaths";
 import LoginPage from "../pages/Login";
 import GuardedApp from "./GuardedApp";
