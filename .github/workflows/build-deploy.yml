@@ -18,6 +18,8 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm run build
+        env:
+          CI: false
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
