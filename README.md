@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# ❤️ Health-M
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Health-M is a simple **web based** patient management system built with [React](https://reactjs.org/). The aim of the project is to demonstrate what can be built with **modern and free technologies** and to highlight some of the technical **challenges and lessons** learned.
 
-## Available Scripts
+  👉 🚧 [Live Demo](https://yli-yasir.github.io/health-m-frontend) 🚧 👈
 
-In the project directory, you can run:
+## User Interface ( React, Material-UI )
 
-### `npm start`
+Health-M is a single page web application built with React. It makes use the [Material-UI](https://material-ui.com) React component library to speed up development and to help deliver a high quality user experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I decided to use React because it has a rich and high quality ecosystem. Although it took me a while to learn to do things in a declarative manner in React, I still personally found it easier and more straightforward to work with than other frameworks such as [Vue](https://vuejs.org/).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![UI GIF](https://github.com/yli-yasir/health-m-frontend/raw/master/readmeAssets/ui.gif)
 
-### `npm test`
+### 🔍 Challenges and Lessons
+* Initially, I thought that my file structure was good and everything was well seperated. I had deeply nested folders that were split according to file or component types. This later turned against me when the project started growing. Due to this structure, it became a pain to import and locate modules, and it started to hinder my development considerably. This was when I remembered something I had a while ago but didn't quite understand until now.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**"Separation of concerns is not equal to separation of file types"** 
 
-### `npm run build`
+I now keep a rather shallow file structure and separate things according to feature or domain.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Some of the Material-UI components felt a bit verbose, this is tradeoff for the high customizability they need to offer. I now understand that component libraries are general purpose and I should create my own wrappers around them to make them better suited to my application if it's needed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+*  Difficulty working with App and some of my components especially in edge cases. This is because of insufficient testing. Consider using [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/) for testing. Also use [StoryBook](https://storybook.js.org/) to develop components in isolation and tackle edge cases.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Async Logic and Clean up ( Memory Leaks )
 
-### `npm run eject`
+It is very common to perform asynchronous logic in React components such as fetching data when the component mounts and then updating component state a callback that is executed after the async operation. It may seem dead simple at first because you all need to is call an asynchronus function when a certain event occurs ( such as `componentDidMount` ) or utilize the  `useEffect()` hook. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 🔍 Challenges and Lessons
+* A component might get unmounted while an asynchronous call it fired is in progress. The callback for this async function will still execute even after the component has been unmounted. This is a waste of resources especially when the callback does expensive work. This problem is best solved by executing clean up logic when the component unmounts. We can cancel the effects of the async callback when the component is unmounted by using something similar to [Cancellable Promises](https://github.com/facebook/react/issues/5465#issuecomment-157888325), or you can check if the component is mounted in your callback and ony execute your logic accordingly. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## User Authentication ( JWT, Local Storage VS Cookies )
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Health-M uses [JWT](https://jwt.io/) for authentication. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 🔍 Challenges and Lessons
 
-## Learn More
+* Local Storage VS Cookies, where should the JWT be stored?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Some developers would advise against using Local Storage because of its invulnerability to XSS attacks, and would instead advise to store the Cookies with `HttpOnly`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+However, using cookies to store your tokens will leave you open to CSRF attacks and still XSS attacks ( Yes, even with `HttpOnly` )!
 
-### Code Splitting
+This is because a malicious user doing an XSS attack can still inject a script which performs a fetch request to a server. Even if you utilize `SameSite` to prevent the cookie from being sent to other servers, the hacker can still issue requests to your server on behalf of the compromised user ( such as shopping, etc. ).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Conclusion: No matter where you choose to store your token. Make sure your site is not vulnerable to malicous attacks.  
 
-### Analyzing the Bundle Size
+## Forms ( Formik, Yup, Fabric )
+The app needed a rather big form with good client side validation support. Managing forms in React can be a bit challenging, and this is why [Formik](https://formik.org/) was made. Fortunately, Formik has out the box support for schema based object validation with [Yup](https://github.com/jquense/yup).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Pedigree Chart Editor](https://github.com/yli-yasir/health-m-frontend/raw/master/readmeAssets/pedigreeChart.gif)
+### 🔍 Challenges
+* A Pedigree Chart (Family Tree) editor was needed in the form. After looking through free options I decided to use the [Fabric](http://fabricjs.com/) HTML canvas library to implement the Pedigree Chart Editor. This is because of Fabric's interative object model and ability to be serialized and restored from JSON.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Backend ( Node, Express, REST, MongoDB, Joi ) 
+The backend server for this application utilizes Node.js and Express to build a web server which complies to the REST architectural style.
 
-### Advanced Configuration
+### 🔍 Challenges and Lessons
+* Some routes in the web server shared similar logic to some degree, and repeating myself would have resulted in code that is harder to scale and maintain. To remedy this, I am defining seperate middleware functions and reusing them where needed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* Consistency was needed on the web server. One must try to remain consistent and comply to REST architecture when possible.
 
-### Deployment
+* Manually and imperatively validating user data was unmaintainable and a pain. I utilized the `Joi` Object schema validation library for validation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* The business logic (domain) layer was tightly coupled with the data access layer. So, a lot of changes would need be made if a change was introduced in the data access layer.
 
-### `npm run build` fails to minify
+The solution is to define an interface (sometimes called repository) which defines all our business logic functions. This interface is then utilized in our routers (controllers) to decouple the domain layer from the data persistence layer.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If any change was made to data access layer (Swapping to a different database), then only changes to the **implementations** in our repository interface would be to be made. This is because our controllers only call the functions defined in that interface now, and do not care about their actual implementations.  
+
+
+
