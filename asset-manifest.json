@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/health-m-frontend/static/js/main.3e38a9be.chunk.js",
-    "main.js.map": "/health-m-frontend/static/js/main.3e38a9be.chunk.js.map",
+    "main.js": "/health-m-frontend/static/js/main.f4027de1.chunk.js",
+    "main.js.map": "/health-m-frontend/static/js/main.f4027de1.chunk.js.map",
     "runtime-main.js": "/health-m-frontend/static/js/runtime-main.6b7de1f4.js",
     "runtime-main.js.map": "/health-m-frontend/static/js/runtime-main.6b7de1f4.js.map",
     "static/js/2.ec0cc03b.chunk.js": "/health-m-frontend/static/js/2.ec0cc03b.chunk.js",
@@ -17,6 +17,6 @@
   "entrypoints": [
     "static/js/runtime-main.6b7de1f4.js",
     "static/js/2.ec0cc03b.chunk.js",
-    "static/js/main.3e38a9be.chunk.js"
+    "static/js/main.f4027de1.chunk.js"
   ]
 }
