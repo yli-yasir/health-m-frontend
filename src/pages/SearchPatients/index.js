@@ -29,6 +29,7 @@ export default function SearchPatients() {
       {!loading && hasMoreResults && (
         <InView
           as="div"
+          style={{minHeight:"10px"}}
           onChange={(inView) => inView && setPage((page) => page + 1)}
         />
       )}
