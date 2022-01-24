@@ -54,7 +54,7 @@ The app needed a rather big form with good client side validation support. Manag
 * A Pedigree Chart (Family Tree) editor was needed in the form. After looking through free options I decided to use the [Fabric](http://fabricjs.com/) HTML canvas library to implement the Pedigree Chart Editor. This is because of Fabric's interative object model and ability to be serialized and restored from JSON.
 
 
-### Backend ( Node, Express, REST, MongoDB, Joi ) 
+## Backend ( Node, Express, REST, MongoDB, Joi ) 
 The backend server for this application utilizes Node.js and Express to build a web server which complies to the REST architectural style.
 
 ### 🔍 Challenges and Lessons
